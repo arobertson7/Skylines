@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Skyline</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div style="margin-top: 10px;">
+            <h1 style="text-shadow: 3px 3px 1px black; opacity: 0.9; color: white;">Can you guess the cities by their skylines?</h1>
+        </div>
+        <div class="game-container">
+            <div class="city-image">
+                <!-- Put images here -->
+                 <img src="./images/seattle.jpg" alt="San Francisco skyline">
+            </div>
+            <div class="game-panel">
+                <div class="score">
+                    <p>City 1/10</p>
+                    <p>Current Grade: --</p>
+                </div>
+                <div class="questions">
+                    <h2>Which city is this?</h2>
+                    <div class="choices">
+                        <button>Los Angeles</button>
+                        <button>New York City</button>
+                        <button>San Francisco</button>
+                        <button>Seattle</button>
+                    </div>
+                </div>
+                <div class="hints">
+                    <button>Hint?</button>
+                    <p>3 remaining</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./javascript.js"></script>
+</body>
+</html>

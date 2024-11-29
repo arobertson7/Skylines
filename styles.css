@@ -1,0 +1,155 @@
+/* RESET */
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remove default margin */
+  * {
+    margin: 0;
+    font-family: sans-serif;
+  }
+  
+  body {
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* 5. Improve media defaults */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 6. Inherit fonts for form controls */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 7. Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* 8. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  /* *********************************************************************************************************************************** */
+
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+
+  .main-container {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(108, 148, 204);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .game-container {
+    background-color: black;
+    width:85%;
+    height: 85%;
+    border-radius: 50px;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .city-image {
+    border-radius: 40px;
+    background-color: white;
+    flex-grow: 3;
+    max-width: 66%;
+  }
+
+  .city-image img {
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .game-panel {
+    border-radius: 40px;
+    border: 2px solid white;
+    color: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .score {
+    font-size: 18px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+    justify-content: center;
+    border-radius: 40px;
+    flex-grow: 3;
+  }
+
+  .choices {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .choices button {
+    background-color: black;
+    text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8);
+    color: white;
+    border-radius: 20px;
+    border: 1px solid whitesmoke;
+    box-shadow: 7px 4px 5px white;
+  }
+
+  .hints {
+    width: 100%;
+    width: 90%;
+    flex-grow: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .hints button {
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgb(255, 255, 255, 0.9);
+  }
