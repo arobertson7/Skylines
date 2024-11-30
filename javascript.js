@@ -72,6 +72,14 @@ class Queue {
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 
+
+/* End main data
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+   Begin helper functions
+*/
+
+
 // Function for generating random index between 0 - n.
 function randomIndex(n)
 {
@@ -131,6 +139,14 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
 }
     */
 
+
+/* End helper functions
+***********************************************************************************************************************************************************
+***********************************************************************************************************************************************************
+   Begin game functions
+*/
+
+
 // Start new game
 function PlayGame() {
     // Setup game panel for new game
@@ -139,6 +155,11 @@ function PlayGame() {
 
     // Score section
     let score = document.createElement("div");
+    score.id = "score"; /* id allows ability to access dynamically created dom object. i don't think we can reference globally though or it will throw error
+                           from the start. will essentially have to pass around through functions once game starts it seems. For example create the game panel here
+                           and then once it's time to initalize the queue and buttons and whatnot, we should be able to create a separate function for that,
+                           call it at the end of this function and then be able to access the dynamically created dom elements from there since they will now
+                           be in the dom. */
     score.classList.add("score");
     gamePanel.appendChild(score);
     let questionNumber = document.createElement("p");
@@ -162,6 +183,8 @@ function PlayGame() {
     {
         choices.appendChild(document.createElement("button"));
     }
+
+    // Hints section
     let hints = document.createElement("div");
     hints.classList.add("hints");
     gamePanel.appendChild(hints);
