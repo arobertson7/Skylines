@@ -218,7 +218,7 @@ function setupNewRound() {
     }
 }
 
-function checkAnswer {
+function displayAnswer() {
     
 }
 
@@ -230,7 +230,7 @@ function playRound() {
         button.addEventListener("mouseenter", () => {
             button.style.backgroundColor = "white";
             button.style.color = "black";
-            button.style.boxShadow = "7px 4px 5px gray";
+            button.style.boxShadow = "7px 6px 5px gray";
         })
         // revert on mouse out
         button.addEventListener("mouseout", () => {
