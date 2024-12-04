@@ -59,7 +59,10 @@
   .main-container {
     height: 100%;
     width: 100%;
-    background-color: rgb(86, 135, 205);
+    /* background: repeating-linear-gradient(to bottom right, white, rgb(86, 135, 205), white, rgb(86, 135, 205)); */
+    background: linear-gradient(to bottom right, white, 5%, rgb(86, 135, 205));
+    /* background: repeating-linear-gradient(to bottom right, black, 10%, rgb(86, 135, 205) 500px); */
+    /* background-color: rgb(86, 135, 205); */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,7 +133,7 @@
 
   .choices button {
     background-color: black;
-    text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8);
+    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
     color: white;
     border-radius: 20px;
     border: 1px solid whitesmoke;
