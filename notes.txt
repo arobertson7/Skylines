@@ -1,8 +1,8 @@
-trace:
+*** Tracing function calls ***
 
-playGame() is the overarching function that starts the game once the start button is pressed
+playGame() is the over-arching function that starts the game once the start button is pressed
 
-right now, it calls...
+Right now, it calls...
 
 1. setupCitiesQueue() which ends calling no other functions or creating any event listeners.
 
