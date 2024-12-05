@@ -72,9 +72,15 @@ class Queue {
     }
 }
 
+
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
-
+// number of rounds per game
+let rounds = 10;
+// placeholder for current number of correct answers
+let correctCount = 0;
+// placeholder for current question number
+let currentRound = 1;
 
 /* End main data
 ***********************************************************************************************************************************************************
@@ -110,12 +116,123 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
    Begin game functions
 */
 
+function nextRound() {
+    // update question number and display
+    currentRound++;
+    score.childNodes[0].textContent = `City ${currentRound}/10`;
 
+    // remove most recent city from the queue
+    cityQueue.pop();
+
+    // remove answer display
+    gamePanel.removeChild(answer);
+
+    // add question display back to game panel
+    displayQuestion();
+
+    // make hint section visible again
+    document.getElementById("hints").style.visibility = "visible";
+
+    setupNewRound();
+}
+
+function evaluateAnswer(correct) {
+    // Logic for any round except the last one
+    if (currentRound != 10)
+    {
+        // temporarily hide hints section
+        document.getElementById("hints").style.visibility = "hidden";
+        // temporarily remove question and buttons
+        gamePanel.removeChild(questions);
+
+        // display answer ("correct" or "incorrect") and add button for going to next question
+        const answer = document.createElement("div");
+        answer.id = "answer";
+        answer.appendChild(document.createElement("h2"));
+        // for comments
+        answer.appendChild(document.createElement("p"));
+        //next question button
+        const nextQuestionButton = document.createElement("button");
+        nextQuestionButton.classList.add("next-question-button");
+        nextQuestionButton.textContent = "Next City " + '\u2192';
+        answer.appendChild(nextQuestionButton);
+        gamePanel.insertBefore(answer, hints);
+
+        if (correct == true)
+        {
+            answer.childNodes[0].textContent = "Correct!";
+            answer.childNodes[0].style.color = "green";
+            correctCount++;
+
+        }
+        else
+        {
+            answer.childNodes[0].textContent = "Nein!";
+            answer.childNodes[1].textContent =  `That was ${cityQueue.peek().name} my friend.`;
+            answer.childNodes[0].style.color = "red";
+        }
+
+        // update display of current grade 
+        score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
+
+
+        nextQuestionButton.addEventListener("click", () => {
+            nextRound();
+        })
+    }
+    else // On the last round
+    {
+        // do something else
+    }
+    
+}
+
+function displayQuestion() {
+    //Questions section
+    const questions = document.createElement("div");
+    questions.id = "questions";
+    questions.classList.add("questions");
+    gamePanel.insertBefore(questions, hints);
+    questions.appendChild(document.createElement("h2"));
+    questions.childNodes[0].textContent = "Which city is this?";
+    let choices = document.createElement("div");
+    choices.id = "choices";
+    choices.classList.add("choices");
+    questions.appendChild(choices);
+    // add 4 answer choice buttons (initialized here with no text content)
+    for (let i = 0; i < 4; i++)
+    {
+        choices.appendChild(document.createElement("button"));
+    }
+
+    // Enable functionality for answer choice buttons
+    const buttons = choices.childNodes;
+    buttons.forEach((button) => {
+        // change color on mouse enter
+        button.addEventListener("mouseenter", () => {
+            button.style.background = "linear-gradient(to bottom right, black, 10%, white, 90%, black)";
+            button.style.color = "black";
+            button.style.boxShadow = "5px 4px 5px gray";
+        })
+        // revert on mouse out
+        button.addEventListener("mouseout", () => {
+            button.style.background = null; // null reverts the style back to how it is set in the stylesheet (removes alterations made here in js)
+            button.style.color = null;
+            button.style.boxShadow = null;
+        })
+        // on click, show answer
+        button.addEventListener("click", () => {
+            let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
+            evaluateAnswer(correctOrIncorrect);
+        })
+    })
+}
 
 function setupGameDisplay()
 {
     // Setup game panel for new game
     const gamePanel = document.querySelector(".game-panel");
+    gamePanel.id = "gamePanel";
     gamePanel.removeChild(startButton);
 
     // Score section
@@ -134,23 +251,6 @@ function setupGameDisplay()
     grade.textContent = "Current Grade: --";
     score.appendChild(grade);
 
-    //Questions section
-    const questions = document.createElement("div");
-    questions.id = "questions";
-    questions.classList.add("questions");
-    gamePanel.appendChild(questions);
-    questions.appendChild(document.createElement("h2"));
-    questions.childNodes[0].textContent = "Which city is this?";
-    let choices = document.createElement("div");
-    choices.id = "choices";
-    choices.classList.add("choices");
-    questions.appendChild(choices);
-    // add 4 answer choice buttons (initialized here with no text content)
-    for (let i = 0; i < 4; i++)
-    {
-        choices.appendChild(document.createElement("button"));
-    }
-
     // Hints section
     let hints = document.createElement("div");
     hints.id = "hints";
@@ -162,11 +262,13 @@ function setupGameDisplay()
     let hintsRemaining = document.createElement("p");
     hintsRemaining.textContent = "3 remaining";
     hints.appendChild(hintsRemaining);
+
+    // Display question and choice buttons
+    displayQuestion();
 }
 
 function setupCitiesQueue() {
     // Setup the queue of randomized cities for new game
-    let rounds = 10;
     let numOfCities = cities.length; // number of cities in the cities array
     let usedIndexes = []; // for storing indexes which were already used
     for (let i = 0; i < rounds; i++)
@@ -218,36 +320,14 @@ function setupNewRound() {
     }
 }
 
-function displayAnswer() {
-    
-}
 
 function playRound() {
-    // Enable functionality for answer choice buttons
-    const buttons = choices.childNodes;
-    buttons.forEach((button) => {
-        // change color on mouse enter
-        button.addEventListener("mouseenter", () => {
-            button.style.backgroundColor = "white";
-            button.style.color = "black";
-            button.style.boxShadow = "7px 6px 5px gray";
-        })
-        // revert on mouse out
-        button.addEventListener("mouseout", () => {
-            button.style.backgroundColor = null; // null reverts the style back to how it is set in the stylesheet (removes alterations made here in js)
-            button.style.color = null;
-            button.style.boxShadow = null;
-        })
-
-        button.addEventListener("click", () => {
-
-        })
-    })
+    
 }
 
 
 // Play new game
-function PlayGame() {
+function playGame() {
     
     // Initialize the right side of the display for a new game
     setupGameDisplay();
@@ -265,5 +345,5 @@ function PlayGame() {
 // Start new game button
 let startButton = document.querySelector(".start-button");
 startButton.addEventListener("click", () => {
-    PlayGame();
+    playGame();
 })

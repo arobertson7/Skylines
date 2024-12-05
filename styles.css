@@ -132,12 +132,13 @@
   }
 
   .choices button {
-    background-color: black;
+    /* background-color: black; */
+    background: linear-gradient(to bottom right, white, 5%, black);
     /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
     color: white;
     border-radius: 20px;
     border: 1px solid whitesmoke;
-    box-shadow: 7px 4px 5px white;
+    box-shadow: 5px 4px 5px white;
   }
 
   .hints {
@@ -156,4 +157,34 @@
     padding-right: 12px;
     background-color: white;
     box-shadow: 2px 2px 5px rgb(255, 255, 255, 0.9);
+  }
+
+  .start-button {
+    width: 9rem;
+    height: 3rem;
+    background: linear-gradient(to bottom right, white, 5%, black);
+    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+    color: white;
+    border-radius: 70px;
+    border: 1px solid whitesmoke;
+    box-shadow: 5px 4px 5px white;
+  }
+
+  #answer {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .next-question-button {
+    width: 9rem;
+    height: 3rem;
+    background: linear-gradient(to bottom right, white, 5%, black);
+    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+    color: white;
+    border-radius: 70px;
+    border: 1px solid whitesmoke;
+    box-shadow: 5px 4px 5px white;
   }
