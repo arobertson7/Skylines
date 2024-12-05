@@ -153,6 +153,13 @@ function evaluateAnswer(correct) {
         answer.appendChild(document.createElement("p"));
         //next question button
         const nextQuestionButton = document.createElement("button");
+        // adding a little style on hover
+        nextQuestionButton.addEventListener("mouseenter", () => {
+            nextQuestionButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
+        })
+        nextQuestionButton.addEventListener("mouseout", () => {
+            nextQuestionButton.style.background = null;
+        })
         nextQuestionButton.classList.add("next-question-button");
         nextQuestionButton.textContent = "Next City " + '\u2192';
         answer.appendChild(nextQuestionButton);
@@ -321,29 +328,32 @@ function setupNewRound() {
 }
 
 
-function playRound() {
-    
-}
 
 
 // Play new game
 function playGame() {
+
+    // Set up a new queue of (number of rounds) random cities for the game
+    setupCitiesQueue();
     
     // Initialize the right side of the display for a new game
     setupGameDisplay();
 
-    // Set up a new queue of n random cities for the game
-    setupCitiesQueue();
-
-    // Populate image and random answer choices for the buttons
+    // Populate image and random answer choices for the first round
     setupNewRound();
 
-    //while (!cityQueue.isEmpty())
-    playRound();
 }
 
 // Start new game button
 let startButton = document.querySelector(".start-button");
+// adding a little style on hover
+startButton.addEventListener("mouseenter", () => {
+    startButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
+})
+startButton.addEventListener("mouseout", () => {
+    startButton.style.background = null;
+})
+// start game on click
 startButton.addEventListener("click", () => {
     playGame();
 })
