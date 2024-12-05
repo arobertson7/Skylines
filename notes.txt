@@ -1,0 +1,17 @@
+trace:
+
+playGame() is the overarching function that starts the game once the start button is pressed
+
+right now, it calls...
+
+1. setupCitiesQueue() which ends calling no other functions or creating any event listeners.
+
+2. setupGameDisplay() which only needs to happen once at the beginning, it calls ----
+
+----> displayQuestion() which ends calling no other function, but it creates a button "click" event listener to ------
+
+------> evaluateAnswer() which has 2 routes: if it's not the last round, it ends calling no other function but creates button "click" event to --------
+
+--------> nextRound() which calls both displayQuestion() (which will loop on button clicks as seen above) and setupNewRound() which ends, not calling anything or creating any event listeners.
+
+3. setupNewRound() which ends, not calling anything or creating any event listeners. Has to happen this first time to setup the first round.
