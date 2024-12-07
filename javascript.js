@@ -137,14 +137,15 @@ function nextRound() {
 }
 
 function evaluateAnswer(correct) {
+
+    // temporarily hide hints section
+    document.getElementById("hints").style.visibility = "hidden";
+    // temporarily remove question and buttons
+    gamePanel.removeChild(questions);
+    
     // Logic for any round except the last one
     if (currentRound != 10)
     {
-        // temporarily hide hints section
-        document.getElementById("hints").style.visibility = "hidden";
-        // temporarily remove question and buttons
-        gamePanel.removeChild(questions);
-
         // display answer ("correct" or "incorrect") and add button for going to next question
         const answer = document.createElement("div");
         answer.id = "answer";
@@ -168,14 +169,14 @@ function evaluateAnswer(correct) {
         if (correct == true)
         {
             answer.childNodes[0].textContent = "Correct!";
-            answer.childNodes[0].style.color = "green";
+            answer.childNodes[0].style.color = "rgba(52, 232, 76, 0.809)";
             correctCount++;
 
         }
         else
         {
             answer.childNodes[0].textContent = "Nein!";
-            answer.childNodes[1].textContent =  `That was ${cityQueue.peek().name} my friend.`;
+            answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name} my friend.`;
             answer.childNodes[0].style.color = "red";
         }
 
@@ -190,6 +191,8 @@ function evaluateAnswer(correct) {
     else // On the last round
     {
         // do something else
+        gamePanel.removeChild(score);
+
     }
     
 }
