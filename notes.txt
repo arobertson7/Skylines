@@ -15,3 +15,14 @@ Right now, it calls...
 --------> nextRound() which calls both displayQuestion() (which will loop on button clicks as seen above) and setupNewRound() which ends, not calling anything or creating any event listeners.
 
 3. setupNewRound() which ends, not calling anything or creating any event listeners. Has to happen this first time to setup the first round.
+
+
+
+
+
+ideas
+-------
+
+- when answer is shown, remove pic from display. either put answer there or do something else
+    * yea i think, display the answer where the pic is and just leave the "next city ->" button where it is now. maybe add something else to the right side as well
+- "Which city is this?" should be above the picture rather than over to the right i think

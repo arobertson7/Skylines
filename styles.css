@@ -2,191 +2,191 @@
 
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  
-  /* 2. Remove default margin */
-  * {
-    margin: 0;
-    font-family: "Red Hat Display";
-  }
-  
-  body {
-    /* 3. Add accessible line-height */
-    line-height: 1.5;
-    /* 4. Improve text rendering */
-    -webkit-font-smoothing: antialiased;
-  }
-  
-  /* 5. Improve media defaults */
-  img, picture, video, canvas, svg {
-    display: block;
-    max-width: 100%;
-  }
-  
-  /* 6. Inherit fonts for form controls */
-  input, button, textarea, select {
-    font: inherit;
-  }
-  
-  /* 7. Avoid text overflows */
-  p, h1, h2, h3, h4, h5, h6 {
-    overflow-wrap: break-word;
-  }
-  
-  /* 8. Improve line wrapping */
-  p {
-    text-wrap: pretty;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
-  }
-  
-  /*
-    9. Create a root stacking context
-  */
-  #root, #__next {
-    isolation: isolate;
-  }
+  box-sizing: border-box;
+}
 
-  /* *********************************************************************************************************************************** */
+/* 2. Remove default margin */
+* {
+  margin: 0;
+  font-family: "Red Hat Display";
+}
 
-  html, body {
-    height: 100%;
-    width: 100%;
-  }
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
 
-  .main-container {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to bottom right, white, 5%, rgb(86, 135, 205));
-    /* background: linear-gradient(to bottom right, white, 5%, black, 10%, white, 15%, black, 20%, white, 25%, black, 30%, white, 35%, black); */
-    /* background-color: rgb(86, 135, 205); */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
 
-  .game-container {
-    background-color: black;
-    box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
-    width:85%;
-    height: 85%;
-    border-radius: 50px;
-    padding: 15px;
-    display: flex;
-    gap: 15px;
-  }
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
 
-  .city-image {
-    border-radius: 40px;
-    background-color: white;
-    flex-grow: 3;
-    max-width: 66%;
-  }
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
 
-  .city-image img {
-    border-radius: 40px;
-    width: 100%;
-    height: 100%;
-  }
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
 
-  .game-panel {
-    border-radius: 40px;
-    border: 2px solid white;
-    color: white;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    font-weight: 700;
-  }
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
 
-  .score {
-    font-size: 18px;
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-  }
+/* *********************************************************************************************************************************** */
 
-  .questions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    justify-content: center;
-    border-radius: 40px;
-    flex-grow: 3;
-  }
+html, body {
+  height: 100%;
+  width: 100%;
+}
 
-  .choices {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
+.main-container {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom right, white, 5%, rgb(86, 135, 205));
+  /* background: linear-gradient(to bottom right, white, 5%, black, 10%, white, 15%, black, 20%, white, 25%, black, 30%, white, 35%, black); */
+  /* background-color: rgb(86, 135, 205); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 
-  .choices button {
-    /* background-color: black; */
-    background: linear-gradient(to bottom right, white, 5%, black);
-    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
-    color: white;
-    border-radius: 20px;
-    border: 1px solid whitesmoke;
-    box-shadow: 4px 3px 4px 2px white;
-    height: 2.5em;
-  }
+.game-container {
+  background-color: black;
+  box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
+  width:85%;
+  height: 85%;
+  border-radius: 50px;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+}
 
-  .hints {
-    width: 100%;
-    width: 90%;
-    flex-grow: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
+.city-image {
+  border-radius: 40px;
+  background-color: white;
+  flex-grow: 3;
+  max-width: 66%;
+}
 
-  .hints button {
-    padding-left: 12px;
-    padding-right: 12px;
-    background-color: white;
-    box-shadow: 2px 2px 5px rgb(255, 255, 255, 0.9);
-  }
+.city-image img {
+  border-radius: 40px;
+  width: 100%;
+  height: 100%;
+}
 
-  .start-button {
-    margin-top: 10vh;
-    width: 9rem;
-    height: 3rem;
-    background: linear-gradient(to bottom right, white, 5%, black);
-    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
-    color: white;
-    border-radius: 70px;
-    border: 1px solid whitesmoke;
-    box-shadow: 2px 2px 4px 2px white;
-  }
+.game-panel {
+  border-radius: 40px;
+  border: 2px solid white;
+  color: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: 700;
+}
 
-  #answer {
-    flex-grow: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  }
+.score {
+  font-size: 18px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
 
-  .next-question-button {
-    width: 9rem;
-    height: 3rem;
-    background: linear-gradient(to bottom right, white, 5%, black);
-    /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
-    color: white;
-    border-radius: 70px;
-    border: 1px solid whitesmoke;
-    box-shadow: 2px 2px 4px 2px white;
-  }
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  justify-content: center;
+  border-radius: 40px;
+  flex-grow: 3;
+}
+
+.choices {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.choices button {
+  /* background-color: black; */
+  background: linear-gradient(to bottom right, white, 5%, black);
+  /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+  color: white;
+  border-radius: 20px;
+  border: 1px solid whitesmoke;
+  box-shadow: 4px 3px 4px 2px white;
+  height: 2.5em;
+}
+
+.hints {
+  width: 100%;
+  width: 90%;
+  flex-grow: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hints button {
+  padding-left: 12px;
+  padding-right: 12px;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgb(255, 255, 255, 0.9);
+}
+
+.start-button {
+  margin-top: 10vh;
+  width: 9rem;
+  height: 3rem;
+  background: linear-gradient(to bottom right, white, 5%, black);
+  /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+  color: white;
+  border-radius: 70px;
+  border: 1px solid whitesmoke;
+  box-shadow: 2px 2px 4px 2px white;
+}
+
+#answer {
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.next-question-button {
+  width: 9rem;
+  height: 3rem;
+  background: linear-gradient(to bottom right, white, 5%, black);
+  /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+  color: white;
+  border-radius: 70px;
+  border: 1px solid whitesmoke;
+  box-shadow: 2px 2px 4px 2px white;
+}
