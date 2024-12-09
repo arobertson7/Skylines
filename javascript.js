@@ -26,10 +26,10 @@ const nash = new City("Nashville", "./images/nash.jpg", "nash hint");
 const stl = new City("St. Louis", "./images/stl.webp", "stl hint");
 const portland = new City("Portland", "./images/portland.jpg", "portland hint");
 const knox = new City("Knoxville", "./images/knox.webp", "knox hint");
-const cross = new City("Crossville, Tennessee", "./images/cross.jpg", "cross hint");
+// const cross = new City("Crossville, Tennessee", "./images/cross.jpg", "cross hint");
 
 // U.S. cities array
-let cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox, cross];
+let cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
 
 // Queue class
 class Queue {
@@ -82,6 +82,10 @@ let correctCount = 0;
 // placeholder for current question number
 let currentRound = 1;
 
+// an array holding various responses to display when answer is correct
+const correctResponses = ["Correct!", "Impressive!", "Your parents must be proud.", "Nice!", "Well done.", "Bravo.",
+                            "Wunderbar!", "You've been around the block, huh?", "Not bad!"];
+
 /* End main data
 ***********************************************************************************************************************************************************
 ***********************************************************************************************************************************************************
@@ -89,7 +93,7 @@ let currentRound = 1;
 */
 
 
-// Function for generating random index between 0 - n.
+// Function for generating random index between 0 - (n - 1).
 function randomIndex(n)
 {
     return Math.floor(Math.random() * n);
@@ -125,7 +129,7 @@ function nextRound() {
     cityQueue.pop();
 
     // remove answer display
-    gamePanel.removeChild(answer);
+    gamePanel.removeChild(nextq);
 
     // add question display back to game panel
     displayQuestion();
@@ -150,6 +154,7 @@ function evaluateAnswer(correct) {
         const answer = document.createElement("div");
         answer.id = "answer";
         answer.appendChild(document.createElement("h2"));
+        answer.childNodes[0].style.fontSize = "2.5rem";
         // for comments
         answer.appendChild(document.createElement("p"));
         //next question button
@@ -163,13 +168,25 @@ function evaluateAnswer(correct) {
         })
         nextQuestionButton.classList.add("next-question-button");
         nextQuestionButton.textContent = "Next City " + '\u2192';
-        answer.appendChild(nextQuestionButton);
         gamePanel.insertBefore(answer, hints);
 
         if (correct == true)
         {
-            answer.childNodes[0].textContent = "Correct!";
-            answer.childNodes[0].style.color = "rgba(52, 232, 76, 0.809)";
+            let response = correctResponses[randomIndex(correctResponses.length)]; // random response for correct answer
+            answer.childNodes[0].textContent = response;
+            if (correctCount == 7) // high score response
+            {
+                answer.childNodes[0].textContent = "Is there anywhere you haven't been?";
+            }
+            if (answer.childNodes[0].textContent.length > 32)
+            {
+                answer.childNodes[0].style.fontSize = "1.5rem"; // smaller font size if response is longer
+            }
+            else if (answer.childNodes[0].textContent.length >= 20)
+            {
+                answer.childNodes[0].style.fontSize = "1.75rem";
+            }
+            gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
             correctCount++;
 
         }
@@ -177,8 +194,20 @@ function evaluateAnswer(correct) {
         {
             answer.childNodes[0].textContent = "Nein!";
             answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name} my friend.`;
-            answer.childNodes[0].style.color = "red";
+            answer.style.justifyContent = "space-around"; // when there're two text elements
+            gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
+            
         }
+
+        setTimeout(() => {
+            gamePanel.removeChild(answer);
+            const nextQ = document.createElement("div");
+            nextQ.classList.add("next-question-button-container");
+            nextQ.id = "nextq";
+            nextQ.appendChild(nextQuestionButton);
+            gamePanel.insertBefore(nextQ, hints);
+            gamePanel.style.background = null;
+        }, 2500);
 
         // update display of current grade 
         score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
@@ -220,7 +249,7 @@ function displayQuestion() {
     buttons.forEach((button) => {
         // change color on mouse enter
         button.addEventListener("mouseenter", () => {
-            button.style.background = "linear-gradient(to bottom right, black, 10%, white, 90%, black)";
+            button.style.background = "linear-gradient(to bottom right, black, 20%, white, 90%, black)";
             button.style.color = "black";
             button.style.boxShadow = "5px 4px 5px gray";
         })
@@ -240,10 +269,28 @@ function displayQuestion() {
 
 function setupGameDisplay()
 {
-    // Setup game panel for new game
-    const gamePanel = document.querySelector(".game-panel");
-    gamePanel.id = "gamePanel";
-    gamePanel.removeChild(startButton);
+    // Setup game container
+    const gameContainer = document.querySelector(".game-container-start");
+    gameContainer.classList.remove("game-container-start");
+    gameContainer.classList.add("game-container-next");
+    const startButton = document.querySelector(".start-button");
+    gameContainer.removeChild(startButton); // remove start button
+    const leftSide = document.createElement("div"); // add picture section
+    leftSide.classList.add("city-image");
+    gameContainer.appendChild(leftSide);
+    const cityPic = document.createElement("img");
+    cityPic.id="city-pic";
+    leftSide.appendChild(cityPic);
+    // Set picture to the correct answer city
+    let firstPic = cityQueue.peek().image;
+    cityPic.src=firstPic;
+    const gamePanel = document.createElement("div"); // add right side section
+    gamePanel.classList.add("game-panel");
+    gamePanel.id="gamePanel";
+    gameContainer.appendChild(gamePanel);
+
+
+    // Setup right side of game panel
 
     // Score section
     let score = document.createElement("div");
@@ -338,10 +385,10 @@ function playGame() {
 
     // Set up a new queue of (number of rounds) random cities for the game
     setupCitiesQueue();
-    
-    // Initialize the right side of the display for a new game
-    setupGameDisplay();
 
+    // Display the game
+    setupGameDisplay();
+    
     // Populate image and random answer choices for the first round
     setupNewRound();
 
@@ -360,3 +407,5 @@ startButton.addEventListener("mouseout", () => {
 startButton.addEventListener("click", () => {
     playGame();
 })
+
+            
