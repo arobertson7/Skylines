@@ -1,32 +1,32 @@
 // City class
 class City {
-    constructor(name, image, hint)
+    constructor(name, imageArray, hint)
     {
         this.name = name;
-        this.image = image;
+        this.imageArray = imageArray;
         this.hint = hint;
     }
 }
 
 // U.S. cities
-const ny = new City("New York City", "./images/nyc.jpg", "The greatest city in the world (Unopinionated).");
-const la = new City("Los Angeles", "./images/la.avif", '\u266B' + " Californiaaa.. knows how to party.." + '\u266B' + ". In the cityyyy of __. " + '\u266B');
-const sf = new City("San Francisco", "./images/sf.jpg", "They named their most famous bridge with a different color than it actually is.");
-const seattle = new City("Seattle", "./images/seattle.jpg", "That's the space needle.");
-const chicago = new City("Chicago", "./images/chicago.avif", "chicago hint");
-const lv = new City("Las Vegas", "./images/lv.avif", "lv hint");
-const philly = new City("Philadelphia", "./images/philly.jpg", "philly hint");
-const dc = new City("Washington D.C.", "./images/dc.jpg", "dc hint");
-const miami = new City("Miami", "./images/miami.webp", "miami hint");
-const atl = new City("Atlanta", "./images/atl.webp", "atl hint");
-const denver = new City("Denver", "./images/denver.jpg", "denver hint");
-const phx = new City("Phoenix", "./images/phx.jpg", "phx hint");
-const boston = new City("Boston", "./images/boston.webp", "boston hint");
-const nash = new City("Nashville", "./images/nash.jpg", "nash hint");
-const stl = new City("St. Louis", "./images/stl.webp", "stl hint");
-const portland = new City("Portland", "./images/portland.jpg", "portland hint");
-const knox = new City("Knoxville", "./images/knox.webp", "knox hint");
-// const cross = new City("Crossville, Tennessee", "./images/cross.jpg", "cross hint");
+const ny = new City("New York City", ["./images/nyc1.jpg", "./images/nyc2.avif", "./images/nyc3.jpg", "./images/nyc4.webp", "./images/nyc5.webp", "./images/nyc6.jpg", "./images/nyc7.jpg"], "The greatest city in the world (Unopinionated).");
+const la = new City("Los Angeles", ["./images/la1.avif", "./images/la2.jpg", "./images/la3.jpg", "./images/la4.jpg", "./images/la5.jpeg", "./images/la6.jpeg", "./images/la7.jpg"], '\u266B' + " Californiaaa.. knows how to party.." + '\u266B' + ". In the cityyyy of __. " + '\u266B');
+const sf = new City("San Francisco", ["./images/sf1.jpg", "./images/sf2.webp", "./images/sf3.jpeg", "./images/sf4.jpg"], "They named their most famous bridge with a different color than it actually is.");
+const seattle = new City("Seattle", ["./images/seattle1.jpg", "./images/seattle2.jpg"], "That's the space needle.");
+const chicago = new City("Chicago", ["./images/chicago1.avif", "./images/chicago2.jpg", "./images/chicago3.webp"], "chicago hint");
+const lv = new City("Las Vegas", ["./images/lv1.avif", "./images/lv2.jpg", "./images/lv3.jpg", "./images/lv4.jpg"], "lv hint");
+const philly = new City("Philadelphia", ["./images/philly1.jpg", "./images/philly2.jpg", "./images/philly3.jpg", "./images/philly4.jpg"], "philly hint");
+const dc = new City("Washington D.C.", ["./images/dc1.jpg", "./images/dc2.jpeg", "./images/dc3.webp"], "dc hint");
+const miami = new City("Miami", ["./images/miami1.jpg", "./images/miami2.jpeg", "./images/miami3.jpg"], "miami hint");
+const atl = new City("Atlanta", ["./images/atl1.webp", "./images/atl2.jpg"], "atl hint");
+const denver = new City("Denver", ["./images/denver1.avif", "./images/denver2.jpg"], "denver hint");
+const phx = new City("Phoenix", ["./images/phx1.jpg", "./images/phx2.jpg", "./images/phx3.png"], "phx hint");
+const boston = new City("Boston", ["./images/boston1.jpg", "./images/boston2.jpg", "./images/boston3.jpg", "./images/boston4.webp", "./images/boston5.webp"], "boston hint");
+const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif"], "nash hint");
+const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.webp"], "stl hint");
+const portland = new City("Portland", ["./images/portland1.jpg", "./images/portland2.webp"], "portland hint");
+const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.jpg"], "knox hint");
+// const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
 
 // U.S. cities array
 let cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
@@ -76,15 +76,15 @@ class Queue {
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-let rounds = 10;
+let rounds = 7;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
 let currentRound = 1;
 
 // an array holding various responses to display when answer is correct
-const correctResponses = ["Correct!", "Impressive!", "Your parents must be proud.", "Nice!", "Well done.", "Bravo.",
-                            "Wunderbar!", "You've been around the block, huh?", "Not bad!"];
+const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo.",
+                             "Not bad!"];
 
 /* End main data
 ***********************************************************************************************************************************************************
@@ -120,10 +120,14 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
    Begin game functions
 */
 
+function showResults() {
+    
+}
+
 function nextRound() {
     // update question number and display
     currentRound++;
-    score.childNodes[0].textContent = `City ${currentRound}/10`;
+    score.childNodes[0].textContent = `City ${currentRound}/${rounds}`;
 
     // remove most recent city from the queue
     cityQueue.pop();
@@ -148,7 +152,7 @@ function evaluateAnswer(correct) {
     gamePanel.removeChild(questions);
     
     // Logic for any round except the last one
-    if (currentRound != 10)
+    if (currentRound != rounds)
     {
         // display answer ("correct" or "incorrect") and add button for going to next question
         const answer = document.createElement("div");
@@ -199,6 +203,7 @@ function evaluateAnswer(correct) {
             
         }
 
+        // 2.5 second delay from showing answer with particular color to reverting color and diplaying "next city" button
         setTimeout(() => {
             gamePanel.removeChild(answer);
             const nextQ = document.createElement("div");
@@ -212,18 +217,14 @@ function evaluateAnswer(correct) {
         // update display of current grade 
         score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
 
-
         nextQuestionButton.addEventListener("click", () => {
             nextRound();
         })
     }
     else // On the last round
     {
-        // do something else
-        gamePanel.removeChild(score);
-
+        showResults();
     }
-    
 }
 
 function displayQuestion() {
@@ -234,6 +235,7 @@ function displayQuestion() {
     gamePanel.insertBefore(questions, hints);
     questions.appendChild(document.createElement("h2"));
     questions.childNodes[0].textContent = "Which city is this?";
+    questions.childNodes[0].style.fontSize = "1.75rem";
     let choices = document.createElement("div");
     choices.id = "choices";
     choices.classList.add("choices");
@@ -281,8 +283,8 @@ function setupGameDisplay()
     const cityPic = document.createElement("img");
     cityPic.id="city-pic";
     leftSide.appendChild(cityPic);
-    // Set picture to the correct answer city
-    let firstPic = cityQueue.peek().image;
+    // Set picture to the correct answer city (selecting a random one from its imageArray)
+    let firstPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
     cityPic.src=firstPic;
     const gamePanel = document.createElement("div"); // add right side section
     gamePanel.classList.add("game-panel");
@@ -302,7 +304,7 @@ function setupGameDisplay()
     score.classList.add("score");
     gamePanel.appendChild(score);
     let questionNumber = document.createElement("p");
-    questionNumber.textContent = "City 1/10";
+    questionNumber.textContent = `City 1/${rounds}`;
     score.appendChild(questionNumber);
     let grade = document.createElement("p");
     grade.textContent = "Current Grade: --";
@@ -340,8 +342,8 @@ function setupCitiesQueue() {
 }
 
 function setupNewRound() {
-    // Set picture to the correct answer city
-    let cityPic = cityQueue.peek().image;
+    // Set picture to the correct answer city (selecting a random one from its imageArray)
+    let cityPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
     let picContainer = document.getElementById("city-pic");
     picContainer.src=cityPic;
 

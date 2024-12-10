@@ -4,17 +4,27 @@ playGame() is the over-arching function that starts the game once the start butt
 
 Right now, it calls...
 
-1. setupCitiesQueue() which ends calling no other functions or creating any event listeners.
+(1) setupCitiesQueue() which ends calling no other functions or creating any event listeners.
 
-2. setupGameDisplay() which only needs to happen once at the beginning, it calls ----
+(2) setupGameDisplay() which only needs to happen once at the beginning, it calls ----
 
 ----> displayQuestion() which ends calling no other function, but it creates a button "click" event listener to ------
 
-------> evaluateAnswer() which has 2 routes: if it's not the last round, it ends calling no other function but creates button "click" event to --------
+------> evaluateAnswer() which has two routes:
+
+(2a) if it's not the last round, it ends calling no other function but creates button "click" event to --------
 
 --------> nextRound() which calls both displayQuestion() (which will loop on button clicks as seen above) and setupNewRound() which ends, not calling anything or creating any event listeners.
 
-3. setupNewRound() which ends, not calling anything or creating any event listeners. Has to happen this first time to setup the first round.
+(2b) if it's the last round, it calls ------
+
+-----------> showResults()
+
+
+
+(3) setupNewRound() which ends, not calling anything or creating any event listeners. Has to happen this first time to setup the first round.
+
+
 
 
 
@@ -26,3 +36,8 @@ ideas
 - when answer is shown, remove pic from display. either put answer there or do something else
     * yea i think, display the answer where the pic is and just leave the "next city ->" button where it is now. maybe add something else to the right side as well
 - "Which city is this?" should be above the picture rather than over to the right i think
+
+
+
+
+
