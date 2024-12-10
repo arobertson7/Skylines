@@ -78,8 +78,11 @@ html, body {
   border-radius: 50px;
   padding: 15px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: white;
+  font-weight: 700;
 }
 
 .game-container-next { /* once game starts */
@@ -211,4 +214,10 @@ html, body {
   border-radius: 70px;
   border: 1px solid whitesmoke;
   box-shadow: 2px 2px 4px 2px white;
+}
+
+.calculating-container {
+  display: flex;
+  justify-content: start;
+  width: 450px;
 }

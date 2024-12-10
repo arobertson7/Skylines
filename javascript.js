@@ -83,8 +83,7 @@ let correctCount = 0;
 let currentRound = 1;
 
 // an array holding various responses to display when answer is correct
-const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo.",
-                             "Not bad!"];
+const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!"];
 
 /* End main data
 ***********************************************************************************************************************************************************
@@ -121,7 +120,63 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
 */
 
 function showResults() {
-    
+    //remove pic and game panel
+    gameContainer.removeChild(leftSide);
+    gameContainer.removeChild(gamePanel);
+    gameContainer.classList.remove("game-container-next"); // revert style
+    gameContainer.classList.add("game-container-start");
+
+    const results = document.createElement("div");
+    gameContainer.appendChild(results);
+    const calculatingContainer = document.createElement("div"); // The header is kept in a div of its own to keep from moving when adding ". . ." (extra width)
+    calculatingContainer.classList.add("calculating-container");
+    results.appendChild(calculatingContainer);
+    calculatingContainer.appendChild(document.createElement("h1"));
+    calculatingContainer.childNodes[0].textContent = "Calculating your results";
+    // there's probably a way better way to do this but...
+    let timer = 275;
+    for (let i = 0; i < 6; i++)
+    {
+        for (let j = 0; j < 4; j++)
+        {
+            setTimeout(() => {
+                calculatingContainer.childNodes[0].textContent += " . ";
+            }, timer);
+            timer += 275;
+        }
+        timer += 50;
+        if (i != 5) // leaves dots on final iteration
+        {
+            setTimeout(() => {
+                calculatingContainer.childNodes[0].textContent = "Calculating your results";
+            }, timer);
+        }
+        timer += 275;
+    }
+    setTimeout(() => {
+        // calculatingContainer.childNodes[0].textContent = "Calculating your results  " + "   " + '    \u2714';
+        const checkMark = document.createElement("div");
+        checkMark.appendChild(document.createElement("h1"));
+        checkMark.childNodes[0].textContent = '\u2714';
+        calculatingContainer.appendChild(checkMark);
+        calculatingContainer.childNodes[0].textContent = "Calculating your results";
+        calculatingContainer.style.gap = "20px";
+
+    }, timer);
+
+
+
+    // next ->
+
+    // - remove "Calculating your results..." (calculatingContainer)
+    // - turn results into a 4 div (or however many lines of results) container, flex-direction column
+    // - go ahead and put each line in each div so they're already there and don't move around, but initalize them all to visibility: hidden
+    // - one by one, make them visible as you go down the line
+    // * will need to continue using timer for this
+
+
+
+
 }
 
 function nextRound() {
@@ -150,59 +205,61 @@ function evaluateAnswer(correct) {
     document.getElementById("hints").style.visibility = "hidden";
     // temporarily remove question and buttons
     gamePanel.removeChild(questions);
+
+    // display answer ("correct" or "incorrect") and add button for going to next question
+    const answer = document.createElement("div");
+    answer.id = "answer";
+    answer.appendChild(document.createElement("h2"));
+    answer.childNodes[0].style.fontSize = "2.5rem";
+    // for comments
+    answer.appendChild(document.createElement("p"));
+    //next question button
+    const nextQuestionButton = document.createElement("button");
+    // adding a little style on hover
+    nextQuestionButton.addEventListener("mouseenter", () => {
+        nextQuestionButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
+    })
+    nextQuestionButton.addEventListener("mouseout", () => {
+        nextQuestionButton.style.background = null;
+    })
+    nextQuestionButton.classList.add("next-question-button");
+    nextQuestionButton.textContent = "Next City " + '\u2192';
+    gamePanel.insertBefore(answer, hints);
+
+    if (correct == true)
+    {
+        let response = correctResponses[randomIndex(correctResponses.length)]; // random response for correct answer
+        answer.childNodes[0].textContent = response;
+        if (correctCount == 7) // high score response
+        {
+            answer.childNodes[0].textContent = "Is there anywhere you haven't been?";
+        }
+        if (answer.childNodes[0].textContent.length > 32)
+        {
+            answer.childNodes[0].style.fontSize = "1.5rem"; // smaller font size if response is longer
+        }
+        else if (answer.childNodes[0].textContent.length >= 20)
+        {
+            answer.childNodes[0].style.fontSize = "1.75rem";
+        }
+        gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
+        correctCount++;
+
+    }
+    else
+    {
+        answer.childNodes[0].textContent = "Nein!";
+        answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name} my friend.`;
+        answer.style.justifyContent = "space-around"; // when there're two text elements
+        gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
+        
+    }
+    // update display of current grade 
+    score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
     
     // Logic for any round except the last one
     if (currentRound != rounds)
     {
-        // display answer ("correct" or "incorrect") and add button for going to next question
-        const answer = document.createElement("div");
-        answer.id = "answer";
-        answer.appendChild(document.createElement("h2"));
-        answer.childNodes[0].style.fontSize = "2.5rem";
-        // for comments
-        answer.appendChild(document.createElement("p"));
-        //next question button
-        const nextQuestionButton = document.createElement("button");
-        // adding a little style on hover
-        nextQuestionButton.addEventListener("mouseenter", () => {
-            nextQuestionButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
-        })
-        nextQuestionButton.addEventListener("mouseout", () => {
-            nextQuestionButton.style.background = null;
-        })
-        nextQuestionButton.classList.add("next-question-button");
-        nextQuestionButton.textContent = "Next City " + '\u2192';
-        gamePanel.insertBefore(answer, hints);
-
-        if (correct == true)
-        {
-            let response = correctResponses[randomIndex(correctResponses.length)]; // random response for correct answer
-            answer.childNodes[0].textContent = response;
-            if (correctCount == 7) // high score response
-            {
-                answer.childNodes[0].textContent = "Is there anywhere you haven't been?";
-            }
-            if (answer.childNodes[0].textContent.length > 32)
-            {
-                answer.childNodes[0].style.fontSize = "1.5rem"; // smaller font size if response is longer
-            }
-            else if (answer.childNodes[0].textContent.length >= 20)
-            {
-                answer.childNodes[0].style.fontSize = "1.75rem";
-            }
-            gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
-            correctCount++;
-
-        }
-        else
-        {
-            answer.childNodes[0].textContent = "Nein!";
-            answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name} my friend.`;
-            answer.style.justifyContent = "space-around"; // when there're two text elements
-            gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
-            
-        }
-
         // 2.5 second delay from showing answer with particular color to reverting color and diplaying "next city" button
         setTimeout(() => {
             gamePanel.removeChild(answer);
@@ -214,16 +271,15 @@ function evaluateAnswer(correct) {
             gamePanel.style.background = null;
         }, 2500);
 
-        // update display of current grade 
-        score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
-
         nextQuestionButton.addEventListener("click", () => {
             nextRound();
         })
     }
     else // On the last round
     {
-        showResults();
+        setTimeout(() => {
+            showResults();
+        }, 2500);
     }
 }
 
@@ -275,10 +331,12 @@ function setupGameDisplay()
     const gameContainer = document.querySelector(".game-container-start");
     gameContainer.classList.remove("game-container-start");
     gameContainer.classList.add("game-container-next");
+    gameContainer.id="gameContainer";
     const startButton = document.querySelector(".start-button");
     gameContainer.removeChild(startButton); // remove start button
     const leftSide = document.createElement("div"); // add picture section
     leftSide.classList.add("city-image");
+    leftSide.id="leftSide";
     gameContainer.appendChild(leftSide);
     const cityPic = document.createElement("img");
     cityPic.id="city-pic";
