@@ -76,11 +76,13 @@ class Queue {
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-let rounds = 7;
+let rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
 let currentRound = 1;
+// current grade (percentage out of 100)
+let currentGrade = Math.round((correctCount / currentRound) * 100);
 
 // an array holding various responses to display when answer is correct
 const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!"];
@@ -111,13 +113,128 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
     return false; // not yet used
 }
 
+// Converts number grade into letter grade. returns a string letter grade
+function convertToLetterGrade(grade) {
+    switch(true) {
+        case (97 <= grade && grade <= 100):
+            return "A+";
+            break;
+        case (93 <= grade && grade <= 96):
+            return "A";
+            break;
+        case (90 <= grade && grade <= 92):
+            return "A-";
+            break;
+        case (87 <= grade && grade <= 89):
+            return "B+";
+            break;
+        case (83 <= grade && grade <= 86):
+            return "B";
+            break;
+        case (80 <= grade && grade <= 82):
+            return "B-";
+            break;
+        case (77 <= grade && grade <= 79):
+            return "C+";
+            break;
+        case (73 <= grade && grade <= 76):
+            return "C";
+            break;
+        case (70 <= grade && grade <= 72):
+            return "C-";
+            break;
+        case (60 <= grade && grade <= 69):
+            return "D";
+            break;
+        case (grade < 60):
+            return "F";
+            break;
+    }
+}
 
+// helper function to provide the correct indefinite article while announcing grade
+// just returns the article by its self in string format
+function correctArticleForGradeHelper(grade) {
+    let letterGrade = convertToLetterGrade(grade);
+    if (letterGrade[0] == 'A' || letterGrade[0] == 'F')
+    {
+        return "an";
+    }
+    else
+    {
+        return "a";
+    }
+}
+
+// generates comments to display based on the user's score. param integer score. returns string.
+function generateFeedback(score) {
+    switch(convertToLetterGrade(score)) {
+        case "A+":
+            return "Is there anywhere you haven't been? You know this country like the back of your hand. City expert!";
+            break;
+        case "A":
+            return "You've been around, huh? You know your cities better than most! Outstanding performance.";
+            break;
+        case "A-":
+            return "Not your first trip around country, is it? You've demonstrated your knowledge of the map on this one. Impressive work!";
+            break;
+        case "B+":
+            return "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!";
+            break;
+        case "B":
+            return "Impressive performance. You've seen some sights, that's for sure.";
+            break;
+        case "B-":
+            return "Not too shabby. You've been watching the travel channel, haven't you?";
+            break;
+        case "C+":
+            return "You know the important cities quite well, but show those tier 3 cities some love every now and then!";
+            break;
+        case "C":
+            return "Okay, okay. You know your cities decently well, but you still have some room to grow. But hey, that's the fun part right?";
+            break;
+        case "C-":
+            return "Something tells me that wasn't your best go. Give it another shot, I know you can do better than that!";
+            break;
+        case "D":
+            return "Yikes.. I know traveling can be expensive, but like, at least look out your window once in a while, yea?";
+            break;
+        case "F":
+            return "You should really get out of the house more often! That was hard to watch.";
+            break;
+    }
+}
 
 /* End helper functions
 ***********************************************************************************************************************************************************
 ***********************************************************************************************************************************************************
    Begin game functions
 */
+
+// function to wrap the game up: display buttons for next game(s), etc. reset any necessary variables for next game.
+function endGame() {
+    // add two new containers, one to each side of results container
+    const leftEnd = document.createElement("div");
+    leftEnd.id="leftEnd";
+    const rightEnd = document.createElement("div");
+    rightEnd.id="rightEnd";
+    gameContainer.insertBefore(leftEnd, results);
+    results.after(rightEnd);
+    gameContainer.classList.remove("game-container-start");
+    gameContainer.classList.add("game-container-end"); // adjust style of game container slightly for this addition of sections
+
+    const rightSideDiv = document.createElement("div");
+    rightEnd.appendChild(rightSideDiv);
+    rightSideDiv.id="rightSideDiv";
+    rightSideDiv.appendChild(document.createElement("h3"));
+    rightSideDiv.childNodes[0].textContent = "There's a lot more cities where those came from!";
+    const newGameButton = document.createElement("button");
+    newGameButton.textContent = "Play Again " + '\u2192';
+    newGameButton.classList.add("start-button"); // same styling as the start button
+    rightSideDiv.appendChild(newGameButton);
+
+    // add event listeners for play again button
+}
 
 function showResults() {
     //remove pic and game panel
@@ -127,6 +244,7 @@ function showResults() {
     gameContainer.classList.add("game-container-start");
 
     const results = document.createElement("div");
+    results.id="results";
     gameContainer.appendChild(results);
     const calculatingContainer = document.createElement("div"); // The header is kept in a div of its own to keep from moving when adding ". . ." (extra width)
     calculatingContainer.classList.add("calculating-container");
@@ -135,7 +253,7 @@ function showResults() {
     calculatingContainer.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
     let timer = 275;
-    for (let i = 0; i < 6; i++)
+    for (let i = 0; i < 4; i++)
     {
         for (let j = 0; j < 4; j++)
         {
@@ -145,7 +263,7 @@ function showResults() {
             timer += 275;
         }
         timer += 50;
-        if (i != 5) // leaves dots on final iteration
+        if (i != 3) // leaves dots on final iteration
         {
             setTimeout(() => {
                 calculatingContainer.childNodes[0].textContent = "Calculating your results";
@@ -163,7 +281,7 @@ function showResults() {
         calculatingContainer.style.gap = "20px";
 
     }, timer);
-
+    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
 
     // next ->
@@ -174,9 +292,63 @@ function showResults() {
     // - one by one, make them visible as you go down the line
     // * will need to continue using timer for this
 
+    setTimeout(() => {
+        results.removeChild(calculatingContainer);
+        results.classList.add("results");
+        // header for results "Your results are in..."
+        const resultsHeader = document.createElement("div");
+        resultsHeader.id="resultsHeader";
+        resultsHeader.appendChild(document.createElement("h1"));
+        resultsHeader.childNodes[0].textContent = "Let's see how you did...";
+        results.appendChild(resultsHeader);
+        const resultsFirstSection = document.createElement("div");
+        resultsFirstSection.classList.add("resultsFirstSection");
+        resultsFirstSection.id="resultsFirstSection";
+        results.appendChild(resultsFirstSection);
+        // add 4 divs to resultsFirstSection container
+        for (let i = 0; i < 4; i++)
+        {
+            const resultsSection = document.createElement("div");
+            resultsSection.classList.add("results-sections"); // add the same css class to each div
+            const resultText = document.createElement("p"); // add a <p> into each div
+            resultsSection.appendChild(resultText);
+            resultsSection.style.visibility = "hidden"; // initialize each section to be hidden
+            resultsFirstSection.appendChild(resultsSection);
+            
+            // set the appropriate content for each section (div)
+            if (i == 0)
+            {
+                resultText.textContent = `Total correct:  You knew ${correctCount}/${rounds} cities.`
+            }
+            if (i == 1)
+            {
+                resultText.textContent = `Score:  ${currentGrade}%`;
+            }
+            if (i == 2)
+            {
+                resultText.textContent = `Overall grade:  ${convertToLetterGrade(currentGrade)}`;
+            }
+            if (i == 3)
+            {
+                resultText.textContent = "Notes:  " + generateFeedback(currentGrade);
+            }
+        }
+    }, timer);
+    
+    // display each result line one by one
+    for (let i = 0; i < 4; i++)
+    {
+        timer += 1500; // brief delay before displaying lines
+        setTimeout(() => {
+            resultsFirstSection.childNodes[i].style.visibility = "visible";
+        }, timer);
+        timer += 1500; // 1.5 seconds between displaying each line
+    }
 
-
-
+    timer += 2000; // 2 second delay before calling final function of the game
+    setTimeout(() => {
+        endGame();
+    }, timer);
 }
 
 function nextRound() {
@@ -254,8 +426,9 @@ function evaluateAnswer(correct) {
         gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
         
     }
-    // update display of current grade 
-    score.childNodes[1].textContent = `Current Grade: ${Math.round((correctCount / currentRound) * 100)}%`;
+    // update display of current grade
+    currentGrade = Math.round((correctCount / currentRound) * 100);
+    score.childNodes[1].textContent = `Current Grade: ${currentGrade}%`;
     
     // Logic for any round except the last one
     if (currentRound != rounds)

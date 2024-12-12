@@ -70,13 +70,12 @@ html, body {
 }
 
 .game-container-start { /* before "start game" */
-  /* background-color: black; */
   background: linear-gradient(to top left, gray, 5%, black);
   box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
   width:95%;
   height: 90%;
   border-radius: 50px;
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -220,4 +219,91 @@ html, body {
   display: flex;
   justify-content: start;
   width: 450px;
+}
+
+.results {
+  border: 3px solid whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  width: 60%;
+  border-radius: 60px;
+  padding: 45px 100px;
+  gap: 30px;
+}
+
+#resultsHeader {
+  border-bottom: 2px solid rgb(255, 255, 255, 0.8);
+  width: 100%;
+  padding-bottom: 10px;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.resultsFirstSection {
+  /* background-color: white; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 70%;
+}
+
+.results-sections {
+  width: 100%;
+  height: 20%;
+  /* background-color: rgb(115, 115, 188); */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 80px;
+  font-size: 1.4em;
+}
+
+.game-container-end { /* styling for final game display" */
+  background: linear-gradient(to top left, gray, 5%, black);
+  box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
+  width:95%;
+  height: 90%;
+  border-radius: 50px;
+  padding: 20px;
+  display: flex;
+  /* flex-direction: column; that's the main thing that changes */
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  gap: 20px;
+}
+
+#leftEnd {
+  width: 18%;
+  height: 100%;
+  border: 3px solid whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#rightEnd {
+  width: 18%;
+  height: 100%;
+  border: 3px solid whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#rightSideDiv {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
