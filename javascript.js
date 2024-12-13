@@ -220,7 +220,7 @@ function endGame() {
     rightEnd.id="rightEnd";
     gameContainer.insertBefore(leftEnd, results);
     results.after(rightEnd);
-    gameContainer.classList.remove("game-container-start");
+    gameContainer.classList.remove("game-container-results");
     gameContainer.classList.add("game-container-end"); // adjust style of game container slightly for this addition of sections
 
     const rightSideDiv = document.createElement("div");
@@ -230,7 +230,7 @@ function endGame() {
     rightSideDiv.childNodes[0].textContent = "There's a lot more cities where those came from!";
     const newGameButton = document.createElement("button");
     newGameButton.textContent = "Play Again " + '\u2192';
-    newGameButton.classList.add("start-button"); // same styling as the start button
+    newGameButton.classList.add("new-game-button");
     rightSideDiv.appendChild(newGameButton);
     // adding a little style on hover
     newGameButton.addEventListener("mouseenter", () => {
@@ -267,7 +267,7 @@ function showResults() {
     gameContainer.removeChild(leftSide);
     gameContainer.removeChild(gamePanel);
     gameContainer.classList.remove("game-container-next"); // revert style
-    gameContainer.classList.add("game-container-start");
+    gameContainer.classList.add("game-container-results");
 
     const results = document.createElement("div");
     results.id="results";
@@ -531,10 +531,15 @@ function setupGameDisplay()
     gameContainer.classList.remove("game-container-start");
     gameContainer.classList.add("game-container-next");
     gameContainer.id="gameContainer";
-    const startButton = document.querySelector(".start-button");
-    if (startButton) // if first game, remove start button
+    const startButtons = document.querySelector(".game-buttons");
+    if (startButtons) // if first game, remove start button
     {
-        gameContainer.removeChild(startButton); // remove start button
+        gameContainer.removeChild(startButtons); // remove start button
+    }
+    const header = document.querySelector(".header");
+    if (header)
+    {
+        gameContainer.removeChild(header);
     }
     const leftSide = document.createElement("div"); // add picture section
     leftSide.classList.add("city-image");
@@ -657,17 +662,30 @@ function playGame() {
 }
 
 // Start new game button
-let startButton = document.querySelector(".start-button");
-// adding a little style on hover
-startButton.addEventListener("mouseenter", () => {
-    startButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
-})
-startButton.addEventListener("mouseout", () => {
-    startButton.style.background = null;
-})
-// start game on click
-startButton.addEventListener("click", () => {
+const buttonsContainer = document.querySelector(".game-buttons");
+const buttonsList = buttonsContainer.querySelectorAll("div");
+
+const usButton = buttonsList[1].querySelector("button");
+const euroButton = buttonsList[0].querySelector("button");
+const worldwideButton = buttonsList[2].querySelector("button");
+// U.S. cities button start game on click
+
+for (let i = 0; i < 3; i++)
+{
+    let button = buttonsList[i].querySelector("button");
+    // adding a little style on hover
+    button.addEventListener("mouseenter", () => {
+        button.childNodes[0].style.opacity = "0.6";
+    })
+    
+    button.addEventListener("mouseout", () => {
+        button.childNodes[0].style.opacity = null;
+    })
+}
+
+
+
+
+usButton.addEventListener("click", () => {
     playGame();
 })
-
-            
