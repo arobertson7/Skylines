@@ -232,8 +232,34 @@ function endGame() {
     newGameButton.textContent = "Play Again " + '\u2192';
     newGameButton.classList.add("start-button"); // same styling as the start button
     rightSideDiv.appendChild(newGameButton);
+    // adding a little style on hover
+    newGameButton.addEventListener("mouseenter", () => {
+        newGameButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
+    });
+    newGameButton.addEventListener("mouseout", () => {
+        newGameButton.style.background = null;
+    });
 
     // add event listeners for play again button
+    newGameButton.addEventListener("click", () => {
+        gameContainer.classList.remove("game-container-end"); // reset game container class
+        gameContainer.classList.add("game-container-start");
+
+        // remove current display
+        gameContainer.removeChild(leftEnd);
+        gameContainer.removeChild(rightEnd);
+        gameContainer.removeChild(results);
+
+        // reset global variables for next game
+        currentRound = 1;
+        correctCount = 0;
+        // clear the queue
+        while (!cityQueue.isEmpty())
+        {
+            cityQueue.pop();
+        }
+        playGame();
+    });
 }
 
 function showResults() {
@@ -253,7 +279,7 @@ function showResults() {
     calculatingContainer.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
     let timer = 275;
-    for (let i = 0; i < 4; i++)
+    for (let i = 0; i < 1; i++)
     {
         for (let j = 0; j < 4; j++)
         {
@@ -263,7 +289,7 @@ function showResults() {
             timer += 275;
         }
         timer += 50;
-        if (i != 3) // leaves dots on final iteration
+        if (i != 2) // leaves dots on final iteration
         {
             setTimeout(() => {
                 calculatingContainer.childNodes[0].textContent = "Calculating your results";
@@ -318,7 +344,7 @@ function showResults() {
             // set the appropriate content for each section (div)
             if (i == 0)
             {
-                resultText.textContent = `Total correct:  You knew ${correctCount}/${rounds} cities.`
+                resultText.textContent = `You guessed:   ${correctCount} out of ${rounds} cities correctly!`
             }
             if (i == 1)
             {
@@ -330,7 +356,7 @@ function showResults() {
             }
             if (i == 3)
             {
-                resultText.textContent = "Notes:  " + generateFeedback(currentGrade);
+                resultText.textContent = "Assessment:  " + generateFeedback(currentGrade);
             }
         }
     }, timer);
@@ -338,11 +364,11 @@ function showResults() {
     // display each result line one by one
     for (let i = 0; i < 4; i++)
     {
-        timer += 1500; // brief delay before displaying lines
+        timer += 1000; // brief delay before displaying lines
         setTimeout(() => {
             resultsFirstSection.childNodes[i].style.visibility = "visible";
         }, timer);
-        timer += 1500; // 1.5 seconds between displaying each line
+        timer += 1000; // 1.5 seconds between displaying each line
     }
 
     timer += 2000; // 2 second delay before calling final function of the game
@@ -506,7 +532,10 @@ function setupGameDisplay()
     gameContainer.classList.add("game-container-next");
     gameContainer.id="gameContainer";
     const startButton = document.querySelector(".start-button");
-    gameContainer.removeChild(startButton); // remove start button
+    if (startButton) // if first game, remove start button
+    {
+        gameContainer.removeChild(startButton); // remove start button
+    }
     const leftSide = document.createElement("div"); // add picture section
     leftSide.classList.add("city-image");
     leftSide.id="leftSide";

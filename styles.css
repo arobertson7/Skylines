@@ -222,7 +222,7 @@ html, body {
 }
 
 .results {
-  border: 3px solid whitesmoke;
+  border: 2px solid rgb(20, 45, 253, 0.6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,6 +232,10 @@ html, body {
   border-radius: 60px;
   padding: 45px 100px;
   gap: 30px;
+  background: linear-gradient(to bottom right, white, 0.5%, rgb(40, 65, 253, 0.6));
+  /* box-shadow: 10px 6px 4px 4px rgba(255, 255, 255, 0.5); */
+  box-shadow: 6px 2px 4px 6px rgba(120, 145, 253, 0.3), 7px 3px 4px 6px rgba(100, 125, 253, 0.35), 8px 4px 4px 6px rgba(80, 105, 253, 0.4),
+  9px 5px 4px 6px rgba(60, 85, 253, 0.45), 10px 6px 4px 6px rgba(40, 65, 253, 0.5);
 }
 
 #resultsHeader {
@@ -247,7 +251,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: start;
+  gap: 30px;
   width: 100%;
   height: 70%;
 }
@@ -255,12 +260,14 @@ html, body {
 .results-sections {
   width: 100%;
   height: 20%;
-  /* background-color: rgb(115, 115, 188); */
+  background-color: rgb(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: start;
   border-radius: 80px;
   font-size: 1.4em;
+  font-weight: 600;
+  padding: 20px;
 }
 
 .game-container-end { /* styling for final game display" */
@@ -282,7 +289,7 @@ html, body {
 #leftEnd {
   width: 18%;
   height: 100%;
-  border: 3px solid whitesmoke;
+  /* border: 3px solid whitesmoke; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,7 +299,7 @@ html, body {
 #rightEnd {
   width: 18%;
   height: 100%;
-  border: 3px solid whitesmoke;
+  /* border: 3px solid whitesmoke; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -305,5 +312,7 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
+  gap: 30px;
 }

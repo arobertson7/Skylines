@@ -41,3 +41,12 @@ ideas
 
 
 
+<div class="results">
+    <div class="resultsheader"></div>
+    <div class="resultsFirstSection">
+        <div class="results-section"></div>
+        <div class="results-section"></div>
+        <div class="results-section"></div>
+        <div class="results-section"></div>
+    </div>
+</div>
