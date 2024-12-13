@@ -271,15 +271,17 @@ function showResults() {
 
     const results = document.createElement("div");
     results.id="results";
+    results.classList.add("results");
     gameContainer.appendChild(results);
     const calculatingContainer = document.createElement("div"); // The header is kept in a div of its own to keep from moving when adding ". . ." (extra width)
     calculatingContainer.classList.add("calculating-container");
     results.appendChild(calculatingContainer);
     calculatingContainer.appendChild(document.createElement("h1"));
+    // calculatingContainer.appendChild(document.createElement("span"));
     calculatingContainer.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
     let timer = 275;
-    for (let i = 0; i < 1; i++)
+    for (let i = 0; i < 3; i++)
     {
         for (let j = 0; j < 4; j++)
         {
@@ -320,7 +322,6 @@ function showResults() {
 
     setTimeout(() => {
         results.removeChild(calculatingContainer);
-        results.classList.add("results");
         // header for results "Your results are in..."
         const resultsHeader = document.createElement("div");
         resultsHeader.id="resultsHeader";
@@ -336,27 +337,53 @@ function showResults() {
         {
             const resultsSection = document.createElement("div");
             resultsSection.classList.add("results-sections"); // add the same css class to each div
+            resultsSection.id= `resultline${i + 1}`;
             const resultText = document.createElement("p"); // add a <p> into each div
             resultsSection.appendChild(resultText);
+            resultsSection.appendChild(document.createElement("span")); // each line is split into to elements (a <p> appended by a <span>), allowing for
+                                                                        // differences in style on the second part
             resultsSection.style.visibility = "hidden"; // initialize each section to be hidden
             resultsFirstSection.appendChild(resultsSection);
             
             // set the appropriate content for each section (div)
             if (i == 0)
             {
-                resultText.textContent = `You guessed:   ${correctCount} out of ${rounds} cities correctly!`
+                resultText.textContent = "You guessed:   ";
+                resultsSection.childNodes[1].textContent = `${correctCount} out of ${rounds} cities correctly!`;
             }
             if (i == 1)
             {
-                resultText.textContent = `Score:  ${currentGrade}%`;
+                resultText.textContent = "Score:   ";
+                resultsSection.childNodes[1].textContent = `${currentGrade}%`;
             }
             if (i == 2)
             {
-                resultText.textContent = `Overall grade:  ${convertToLetterGrade(currentGrade)}`;
+                resultText.textContent = "Overall grade:   ";
+                resultsSection.childNodes[1].textContent = `${convertToLetterGrade(currentGrade)}`;
+                // apply color to letter grade
+                switch((convertToLetterGrade(currentGrade))[0])
+                {
+                    case 'A':
+                        resultsSection.childNodes[1].style.color = "green";
+                        break;
+                    case 'B':
+                        resultsSection.childNodes[1].style.color = "greenyellow";
+                        break;
+                    case 'C':
+                        resultsSection.childNodes[1].style.color = "yellow";
+                        break;
+                    case 'D':
+                        resultsSection.childNodes[1].style.color = "orange";
+                        break;
+                    case 'F':
+                        resultsSection.childNodes[1].style.color = "red";
+                        break;
+                }
             }
             if (i == 3)
             {
-                resultText.textContent = "Assessment:  " + generateFeedback(currentGrade);
+                resultText.textContent = "Assessment:   "; 
+                resultsSection.childNodes[1].textContent = generateFeedback(currentGrade);
             }
         }
     }, timer);
@@ -675,14 +702,15 @@ for (let i = 0; i < 3; i++)
     let button = buttonsList[i].querySelector("button");
     // adding a little style on hover
     button.addEventListener("mouseenter", () => {
-        button.childNodes[0].style.opacity = "0.6";
+        // button.childNodes[0].style.opacity = "0.6";
+        button.childNodes[0].style.filter = "brightness(1.2)";
     })
     
     button.addEventListener("mouseout", () => {
-        button.childNodes[0].style.opacity = null;
+        // button.childNodes[0].style.opacity = null;
+        button.childNodes[0].style.filter = null;
     })
 }
-
 
 
 

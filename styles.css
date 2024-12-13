@@ -114,7 +114,7 @@ html, body {
   /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
   color: white;
   border-radius: 70px;
-  border: 3px solid whitesmoke;
+  /* border: 3px solid whitesmoke; */
   /* box-shadow: 2px 2px 4px 2px white; */
   font-weight: 700;
 }
@@ -256,9 +256,12 @@ html, body {
 }
 
 .calculating-container {
+  border-bottom: 2px solid rgb(255, 255, 255, 0.8);
   display: flex;
   justify-content: start;
-  width: 450px;
+  width: 500px;
+  padding-bottom: 10px;
+  text-align: center;
 }
 
 .game-container-results { /* before "start game" */
@@ -295,9 +298,9 @@ html, body {
 
 #resultsHeader {
   border-bottom: 2px solid rgb(255, 255, 255, 0.8);
-  width: 100%;
+  width: 500px;
   padding-bottom: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: center;
 }
 
@@ -321,10 +324,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: start;
+  gap: 10px;
   border-radius: 80px;
   font-size: 1.4em;
-  font-weight: 600;
+  font-weight: 800;
   padding: 20px;
+}
+
+.results-sections span {
+  font-weight: 600;
 }
 
 .game-container-end { /* styling for final game display" */
@@ -375,15 +383,15 @@ html, body {
 }
 
 .new-game-button {
-  width: 9rem;
-  height: 3rem;
+  width: 10rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(to bottom right, white, 5%, black);
   /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
   color: white;
-  border-radius: 70px;
+  border-radius: 30px;
   border: 1px solid whitesmoke;
   box-shadow: 2px 2px 4px 2px white;
   font-weight: 700;
