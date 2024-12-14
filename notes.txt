@@ -40,17 +40,6 @@ ideas
 
 
 
-
-<div class="results">
-    <div class="resultsheader"></div>
-    <div class="resultsFirstSection">
-        <div class="results-section"></div>
-        <div class="results-section"></div>
-        <div class="results-section"></div>
-        <div class="results-section"></div>
-    </div>
-</div>
-
 box-shadow: 6px 2px 4px 4px rgba(160, 185, 253, 0.5), 7px 3px 4px 4px rgba(130, 155, 253, 0.5), 8px 4px 4px 4px rgba(100, 125, 253, 0.5),
   9px 5px 4px 4px rgba(70, 95, 253, 0.5), 10px 6px 4px 4px rgba(40, 65, 253, 0.5);
 

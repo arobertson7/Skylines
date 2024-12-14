@@ -353,7 +353,7 @@ function showResults() {
             }
             if (i == 1)
             {
-                resultText.textContent = "Score:   ";
+                resultText.textContent = " Your score:   ";
                 resultsSection.childNodes[1].textContent = `${currentGrade}%`;
             }
             if (i == 2)
@@ -382,7 +382,7 @@ function showResults() {
             }
             if (i == 3)
             {
-                resultText.textContent = "Assessment:   "; 
+                resultText.textContent = "Assessment:   ";
                 resultsSection.childNodes[1].textContent = generateFeedback(currentGrade);
             }
         }
