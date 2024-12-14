@@ -76,7 +76,7 @@ class Queue {
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 4;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -227,7 +227,7 @@ function endGame() {
     rightEnd.appendChild(rightSideDiv);
     rightSideDiv.id="rightSideDiv";
     rightSideDiv.appendChild(document.createElement("h3"));
-    rightSideDiv.childNodes[0].textContent = "There's a lot more cities where those came from!";
+    rightSideDiv.childNodes[0].textContent = "There's many more cities where those came from!";
     const newGameButton = document.createElement("button");
     newGameButton.textContent = "Play Again " + '\u2192';
     newGameButton.classList.add("new-game-button");
