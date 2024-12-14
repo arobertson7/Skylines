@@ -47,3 +47,12 @@ box-shadow: 6px 2px 4px 4px rgba(160, 185, 253, 0.5), 7px 3px 4px 4px rgba(130, 
 versions:
     just keep a global variable as a "pointer" to the current version of the game.
     with that i can basically modify anything in the game to a paritcular version, via switch statements and if/else statements
+
+
+
+
+after next game button:
+
+"Or... broaden your horizons"
+euorpe button
+worldwide button

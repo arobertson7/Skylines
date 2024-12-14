@@ -76,7 +76,7 @@ class Queue {
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-let rounds = 1;
+const rounds = 4;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -140,13 +140,13 @@ function convertToLetterGrade(grade) {
         case (73 <= grade && grade <= 76):
             return "C";
             break;
-        case (70 <= grade && grade <= 72):
+        case (65 <= grade && grade <= 72):
             return "C-";
             break;
-        case (60 <= grade && grade <= 69):
+        case (50 <= grade && grade <= 64):
             return "D";
             break;
-        case (grade < 60):
+        case (grade < 50):
             return "F";
             break;
     }
@@ -182,10 +182,10 @@ function generateFeedback(score) {
             return "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!";
             break;
         case "B":
-            return "Impressive performance. You've seen some sights, that's for sure.";
+            return "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?";
             break;
         case "B-":
-            return "Not too shabby. You've been watching the travel channel, haven't you?";
+            return "Not too shabby. You've seen some sights, that's for sure!";
             break;
         case "C+":
             return "You know the important cities quite well, but show those tier 3 cities some love every now and then!";
@@ -197,7 +197,7 @@ function generateFeedback(score) {
             return "Something tells me that wasn't your best go. Give it another shot, I know you can do better than that!";
             break;
         case "D":
-            return "Yikes.. I know traveling can be expensive, but like, at least look out your window once in a while, yea?";
+            return "Yikes... I hope you at least got a good price. On that rock you've been living under!";
             break;
         case "F":
             return "You should really get out of the house more often! That was hard to watch.";
@@ -276,9 +276,12 @@ function showResults() {
     const calculatingContainer = document.createElement("div"); // The header is kept in a div of its own to keep from moving when adding ". . ." (extra width)
     calculatingContainer.classList.add("calculating-container");
     results.appendChild(calculatingContainer);
-    calculatingContainer.appendChild(document.createElement("h1"));
+    const calc = document.createElement("div");
+    calc.id="calc";
+    calculatingContainer.appendChild(calc);
+    calc.appendChild(document.createElement("h1"));
     // calculatingContainer.appendChild(document.createElement("span"));
-    calculatingContainer.childNodes[0].textContent = "Calculating your results";
+    calc.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
     let timer = 275;
     for (let i = 0; i < 3; i++)
@@ -286,7 +289,7 @@ function showResults() {
         for (let j = 0; j < 4; j++)
         {
             setTimeout(() => {
-                calculatingContainer.childNodes[0].textContent += " . ";
+                calc.childNodes[0].textContent += ". ";
             }, timer);
             timer += 275;
         }
@@ -294,19 +297,14 @@ function showResults() {
         if (i != 2) // leaves dots on final iteration
         {
             setTimeout(() => {
-                calculatingContainer.childNodes[0].textContent = "Calculating your results";
+                calc.childNodes[0].textContent = "Calculating your results";
             }, timer);
         }
         timer += 275;
     }
     setTimeout(() => {
-        // calculatingContainer.childNodes[0].textContent = "Calculating your results  " + "   " + '    \u2714';
-        const checkMark = document.createElement("div");
-        checkMark.appendChild(document.createElement("h1"));
-        checkMark.childNodes[0].textContent = '\u2714';
-        calculatingContainer.appendChild(checkMark);
-        calculatingContainer.childNodes[0].textContent = "Calculating your results";
-        calculatingContainer.style.gap = "20px";
+        calc.childNodes[0].textContent = "Calculating your results  ";
+        calc.childNodes[0].textContent += "      \u2714";
 
     }, timer);
     timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
@@ -326,9 +324,10 @@ function showResults() {
         const resultsHeader = document.createElement("div");
         resultsHeader.id="resultsHeader";
         resultsHeader.appendChild(document.createElement("h1"));
-        resultsHeader.childNodes[0].textContent = "Let's see how you did...";
+        resultsHeader.childNodes[0].textContent = "Let's see how you did. . .";
         results.appendChild(resultsHeader);
         const resultsFirstSection = document.createElement("div");
+        resultsFirstSection.style.visibility = "hidden";
         resultsFirstSection.classList.add("resultsFirstSection");
         resultsFirstSection.id="resultsFirstSection";
         results.appendChild(resultsFirstSection);
@@ -336,13 +335,13 @@ function showResults() {
         for (let i = 0; i < 4; i++)
         {
             const resultsSection = document.createElement("div");
-            resultsSection.classList.add("results-sections"); // add the same css class to each div
+            resultsSection.classList.add("results-sections"); // add the same css class to each div /hi
             resultsSection.id= `resultline${i + 1}`;
             const resultText = document.createElement("p"); // add a <p> into each div
             resultsSection.appendChild(resultText);
             resultsSection.appendChild(document.createElement("span")); // each line is split into to elements (a <p> appended by a <span>), allowing for
                                                                         // differences in style on the second part
-            resultsSection.style.visibility = "hidden"; // initialize each section to be hidden
+            resultsSection.childNodes[1].style.visibility = "hidden"; // initialize each section to be hidden
             resultsFirstSection.appendChild(resultsSection);
             
             // set the appropriate content for each section (div)
@@ -360,17 +359,18 @@ function showResults() {
             {
                 resultText.textContent = "Overall grade:   ";
                 resultsSection.childNodes[1].textContent = `${convertToLetterGrade(currentGrade)}`;
+                resultsSection.childNodes[1].style.fontWeight = "800";
                 // apply color to letter grade
                 switch((convertToLetterGrade(currentGrade))[0])
                 {
                     case 'A':
-                        resultsSection.childNodes[1].style.color = "green";
+                        resultsSection.childNodes[1].style.color = "rgb(18, 162, 18)";
                         break;
                     case 'B':
-                        resultsSection.childNodes[1].style.color = "greenyellow";
+                        resultsSection.childNodes[1].style.color = "rgb(77, 177, 0)";
                         break;
                     case 'C':
-                        resultsSection.childNodes[1].style.color = "yellow";
+                        resultsSection.childNodes[1].style.color = "rgb(228, 228, 16";
                         break;
                     case 'D':
                         resultsSection.childNodes[1].style.color = "orange";
@@ -387,18 +387,24 @@ function showResults() {
             }
         }
     }, timer);
-    
+
+    timer += 1000;
+    setTimeout(() => {
+        resultsFirstSection.style.visibility = "visible";
+    }, timer);
+
+    timer += 2300; // brief delay before displaying lines
+
     // display each result line one by one
     for (let i = 0; i < 4; i++)
-    {
-        timer += 1000; // brief delay before displaying lines
+    {   
         setTimeout(() => {
-            resultsFirstSection.childNodes[i].style.visibility = "visible";
+            resultsFirstSection.childNodes[i].childNodes[1].style.visibility = "visible";
         }, timer);
-        timer += 1000; // 1.5 seconds between displaying each line
+        timer += 2300; // 1.5 seconds between displaying each line
     }
 
-    timer += 2000; // 2 second delay before calling final function of the game
+    timer += 3000; // 2 second delay before calling final function of the game
     setTimeout(() => {
         endGame();
     }, timer);
@@ -413,7 +419,7 @@ function nextRound() {
     cityQueue.pop();
 
     // remove answer display
-    gamePanel.removeChild(nextq);
+    // gamePanel.removeChild(nextq);
 
     // add question display back to game panel
     displayQuestion();
@@ -487,25 +493,33 @@ function evaluateAnswer(correct) {
     if (currentRound != rounds)
     {
         // 2.5 second delay from showing answer with particular color to reverting color and diplaying "next city" button
+        // setTimeout(() => {
+        //     gamePanel.removeChild(answer);
+        //     const nextQ = document.createElement("div");
+        //     nextQ.classList.add("next-question-button-container");
+        //     nextQ.id = "nextq";
+        //     nextQ.appendChild(nextQuestionButton);
+        //     gamePanel.insertBefore(nextQ, hints);
+        //     gamePanel.style.background = null;
+        // }, 2500);
+
+        // nextQuestionButton.addEventListener("click", () => {
+        //     nextRound();
+        // })
+
+
+        // goes straight to next question after 3 seconds. loses the next question button
         setTimeout(() => {
             gamePanel.removeChild(answer);
-            const nextQ = document.createElement("div");
-            nextQ.classList.add("next-question-button-container");
-            nextQ.id = "nextq";
-            nextQ.appendChild(nextQuestionButton);
-            gamePanel.insertBefore(nextQ, hints);
             gamePanel.style.background = null;
-        }, 2500);
-
-        nextQuestionButton.addEventListener("click", () => {
             nextRound();
-        })
+        }, 3500);
     }
     else // On the last round
     {
         setTimeout(() => {
             showResults();
-        }, 2500);
+        }, 3700);
     }
 }
 
@@ -703,7 +717,7 @@ for (let i = 0; i < 3; i++)
     // adding a little style on hover
     button.addEventListener("mouseenter", () => {
         // button.childNodes[0].style.opacity = "0.6";
-        button.childNodes[0].style.filter = "brightness(1.2)";
+        button.childNodes[0].style.filter = "brightness(1.25)";
     })
     
     button.addEventListener("mouseout", () => {

@@ -70,12 +70,12 @@ html, body {
 }
 
 .game-container-start { /* before "start game" */
-  background: linear-gradient(to top left, gray, 5%, black);
+  background: linear-gradient(to top, gray, 2%, black);
   box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
   width:95%;
   height: 90%;
   border-radius: 50px;
-  padding: 40px;
+  padding: 20px 40px 55px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,6 +117,8 @@ html, body {
   /* border: 3px solid whitesmoke; */
   /* box-shadow: 2px 2px 4px 2px white; */
   font-weight: 700;
+  box-shadow: -1px -2px 5px 0px rgba(255, 255, 255, 0.8);
+
 }
 
 .europe, .usa, .worldwide {
@@ -126,7 +128,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   font-size: 1.3em;
 }
 
@@ -134,6 +136,10 @@ html, body {
   height: 100%;
   width: 100%;
   border-radius: 70px;
+}
+
+#europe-button.start-buttons {
+  height: 90%; /* for some reason the button grew with this one particular picture of germany. 90% put it back to normal size */
 }
 
 .game-container-next { /* once game starts */
@@ -258,10 +264,16 @@ html, body {
 .calculating-container {
   border-bottom: 2px solid rgb(255, 255, 255, 0.8);
   display: flex;
-  justify-content: start;
+  justify-content: center;
   width: 500px;
   padding-bottom: 10px;
   text-align: center;
+}
+
+#calc {
+  display: flex;
+  justify-content: start;
+  width: 80%;
 }
 
 .game-container-results { /* before "start game" */
@@ -286,7 +298,7 @@ html, body {
   align-items: center;
   justify-content: start;
   height: 95%;
-  width: 60%;
+  width: 70%;
   border-radius: 60px;
   padding: 25px 100px 30px;
   gap: 40px;
@@ -319,7 +331,7 @@ html, body {
   width: 100%;
   height: 15%;
   /* background-color: rgb(0, 0, 0, 0.4); */
-  background: linear-gradient(to top left, rgb(40, 65, 253, 0.6), 5%, white);
+  background: linear-gradient(to top left, rgb(90, 90, 90, 0.8), 5%, white);
   color: black;
   display: flex;
   align-items: center;
@@ -340,6 +352,10 @@ html, body {
   align-items: start;
 }
 
+#resultline3 span {
+  font-size: 1.2em;
+}
+
 .results-sections span {
   font-weight: 500;
 }
@@ -357,11 +373,11 @@ html, body {
   justify-content: center;
   color: white;
   font-weight: 700;
-  gap: 20px;
+  gap: 24px;
 }
 
 #leftEnd {
-  width: 18%;
+  width: 12%;
   height: 100%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -371,7 +387,7 @@ html, body {
 }
 
 #rightEnd {
-  width: 18%;
+  width: 12%;
   height: 100%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -383,18 +399,21 @@ html, body {
 
 #rightSideDiv {
   width: 100%;
-  height: 30%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 30px;
+  gap: 20px;
+  /* border: 2px solid white; */
+  padding: 5px 5px 10px;
+  border-radius: 30px;
 }
 
 .new-game-button {
-  width: 10rem;
-  height: 6rem;
+  width: 10em;
+  height: 8em;
   display: flex;
   align-items: center;
   justify-content: center;
