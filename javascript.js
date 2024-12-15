@@ -29,7 +29,27 @@ const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", 
 // const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
 
 // U.S. cities array
-let cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
+const cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
+
+
+// European countries
+const germany = new City("Germany", ["./images/munich.avif", "./images/berlin1.avif", "./images/berlin2.jpg", "./images/bayern.jpg"], "germany hint");
+const france = new City("France", ["./images/paris1.jpg", "./images/paris2.webp", "./images/paris3.jpeg"], "france hint");
+const england = new City("England", ["./images/london1.jpg", "./images/london2.jpg", "./images/london3.webp", "./images/london4.jpg"], "england hint");
+const spain = new City("Spain", ["./images/barcelona1.webp", "./images/barcelona2.jpg", "./images/barcelona3.jpeg"], "spain hint");
+const norway = new City("Norway", ["./images/norway.jpg", "./images/oslo1.webp"], "norway hint");
+const denmark = new City("Denmark", ["./images/copenhagen1.jpg", "./images/copenhagen2.jpg", "./images/copenhagen3.jpg"], "denmark hint");
+const netherlands = new City("The Netherlands", ["./images/amsterdam1.jpg", "./images/amsterdam2.jpg", "./images/utrecht.webp"], "netherlands hint");
+const czech = new City("Czech Republic", ["./images/prague1.jpg", "./images/prague2.jpg", "./images/prague3.jpg", "./images/prague4.webp"], "czech republic hint");
+const portugal = new City("Portugal", ["./images/lisbon1.webp", "./images/nazare.jpg", "./images/lisbon2.jpg"], "portugal hint");
+const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2.jpg", "./images/austria3.jpg"], "austria hint");
+const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/zurich1.jpg", "./images/zurich2.jpeg", "./images/zurich3.jpg", "./images/zurich4.jpg", "./images/lucerne1.jpg", "./images/lucerne2.webp"], "switzerland hint");
+const italy = new City("Italy", ["./images/milan.webp", "./images/siena.jpeg", "./images/tuscany.jpg", "./images/florence.jpg", "./images/amalfi.webp"], "italy hint");
+
+
+// European countries array
+const europe = [germany, france, england, spain, norway, denmark, netherlands, czech, portugal, austria, switzerland, italy];
+
 
 // Queue class
 class Queue {
@@ -72,11 +92,12 @@ class Queue {
     }
 }
 
-
+// Global "pointer" for tracking which version of the game is being played. (value should be a string with the same name as the current region's array name)
+let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 1;
+const rounds = 2;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -633,7 +654,7 @@ function setupGameDisplay()
 }
 
 function setupCitiesQueue() {
-    // Setup the queue of randomized cities for new game
+    // // Setup the queue of randomized cities for new game
     let numOfCities = cities.length; // number of cities in the cities array
     let usedIndexes = []; // for storing indexes which were already used
     for (let i = 0; i < rounds; i++)
@@ -706,7 +727,7 @@ function playGame() {
 const buttonsContainer = document.querySelector(".game-buttons");
 const buttonsList = buttonsContainer.querySelectorAll("div");
 
-const usButton = buttonsList[1].querySelector("button");
+const usaButton = buttonsList[1].querySelector("button");
 const euroButton = buttonsList[0].querySelector("button");
 const worldwideButton = buttonsList[2].querySelector("button");
 // U.S. cities button start game on click
@@ -728,6 +749,12 @@ for (let i = 0; i < 3; i++)
 
 
 
-usButton.addEventListener("click", () => {
+usaButton.addEventListener("click", () => {
+    currentRegion = "usa";
+    playGame();
+})
+
+euroButton.addEventListener("click", () => {
+    currentRegion = "europe";
     playGame();
 })
