@@ -18,7 +18,9 @@ Right now, it calls...
 
 (2b) if it's the last round, it calls ------
 
------------> showResults()
+-----------> showResults() which calls ----------
+
+----------------> endGame() which **currently** sets a click event listener to playGame(), starting a new game with the same region
 
 
 
@@ -51,8 +53,9 @@ versions:
 
 
 
-after next game button:
-
-"Or... broaden your horizons"
-euorpe button
-worldwide button
+Left side:
+    "More cities where those came from" play again
+Right side:
+    "Broaden your horizons"
+    euorpe button
+    worldwide button

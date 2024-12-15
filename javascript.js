@@ -29,7 +29,7 @@ const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", 
 // const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
 
 // U.S. cities array
-const cities = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
+const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
 
 
 // European countries
@@ -92,7 +92,7 @@ class Queue {
     }
 }
 
-// Global "pointer" for tracking which version of the game is being played. (value should be a string with the same name as the current region's array name)
+// Global "pointer" for tracking which version of the game is being played. (value to be assigned is the array of the correct version of the game)
 let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
@@ -248,7 +248,7 @@ function endGame() {
     rightEnd.appendChild(rightSideDiv);
     rightSideDiv.id="rightSideDiv";
     rightSideDiv.appendChild(document.createElement("h3"));
-    rightSideDiv.childNodes[0].textContent = "There's many more cities where those came from!";
+    rightSideDiv.childNodes[0].textContent = "More cities where those came from!";
     const newGameButton = document.createElement("button");
     newGameButton.textContent = "Play Again " + '\u2192';
     newGameButton.classList.add("new-game-button");
@@ -551,7 +551,16 @@ function displayQuestion() {
     questions.classList.add("questions");
     gamePanel.insertBefore(questions, hints);
     questions.appendChild(document.createElement("h2"));
-    questions.childNodes[0].textContent = "Which city is this?";
+    let cityOrCountry;
+    switch(currentRegion) {
+        case usa:
+            cityOrCountry = "city";
+            break;
+        case europe:
+            cityOrCountry = "country";
+            break;
+    }
+    questions.childNodes[0].textContent = `Which ${cityOrCountry} is this?`;
     questions.childNodes[0].style.fontSize = "1.75rem";
     let choices = document.createElement("div");
     choices.id = "choices";
@@ -631,7 +640,16 @@ function setupGameDisplay()
     score.classList.add("score");
     gamePanel.appendChild(score);
     let questionNumber = document.createElement("p");
-    questionNumber.textContent = `City 1/${rounds}`;
+    let cityOrCountry;
+    switch(currentRegion) {
+        case usa:
+            cityOrCountry = "City";
+            break;
+        case europe:
+            cityOrCountry = "Country";
+            break;
+    }
+    questionNumber.textContent = `${cityOrCountry} 1/${rounds}`;
     score.appendChild(questionNumber);
     let grade = document.createElement("p");
     grade.textContent = "Current Grade: --";
@@ -654,8 +672,8 @@ function setupGameDisplay()
 }
 
 function setupCitiesQueue() {
-    // // Setup the queue of randomized cities for new game
-    let numOfCities = cities.length; // number of cities in the cities array
+    // // Setup the queue of randomized cities/countries for new game
+    let numOfCities = currentRegion.length;
     let usedIndexes = []; // for storing indexes which were already used
     for (let i = 0; i < rounds; i++)
     {
@@ -664,7 +682,7 @@ function setupCitiesQueue() {
         }
         while (indexAlreadyUsed(usedIndexes, randomCityIndex));
         usedIndexes.push(randomCityIndex);
-        cityQueue.push(cities[randomCityIndex]);
+        cityQueue.push(currentRegion[randomCityIndex]);
     }
 }
 
@@ -682,9 +700,9 @@ function setupNewRound() {
     let usedCityIndexes = []; // for storing city indexes which were already used
     
     // push index of the answer city to the usedIndexes array so it is not used below for another answer choice button
-    for (let i = 0; i < cities.length; i++)
+    for (let i = 0; i < currentRegion.length; i++)
     {
-        if (cities[i].name == cityQueue.peek().name)
+        if (currentRegion[i].name == cityQueue.peek().name)
         {
             usedCityIndexes.push(i);
         }
@@ -696,11 +714,11 @@ function setupNewRound() {
         let randomCityIndex;
         if (i != answerButtonIndex) // go through all 4 buttons but skip the one holding the correct answer
         {
-            do {randomCityIndex = randomIndex(cities.length);
+            do {randomCityIndex = randomIndex(currentRegion.length);
             }
             while (indexAlreadyUsed(usedCityIndexes, randomCityIndex));
             usedCityIndexes.push(randomCityIndex);
-            choices.childNodes[i].textContent = cities[randomCityIndex].name;
+            choices.childNodes[i].textContent = currentRegion[randomCityIndex].name;
         }
 
     }
@@ -750,11 +768,11 @@ for (let i = 0; i < 3; i++)
 
 
 usaButton.addEventListener("click", () => {
-    currentRegion = "usa";
+    currentRegion = usa;
     playGame();
 })
 
 euroButton.addEventListener("click", () => {
-    currentRegion = "europe";
+    currentRegion = europe;
     playGame();
 })

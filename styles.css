@@ -184,7 +184,7 @@ html, body {
   width: 90%;
   display: flex;
   justify-content: space-between;
-  flex-grow: 1;
+  flex-grow: 2;
 }
 
 .questions {
@@ -193,7 +193,7 @@ html, body {
   align-items: center;
   gap: 40px;
   width: 100%;
-  justify-content: center;
+  justify-content: start;
   border-radius: 40px;
   flex-grow: 3;
 }
@@ -202,7 +202,7 @@ html, body {
   width: 70%;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
 }
 
 .choices button {
@@ -210,16 +210,16 @@ html, body {
   background: linear-gradient(to bottom right, white, 5%, black);
   /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
   color: white;
-  border-radius: 20px;
+  border-radius: 40px;
   border: 1px solid whitesmoke;
   box-shadow: 4px 3px 4px 2px white;
-  height: 2.5em;
+  height: 3em;
 }
 
 .hints {
   width: 100%;
   width: 90%;
-  flex-grow: 4;
+  flex-grow: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
