@@ -280,21 +280,6 @@ html, body {
   width: 80%;
 }
 
-.game-container-results { /* before "start game" */
-  background: linear-gradient(to top left, gray, 5%, black);
-  box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
-  width:95%;
-  height: 90%;
-  border-radius: 50px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-}
-
 .results {
   border: 2px solid rgb(20, 45, 253, 0.6);
   display: flex;
@@ -302,7 +287,7 @@ html, body {
   align-items: center;
   justify-content: start;
   height: 95%;
-  width: 70%;
+  width: 74%;
   border-radius: 60px;
   padding: 25px 100px 30px;
   gap: 40px;
@@ -381,7 +366,7 @@ html, body {
 }
 
 #leftEnd {
-  width: 15%;
+  width: 13%;
   height: 95%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -392,7 +377,7 @@ html, body {
 }
 
 #rightEnd {
-  width: 15%;
+  width: 13%;
   height: 95%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -432,10 +417,9 @@ html, body {
   text-align: center;
   gap: 40px;
   /* border: 2px solid white; */
-  padding: 10px 22px 12px;
+  padding: 10px 20px 10px 30px;
   /* border-radius: 30px; */
   font-weight: 400;
-  margin: 0px -10px 0px 10px;
 }
 
 .new-game-button {

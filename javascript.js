@@ -97,7 +97,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 1;
+const rounds = 4;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -232,25 +232,37 @@ function generateFeedback(score) {
    Begin game functions
 */
 
-// function to wrap the game up: display buttons for next game(s), etc. reset any necessary variables for next game.
-function endGame() {
+// called by showResults()
+function displayNextGameButtons() {
+    //initialized as hidden
+
     // add two new containers, one to each side of results container
     const leftEnd = document.createElement("div");
     leftEnd.id="leftEnd";
+    leftEnd.style.visibility = "hidden";
     const rightEnd = document.createElement("div");
     rightEnd.id="rightEnd";
+    rightEnd.style.visibility = "hidden";
     gameContainer.insertBefore(leftEnd, results);
     results.after(rightEnd);
-    gameContainer.classList.remove("game-container-results");
-    gameContainer.classList.add("game-container-end"); // adjust style of game container slightly for this addition of sections
 
     // Play again prompt/buttons (same version)
     const leftSideDiv = document.createElement("div");
     leftEnd.appendChild(leftSideDiv);
     leftSideDiv.id="leftSideDiv";
     leftSideDiv.appendChild(document.createElement("h3"));
-    leftSideDiv.childNodes[0].textContent = "More cities!"; // "More cities where those came from!""
+    let cityOrCountry;
+    switch(currentRegion) {
+        case usa:
+            cityOrCountry = "cities";
+            break;
+        case europe:
+            cityOrCountry = "countries";
+            break;
+    }
+    leftSideDiv.childNodes[0].textContent = `More ${cityOrCountry}!`; // "More cities where those came from!""
     const newGameButtonSame = document.createElement("button");
+    newGameButtonSame.id = "newGameButtonSame";
     newGameButtonSame.textContent = "Play Again " + '\u2192';
     newGameButtonSame.classList.add("new-game-button");
     leftSideDiv.appendChild(newGameButtonSame);
@@ -262,27 +274,6 @@ function endGame() {
         newGameButtonSame.style.background = null;
     });
 
-    // add event listeners for play again button
-    newGameButtonSame.addEventListener("click", () => {
-        gameContainer.classList.remove("game-container-end"); // reset game container class
-        gameContainer.classList.add("game-container-start");
-
-        // remove current display
-        gameContainer.removeChild(leftEnd);
-        gameContainer.removeChild(rightEnd);
-        gameContainer.removeChild(results);
-
-        // reset global variables for next game
-        currentRound = 1;
-        correctCount = 0;
-        // clear the queue
-        while (!cityQueue.isEmpty())
-        {
-            cityQueue.pop();
-        }
-        playGame();
-    });
-
 
     // Play again prompt/button (different version)
     const rightSideDiv = document.createElement("div");
@@ -291,9 +282,29 @@ function endGame() {
     rightSideDiv.appendChild(document.createElement("h3"));
     rightSideDiv.childNodes[0].textContent = "Broaden your horizons";
     const newGameButtonDiff1 = document.createElement("button"); // different version 1
+    newGameButtonDiff1.id="newGameButtonDiff1";
     const newGameButtonDiff2 = document.createElement("button"); // different version 2
-    newGameButtonDiff1.textContent = "Europe " + '\u2192';
-    newGameButtonDiff2.textContent = "Worldwide " + '\u2192';
+    newGameButtonDiff2.id="newGameButtonDiff2";
+    // to properly name the newGameButtonDiff buttons
+    let otherVersion1;
+    let otherVersion2;
+    if (currentRegion == usa)
+    {
+        otherVersion1 = "Europe";
+        otherVersion2 = "Worldwide";
+    }
+    else if (currentRegion == europe)
+    {
+        otherVersion1 = "USA";
+        otherVersion2 = "Worldwide";
+    }
+    else
+    {
+        otherVersion1 = "Europe";
+        otherVersion1 = "USA";
+    }
+    newGameButtonDiff1.textContent = `${otherVersion1} ` + '\u2192';
+    newGameButtonDiff2.textContent = `${otherVersion2} ` + '\u2192';
     newGameButtonDiff1.classList.add("new-game-button");
     newGameButtonDiff2.classList.add("new-game-button");
     rightSideDiv.appendChild(newGameButtonDiff1);
@@ -314,9 +325,13 @@ function endGame() {
     newGameButtonDiff2.addEventListener("mouseout", () => {
         newGameButtonDiff2.style.background = null;
     });
+}
 
-    // add event listeners for play again button (different version 1)
-    newGameButtonDiff1.addEventListener("click", () => {
+// function to wrap the game up: display buttons for next game(s), etc. reset any necessary variables for next game.
+function endGame() {
+    
+     // add event listeners for play again button (same version)
+     newGameButtonSame.addEventListener("click", () => {
         gameContainer.classList.remove("game-container-end"); // reset game container class
         gameContainer.classList.add("game-container-start");
 
@@ -333,7 +348,37 @@ function endGame() {
         {
             cityQueue.pop();
         }
-        currentRegion = europe;
+        playGame();
+    });
+
+    // add event listeners for play again button (different version 1)
+    newGameButtonDiff1.addEventListener("click", () => {
+        gameContainer.classList.remove("game-container-end"); // reset game container class
+        gameContainer.classList.add("game-container-start");
+
+        // set correct version for next game
+        switch(newGameButtonDiff1.textContent.split(' ')[0]) {
+            case "Europe":
+                currentRegion = europe;
+                break;
+            case "USA":
+                currentRegion = usa;
+                break;
+        }
+
+        // remove current display
+        gameContainer.removeChild(leftEnd);
+        gameContainer.removeChild(rightEnd);
+        gameContainer.removeChild(results);
+
+        // reset global variables for next game
+        currentRound = 1;
+        correctCount = 0;
+        // clear the queue
+        while (!cityQueue.isEmpty())
+        {
+            cityQueue.pop();
+        }
         playGame();
     });
 
@@ -357,6 +402,9 @@ function endGame() {
     //     }
     //     playGame();
     // });
+
+    leftEnd.style.visibility = "visible";
+    rightEnd.style.visibility = "visible";
 }
 
 function showResults() {
@@ -364,12 +412,14 @@ function showResults() {
     gameContainer.removeChild(leftSide);
     gameContainer.removeChild(gamePanel);
     gameContainer.classList.remove("game-container-next"); // revert style
-    gameContainer.classList.add("game-container-results");
+    gameContainer.classList.add("game-container-end");
 
     const results = document.createElement("div");
     results.id="results";
     results.classList.add("results");
     gameContainer.appendChild(results);
+    // append left and right side sections intially hidden
+    displayNextGameButtons();
     const calculatingContainer = document.createElement("div"); // The header is kept in a div of its own to keep from moving when adding ". . ." (extra width)
     calculatingContainer.classList.add("calculating-container");
     results.appendChild(calculatingContainer);
@@ -445,7 +495,16 @@ function showResults() {
             if (i == 0)
             {
                 resultText.textContent = "You guessed:   ";
-                resultsSection.childNodes[1].textContent = `${correctCount} out of ${rounds} cities correctly!`;
+                let cityOrCountry;
+                switch(currentRegion) {
+                    case usa:
+                        cityOrCountry = "cities";
+                        break;
+                    case europe:
+                        cityOrCountry = "countries";
+                        break;
+                };
+                resultsSection.childNodes[1].textContent = `${correctCount} out of ${rounds} ${cityOrCountry} correctly!`;
             }
             if (i == 1)
             {
