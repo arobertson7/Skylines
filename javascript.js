@@ -97,7 +97,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 2;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -244,25 +244,26 @@ function endGame() {
     gameContainer.classList.remove("game-container-results");
     gameContainer.classList.add("game-container-end"); // adjust style of game container slightly for this addition of sections
 
-    const rightSideDiv = document.createElement("div");
-    rightEnd.appendChild(rightSideDiv);
-    rightSideDiv.id="rightSideDiv";
-    rightSideDiv.appendChild(document.createElement("h3"));
-    rightSideDiv.childNodes[0].textContent = "More cities where those came from!";
-    const newGameButton = document.createElement("button");
-    newGameButton.textContent = "Play Again " + '\u2192';
-    newGameButton.classList.add("new-game-button");
-    rightSideDiv.appendChild(newGameButton);
+    // Play again prompt/buttons (same version)
+    const leftSideDiv = document.createElement("div");
+    leftEnd.appendChild(leftSideDiv);
+    leftSideDiv.id="leftSideDiv";
+    leftSideDiv.appendChild(document.createElement("h3"));
+    leftSideDiv.childNodes[0].textContent = "More cities!"; // "More cities where those came from!""
+    const newGameButtonSame = document.createElement("button");
+    newGameButtonSame.textContent = "Play Again " + '\u2192';
+    newGameButtonSame.classList.add("new-game-button");
+    leftSideDiv.appendChild(newGameButtonSame);
     // adding a little style on hover
-    newGameButton.addEventListener("mouseenter", () => {
-        newGameButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
+    newGameButtonSame.addEventListener("mouseenter", () => {
+        newGameButtonSame.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
     });
-    newGameButton.addEventListener("mouseout", () => {
-        newGameButton.style.background = null;
+    newGameButtonSame.addEventListener("mouseout", () => {
+        newGameButtonSame.style.background = null;
     });
 
     // add event listeners for play again button
-    newGameButton.addEventListener("click", () => {
+    newGameButtonSame.addEventListener("click", () => {
         gameContainer.classList.remove("game-container-end"); // reset game container class
         gameContainer.classList.add("game-container-start");
 
@@ -281,6 +282,81 @@ function endGame() {
         }
         playGame();
     });
+
+
+    // Play again prompt/button (different version)
+    const rightSideDiv = document.createElement("div");
+    rightEnd.appendChild(rightSideDiv);
+    rightSideDiv.id="rightSideDiv";
+    rightSideDiv.appendChild(document.createElement("h3"));
+    rightSideDiv.childNodes[0].textContent = "Broaden your horizons";
+    const newGameButtonDiff1 = document.createElement("button"); // different version 1
+    const newGameButtonDiff2 = document.createElement("button"); // different version 2
+    newGameButtonDiff1.textContent = "Europe " + '\u2192';
+    newGameButtonDiff2.textContent = "Worldwide " + '\u2192';
+    newGameButtonDiff1.classList.add("new-game-button");
+    newGameButtonDiff2.classList.add("new-game-button");
+    rightSideDiv.appendChild(newGameButtonDiff1);
+    rightSideDiv.appendChild(newGameButtonDiff2);
+
+    // adding a little style on hover - button 1
+    newGameButtonDiff1.addEventListener("mouseenter", () => {
+        newGameButtonDiff1.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
+    });
+    newGameButtonDiff1.addEventListener("mouseout", () => {
+        newGameButtonDiff1.style.background = null;
+    });
+
+    // adding a little style on hover - button 2
+    newGameButtonDiff2.addEventListener("mouseenter", () => {
+        newGameButtonDiff2.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
+    });
+    newGameButtonDiff2.addEventListener("mouseout", () => {
+        newGameButtonDiff2.style.background = null;
+    });
+
+    // add event listeners for play again button (different version 1)
+    newGameButtonDiff1.addEventListener("click", () => {
+        gameContainer.classList.remove("game-container-end"); // reset game container class
+        gameContainer.classList.add("game-container-start");
+
+        // remove current display
+        gameContainer.removeChild(leftEnd);
+        gameContainer.removeChild(rightEnd);
+        gameContainer.removeChild(results);
+
+        // reset global variables for next game
+        currentRound = 1;
+        correctCount = 0;
+        // clear the queue
+        while (!cityQueue.isEmpty())
+        {
+            cityQueue.pop();
+        }
+        currentRegion = europe;
+        playGame();
+    });
+
+    // // add event listeners for play again button (different version 1)
+    // newGameButtonDiff1.addEventListener("click", () => {
+    //     gameContainer.classList.remove("game-container-end"); // reset game container class
+    //     gameContainer.classList.add("game-container-start");
+
+    //     // remove current display
+    //     gameContainer.removeChild(leftEnd);
+    //     gameContainer.removeChild(rightEnd);
+    //     gameContainer.removeChild(results);
+
+    //     // reset global variables for next game
+    //     currentRound = 1;
+    //     correctCount = 0;
+    //     // clear the queue
+    //     while (!cityQueue.isEmpty())
+    //     {
+    //         cityQueue.pop();
+    //     }
+    //     playGame();
+    // });
 }
 
 function showResults() {

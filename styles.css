@@ -60,8 +60,7 @@ html, body {
   height: 100%;
   width: 100%;
   background: linear-gradient(to bottom right, white, 5%, rgb(86, 135, 205), 95%, white);
-  /* background: linear-gradient(to bottom right, white, 5%, black, 10%, white, 15%, black, 20%, white, 25%, black, 30%, white, 35%, black); */
-  /* background-color: rgb(86, 135, 205); */
+  /* background: linear-gradient(to top, white, 3%, rgb(27, 79, 235, 0.8)); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,17 +173,21 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 10px;
   font-weight: 700;
+  gap: 40px;
 }
 
 .score {
   font-size: 18px;
-  width: 90%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-grow: 2;
+  justify-content: center;
+  gap: 30%;
+  /* flex-grow: 2; */
+  height: 6.5%;
+  border-bottom: 2px solid white;
 }
 
 .questions {
@@ -195,7 +198,8 @@ html, body {
   width: 100%;
   justify-content: start;
   border-radius: 40px;
-  flex-grow: 3;
+  /* flex-grow: 3; */
+  height: 60%;
 }
 
 .choices {
@@ -217,14 +221,14 @@ html, body {
 }
 
 .hints {
-  width: 100%;
   width: 90%;
-  flex-grow: 2;
+  /* flex-grow: 2; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
+  height: 20%;
 }
 
 .hints button {
@@ -265,7 +269,7 @@ html, body {
   border-bottom: 2px solid rgb(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
-  width: 500px;
+  width: 70%;
   padding-bottom: 10px;
   text-align: center;
 }
@@ -310,7 +314,7 @@ html, body {
 
 #resultsHeader {
   border-bottom: 2px solid rgb(255, 255, 255, 0.8);
-  width: 500px;
+  width: 70%;
   padding-bottom: 10px;
   font-size: 1em;
   text-align: center;
@@ -373,11 +377,11 @@ html, body {
   justify-content: center;
   color: white;
   font-weight: 700;
-  gap: 24px;
+  gap: 20px;
 }
 
 #leftEnd {
-  width: 12%;
+  width: 15%;
   height: 95%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -388,7 +392,7 @@ html, body {
 }
 
 #rightEnd {
-  width: 12%;
+  width: 15%;
   height: 95%;
   /* border: 3px solid whitesmoke; */
   display: flex;
@@ -398,36 +402,53 @@ html, body {
   padding-top: 75px;
 }
 
-#rightSideDiv {
-  background: linear-gradient(to bottom, white, 3%, black);
-  box-shadow: 1px 1px 4px 4px rgb(245, 245, 245, 0.8);
+#leftSideDiv {
+  /* background: linear-gradient(to bottom, white, 3%, black); */
+  /* box-shadow: 1px 1px 4px 4px rgb(245, 245, 245, 0.8); */
   width: 100%;
-  height: 45%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: start;
-  gap: 25px;
+  justify-content: start;
+  text-align: center;
+  gap: 40px;
   /* border: 2px solid white; */
-  padding: 10px 20px 12px;
-  border-radius: 30px;
+  padding: 10px 20px;
+  /* border-radius: 30px; */
+  font-weight: 400;
+}
+
+#rightSideDiv {
+  /* background: linear-gradient(to bottom, white, 3%, black); */
+
+  /* box-shadow: 1px 1px 4px 4px rgb(245, 245, 245, 0.8); */
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  text-align: center;
+  gap: 40px;
+  /* border: 2px solid white; */
+  padding: 10px 22px 12px;
+  /* border-radius: 30px; */
   font-weight: 400;
   margin: 0px -10px 0px 10px;
 }
 
 .new-game-button {
   width: 100%;
-  height: 20%;
+  height: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
   /* background: linear-gradient(to bottom right, white, 5%, black); */
-  background: linear-gradient(to bottom, white, 3%, rgb(27, 79, 235, 0.8));
-  /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+  background: linear-gradient(to bottom right, white, 7%, rgb(27, 79, 235, 0.8));
   color: white;
-  border-radius: 40px;
-  border: 1px solid whitesmoke;
-  box-shadow: 1px 1px 1px 1px rgb(245, 245, 245, 0.8);
+  border-radius: 25px;
+  box-shadow: 3px 3px 2px 2px rgba(120, 140, 235, 0.8);
+  border: 1px solid rgba(10, 50, 235, 0.8);
   font-weight: 700;
 }
