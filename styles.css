@@ -141,6 +141,28 @@ html, body {
   height: 90%; /* for some reason the button grew with this one particular picture of germany. 90% put it back to normal size */
 }
 
+#versionDisplayContainer {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 1.5em;
+  margin-bottom: 75px;
+}
+
+#versionDisplayContainer div {
+  height: 50%;
+  width: 50%;
+  border-radius: 20px;
+}
+
+#versionDisplayContainer div>img {
+  border-radius: 20px;
+}
+
 .game-container-next { /* once game starts */
   background-color: black;
   box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
@@ -155,8 +177,7 @@ html, body {
 .city-image {
   border-radius: 40px;
   background-color: white;
-  flex-grow: 3;
-  max-width: 66%;
+  width: 70%;
 }
 
 .city-image img {
@@ -166,10 +187,10 @@ html, body {
 }
 
 .game-panel {
+  width: 30%;
   border-radius: 40px;
   border: 2px solid white;
   color: white;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,7 +205,7 @@ html, body {
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 30%;
+  gap: 20%;
   /* flex-grow: 2; */
   height: 6.5%;
   border-bottom: 2px solid white;

@@ -652,7 +652,20 @@ function evaluateAnswer(correct) {
     }
     // update display of current grade
     currentGrade = Math.round((correctCount / currentRound) * 100);
+    let gradeColor; // for giving the grade a corresponding color
+    switch (true) {
+        case currentGrade >= 80:
+            gradeColor = "rgb(18, 162, 18)";
+            break;
+        case currentGrade >= 60:
+            gradeColor = "orange";
+            break;
+        case currentGrade < 60:
+            gradeColor = "red";
+            break;
+    }
     score.childNodes[1].textContent = `Current Grade: ${currentGrade}%`;
+    score.childNodes[1].style.color = gradeColor;
     
     // Logic for any round except the last one
     if (currentRound != rounds)
@@ -743,8 +756,6 @@ function setupGameDisplay()
 {
     // Setup game container
     const gameContainer = document.querySelector(".game-container-start");
-    gameContainer.classList.remove("game-container-start");
-    gameContainer.classList.add("game-container-next");
     gameContainer.id="gameContainer";
     const startButtons = document.querySelector(".game-buttons");
     if (startButtons) // if first game, remove start button
@@ -756,63 +767,96 @@ function setupGameDisplay()
     {
         gameContainer.removeChild(header);
     }
-    const leftSide = document.createElement("div"); // add picture section
-    leftSide.classList.add("city-image");
-    leftSide.id="leftSide";
-    gameContainer.appendChild(leftSide);
-    const cityPic = document.createElement("img");
-    cityPic.id="city-pic";
-    leftSide.appendChild(cityPic);
-    // Set picture to the correct answer city (selecting a random one from its imageArray)
-    let firstPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
-    cityPic.src=firstPic;
-    const gamePanel = document.createElement("div"); // add right side section
-    gamePanel.classList.add("game-panel");
-    gamePanel.id="gamePanel";
-    gameContainer.appendChild(gamePanel);
 
-
-    // Setup right side of game panel
-
-    // Score section
-    let score = document.createElement("div");
-    score.id = "score"; /* id allows ability to access dynamically created dom object. i don't think we can reference globally though or it will throw error
-                           from the start. will essentially have to pass around through functions once game starts it seems. For example create the game panel here
-                           and then once it's time to initalize the queue and buttons and whatnot, we should be able to create a separate function for that,
-                           call it at the end of this function and then be able to access the dynamically created dom elements from there since they will now
-                           be in the dom. */
-    score.classList.add("score");
-    gamePanel.appendChild(score);
-    let questionNumber = document.createElement("p");
-    let cityOrCountry;
-    switch(currentRegion) {
+    // Briefly display the version which was chosen before starting the game
+    const versionDisplayContainer = document.createElement("div");
+    versionDisplayContainer.id="versionDisplayContainer";
+    gameContainer.appendChild(versionDisplayContainer);
+    versionDisplayContainer.appendChild(document.createElement("h2")); // name of version
+    switch (currentRegion) {
         case usa:
-            cityOrCountry = "City";
+            versionDisplayContainer.childNodes[0].textContent = "USA";
             break;
         case europe:
-            cityOrCountry = "Country";
+            versionDisplayContainer.childNodes[0].textContent = "Europe";
+            break;
+        // case worldwide:
+        //     versionDisplayContainer.childNodes[0].textContent = "Worldwide";
+        //     break;
+    }
+    versionDisplayContainer.appendChild(document.createElement("div")); // image container (probably flag of that region)
+    versionDisplayContainer.childNodes[1].appendChild(document.createElement("img"));
+    switch (currentRegion) {
+        case usa:
+            versionDisplayContainer.childNodes[1].childNodes[0].src = "./images/usa-flag.webp";
+            break;
+        case europe:
+            versionDisplayContainer.childNodes[1].childNodes[0].src = "./images/europe-flag.gif";
             break;
     }
-    questionNumber.textContent = `${cityOrCountry} 1/${rounds}`;
-    score.appendChild(questionNumber);
-    let grade = document.createElement("p");
-    grade.textContent = "Current Grade: --";
-    score.appendChild(grade);
 
-    // Hints section
-    let hints = document.createElement("div");
-    hints.id = "hints";
-    hints.classList.add("hints");
-    gamePanel.appendChild(hints);
-    let hintButton = document.createElement("button");
-    hintButton.textContent = "Hint?";
-    hints.appendChild(hintButton);
-    let hintsRemaining = document.createElement("p");
-    hintsRemaining.textContent = "3 remaining";
-    hints.appendChild(hintsRemaining);
+    setTimeout(() => {
+        gameContainer.removeChild(versionDisplayContainer);
+        gameContainer.classList.remove("game-container-start");
+        gameContainer.classList.add("game-container-next");
+        const leftSide = document.createElement("div"); // add picture section
+        leftSide.classList.add("city-image");
+        leftSide.id="leftSide";
+        gameContainer.appendChild(leftSide);
+        const cityPic = document.createElement("img");
+        cityPic.id="city-pic";
+        leftSide.appendChild(cityPic);
+        // Set picture to the correct answer city (selecting a random one from its imageArray)
+        let firstPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
+        cityPic.src=firstPic;
+        const gamePanel = document.createElement("div"); // add right side section
+        gamePanel.classList.add("game-panel");
+        gamePanel.id="gamePanel";
+        gameContainer.appendChild(gamePanel);
 
-    // Display question and choice buttons
-    displayQuestion();
+
+        // Setup right side of game panel
+
+        // Score section
+        let score = document.createElement("div");
+        score.id = "score"; /* id allows ability to access dynamically created dom object. i don't think we can reference globally though or it will throw error
+                            from the start. will essentially have to pass around through functions once game starts it seems. For example create the game panel here
+                            and then once it's time to initalize the queue and buttons and whatnot, we should be able to create a separate function for that,
+                            call it at the end of this function and then be able to access the dynamically created dom elements from there since they will now
+                            be in the dom. */
+        score.classList.add("score");
+        gamePanel.appendChild(score);
+        let questionNumber = document.createElement("p");
+        let cityOrCountry;
+        switch(currentRegion) {
+            case usa:
+                cityOrCountry = "City";
+                break;
+            case europe:
+                cityOrCountry = "Country";
+                break;
+        }
+        questionNumber.textContent = `${cityOrCountry} 1/${rounds}`;
+        score.appendChild(questionNumber);
+        let grade = document.createElement("p");
+        grade.textContent = "Current Grade: --";
+        score.appendChild(grade);
+
+        // Hints section
+        let hints = document.createElement("div");
+        hints.id = "hints";
+        hints.classList.add("hints");
+        gamePanel.appendChild(hints);
+        let hintButton = document.createElement("button");
+        hintButton.textContent = "Hint?";
+        hints.appendChild(hintButton);
+        let hintsRemaining = document.createElement("p");
+        hintsRemaining.textContent = "3 remaining";
+        hints.appendChild(hintsRemaining);
+
+        // Display question and choice buttons
+        displayQuestion();
+    }, 2000); // 2 second display of version before moving on
 }
 
 function setupCitiesQueue() {
@@ -832,9 +876,12 @@ function setupCitiesQueue() {
 
 function setupNewRound() {
     // Set picture to the correct answer city (selecting a random one from its imageArray)
-    let cityPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
-    let picContainer = document.getElementById("city-pic");
-    picContainer.src=cityPic;
+    if (currentRound != 1) // pic is already set by this point if it's the first round
+    {
+        let cityPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
+        let picContainer = document.getElementById("city-pic");
+        picContainer.src=cityPic;
+    }
 
     // Set random answer choices
     // Start with ensuring that the correct city is in one of them, a random one;
@@ -881,7 +928,9 @@ function playGame() {
     setupGameDisplay();
     
     // Populate image and random answer choices for the first round
-    setupNewRound();
+    setTimeout(() => {
+        setupNewRound();
+    }, 2000);
 
 }
 
