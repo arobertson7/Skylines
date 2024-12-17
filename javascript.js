@@ -569,7 +569,16 @@ function showResults() {
 function nextRound() {
     // update question number and display
     currentRound++;
-    score.childNodes[0].textContent = `City ${currentRound}/${rounds}`;
+    let cityOrCountry;
+    switch(currentRegion) {
+        case usa:
+            cityOrCountry = "City";
+            break;
+        case europe:
+            cityOrCountry = "Country";
+            break;
+    }
+    score.childNodes[0].textContent = `${cityOrCountry} ${currentRound}/${rounds}`;
 
     // remove most recent city from the queue
     cityQueue.pop();
