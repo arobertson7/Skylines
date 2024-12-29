@@ -74,7 +74,7 @@ html, body {
   width:95%;
   height: 90%;
   border-radius: 50px;
-  padding: 20px 40px 55px 40px;
+  padding: 20px 42px 55px 42px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,18 +94,18 @@ html, body {
 }
 
 .game-buttons {
-  height: 70%;
+  height: min(70%, 35vw);
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 4%; /* 20px */
 }
 
 .start-buttons {
   padding: 0px;
   width: 100%;
-  height: 100%;
+  height: 88%; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,9 +116,19 @@ html, body {
   /* border: 3px solid whitesmoke; */
   /* box-shadow: 2px 2px 4px 2px white; */
   font-weight: 700;
-  box-shadow: -1px -2px 5px 0px rgba(255, 255, 255, 0.8);
-
+  box-shadow: -2px -2px 5px 1px rgba(255, 255, 255, 0.6);
+  border: 0.2rem outset black;
 }
+
+.start-buttons:hover {
+  filter: brightness(1.25);
+}
+
+ /* #usa-button:hover {
+  filter: brightness(1.25);
+  width: 103%;
+  height: 91%;
+ } */
 
 .europe, .usa, .worldwide {
   height: 100%;
@@ -135,10 +145,6 @@ html, body {
   height: 100%;
   width: 100%;
   border-radius: 70px;
-}
-
-#europe-button.start-buttons {
-  height: 90%; /* for some reason the button grew with this one particular picture of germany. 90% put it back to normal size */
 }
 
 #versionDisplayContainer {
@@ -204,8 +210,9 @@ html, body {
   font-size: 18px;
   width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 20%;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 25px;
   /* flex-grow: 2; */
   height: 6.5%;
   border-bottom: 2px solid white;
@@ -228,6 +235,7 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  justify-content: space-between;
 }
 
 .choices button {
@@ -237,7 +245,7 @@ html, body {
   color: white;
   border-radius: 40px;
   border: 1px solid whitesmoke;
-  box-shadow: 4px 3px 4px 2px white;
+  box-shadow: 2px 2px 4px 2px white;
   height: 3em;
 }
 
@@ -353,6 +361,10 @@ html, body {
   padding: 20px;
 }
 
+#resultline4 {
+  font-size: 1.3em;
+}
+
 .results-sections p {
   width: 27%;
 }
@@ -455,5 +467,11 @@ html, body {
   border-radius: 25px;
   box-shadow: 3px 3px 2px 2px rgba(120, 140, 235, 0.8);
   border: 1px solid rgba(10, 50, 235, 0.8);
-  font-weight: 700;
+  font-weight: 900;
+  letter-spacing: .09rem;
+}
+
+.new-game-button:hover {
+  margin-right: -2px;
+  margin-top: 2px;
 }

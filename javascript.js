@@ -27,9 +27,26 @@ const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.webp"], 
 const portland = new City("Portland", ["./images/portland1.jpg", "./images/portland2.webp"], "portland hint");
 const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.jpg"], "knox hint");
 // const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
+const newOrleans = new City("New Orleans", ["./images/new-orleans1.avif", "./images/new-orleans2.webp", "./images/new-orleans3.jpg", "./images/new-orleans4.avif", "./images/new-orleans5.jpg"], "new orleans hint");
+const sanDiego = new City("San Diego", ["./images/sd1.avif", "./images/sd2.jpeg", "./images/sd3.jpg", "./images/sd4.jpg", "./images/sd5.jpg"], "sd hint");
+const honolulu = new City("Honolulu", ["./images/honolulu1.jpg", "./images/honolulu2.webp", "./images/honolulu3.jpg", "./images/honolulu4.jpg"], "honolulu hint");
+const dallas = new City("Dallas", ["./images/dallas1.jpeg", "./images/dallas2.avif", "./images/dallas3.jpeg", "./images/dallas4.jpg"], "dallas hint");
+const charleston = new City("Charleston", ["./images/charleston1.jpg", "./images/charleston2.jpg", "./images/charleston3.jpg", "./images/charleston4.jpg"], "charleston hint");
+const detroit = new City("Detroit", ["./images/detroit1.webp", "./images/detroit2.jpeg", "./images/detroit3.avif", "./images/detroit4.jpg", "./images/detroit5.webp"], "detroit hint");
+const houston = new City("Houston", ["./images/houston1.jpg", "./images/houston2.avif", "./images/houston3.jpg", "./images/houston4.jpg", "./images/houston5.jpg", "./images/houston6.jpg"], "houston hint");
+const charlotte = new City("Charlotte", ["./images/charlotte1.jpg", "./images/charlotte2.webp", "./images/charlotte3.jpg", "./images/charlotte4.jpeg", "./images/charlotte5.jpg", "./images/charlotte6.webp"], "charlotte hint");
+const baltimore = new City("Baltimore", ["./images/baltimore1.jpeg", "./images/baltimore2.jpg", "./images/baltimore3.jpg", "./images/baltimore4.png", "./images/baltimore5.webp", "./images/baltimore6.jpg"], "baltimore hint");
+const palmSprings = new City("Palm Springs", ["./images/ps1.jpg", "./images/ps2.avif", "./images/ps3.jpg", "./images/ps4.jpeg", "./images/ps5.jpg"], "palm springs hint");
+const boise = new City("Boise", ["./images/boise1.jpg", "./images/boise2.jpg", "./images/boise3.jpg", "./images/boise4.jpg", "./images/boise5.png"], "boise hint");
+const sedona = new City("Sedona", ["./images/sedona1.webp", "./images/sedona2.webp", "./images/sedona3.jpg", "./images/sedona4.jpg", "./images/sedona5.jpg", "./images/sedona6.jpg"], "sedona hint");
+const slc = new City("Salt Lake City", ["./images/slc1.jpg", "./images/slc2.webp", "./images/slc3.jpg", "./images/slc4.jpeg", "./images/slc.avif", "./images/slc6.avif"], "slc hint");
+const barHarbor = new City("Bar Harbor", ["./images/barHarbor1.png", "./images/barHarbor2.png", "./images/barHarbor3.jpg", "./images/barHarbor4.jpg", "./images/barHarbor5.jpg"], "bar harbor hint");
+const santaFe = new City("Santa Fe", ["./images/santaFe1.jpg", "./images/santaFe2.webp", "./images/santaFe3.jpg", "./images/santaFe4.avif", "./images/santaFe5.webp"], "santa fe hint");
+const newportRI = new City("Newport, RI", ["./images/newport1.jpg", "./images/newport2.jpg", "./images/newport3.jpg", "./images/newport4.jpg", "./images/newport5.jpg", "./images/newport6.jpg"], "newport hint");
 
 // U.S. cities array
-const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox];
+const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox, newOrleans, sanDiego, honolulu,
+                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI];
 
 
 // European countries
@@ -97,16 +114,71 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 4;
+const rounds = 8;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
 let currentRound = 1;
 // current grade (percentage out of 100)
 let currentGrade = Math.round((correctCount / currentRound) * 100);
+// currently using a global var for tracking index of currently used photo so able to show a different one when hint button is clicked
+let randomImageIndex;
+// currently using global vars for hint functionality
+let hintsRemaining = 2;
 
 // an array holding various responses to display when answer is correct
-const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!"];
+const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done."];
+
+const A_Plus_Responses = ["Geography Genius! You've officially reached 'World Traveler' status. If there were a Nobel Prize for geography, you'd have at least three by now. The UN should call you for advice!",
+    "Top of the Class! You've got the geography skills of a well-traveled detective! Sherlock Holmes would call you for tips on finding obscure countries. You're basically the Indiana Jones of map-reading.",
+    "Are You a Map? You've navigated your way to an A+, making even Google Maps jealous. If there's a lost city of Atlantis, you'd probably find it before breakfast.",
+    "Geography? More like Ge-uh, this is easy. You've crushed this quiz like you were born with a passport in one hand and a globe in the other. NASA is considering hiring you as a consultant.",
+    "World-Class Expert! A+! You've officially unlocked 'Superhuman Geography Powers'. At this rate, the only continent you haven't visited is Antarctica... and that's only because penguins don't need your help."];
+const A_Responses = [  "Nice job! You're officially a geography prodigy—at least until someone asks you about Antarctica. But hey, nobody's perfect, right?",
+    "A solid A! You've got a brain like Google Maps... if Google Maps had a caffeine addiction. Keep it up, and you'll be leading world tours in no time!",
+    "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
+    "Well done! You're just a few maps away from being the human equivalent of Google Earth. Still need to work on those street names, though.",
+    "You nailed it! You've got more geography knowledge than a globe, and you don't even need to spin yourself to show off. But A+ is still calling your name!",
+    "You've been around, huh? You know your cities better than most! Outstanding performance."];
+const B_Plus_Responses = [
+    "B+? You're basically the GPS we all turn to when Google Maps glitches!",
+    "B+? You're like the world's most knowledgeable tourist. Soon you'll be giving guided tours!",
+    "Well done! A B+ means you're in the top tier of geography geniuses. You've got the map memorized—just a few more cities to make it perfect!",
+    "Impressive! A B+ means you're a geography rockstar. You've got more cities under your belt than most people even know exist—keep it up!",
+    "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"];
+const B_Responses = [  "Great job! You've got a solid grip on geography, but you're just one step away from being a map wizard. Keep going, the A's are within reach!",
+    "Nice work! You're doing awesome—think of this as a high-five from the geography gods. A little more effort and you'll be in the A+ club before you know it!",
+    "Well done! A B is a great score, and you've got a fantastic base of knowledge. A few more cities and you'll be on top of the world—literally!",
+    "Nice! You've got a strong geography game, but you're not quite a globe-trotting superhero yet. A little more practice and you'll be in the A-range!",
+    "Solid work! You know your cities, but now it's time to hit the accelerator and aim for an A. You've got this, just a few more places to learn!",
+    "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?"];
+const C_Plus_Responses = ["Nice try! You've got the basics down, but it's clear you're still warming up. Don't worry, you'll be a geography whiz in no time with a little more practice!",
+    "You're getting there! A C+ means you've got potential, like a map with a few blank spots. Keep going, and soon you'll have the whole world covered!",
+    "Not bad! You've got some good knowledge under your belt, but now it's time to get serious. Think of this as the first lap of your geography marathon!",
+    "You're on the right track! A C+ is like a halfway point on a road trip—there's still some driving left to do, but you're headed in the right direction!",
+    "C+? Not bad! You're definitely on the right continent… just maybe need to zoom in a little!",
+    "C+? Not quite *world* traveler yet, but you're definitely a *tourist* in the making!",
+    "You know the important cities quite well, but show those tier 3 cities some love every now and then!"];
+const C_Responses = [  "Not bad! You've got a solid start, but you might want to swap your world map for a pair of glasses. A little more effort, and you'll be cruising through this!",
+    "You're halfway there! A C means you're on the map, but not quite the one showing the best tourist spots. Keep at it, and you'll level up in no time!",
+    "You've got the basics down! Now it's time to dust off that globe and get serious—there's a whole world waiting for you to explore!",
+    "Alright, you're not quite a geography master yet, but hey, you're closer than most people who just use maps for decoration. A little more work and you'll get there!",
+    "Decent start! A C means you know *some* geography, but not enough to impress your friends at trivia night. But don't worry, it's not too late to level up!",
+    "C? Hey, you're not lost… you just haven't found the right map yet.",
+    "Okay, okay. You know your cities decently well, but you still have some room to grow. But hey, that's the fun part right?"];
+const D_Responses = ["D? Well, at least you know the *Earth* exists, that's a start!",
+    "A D?! Looks like you're a world traveler… but you've lost your passport.",
+    "D? You're not quite lost in the world yet, but you're definitely wandering off track!",
+    "D? Hey, you *almost* know where you are. Just maybe not on the map.",
+    "D?! You've got a better chance of finding Waldo than finding all the countries.",
+    "D?! You've definitely been to Earth. But as for the rest of the globe… unclear.",
+    "D? You might not know where you're going, but at least you're going somewhere!",
+    "C? At least you didn't fail! That's a win in some countries, right?"];
+const F_Responses = ["Well... that was *something*, wasn't it? You've got the geography knowledge of a potato. But hey, potatoes can grow into French fries with a little time. Try again!",
+    "You should really get out of the house more often! That was hard to watch.",
+    "Yikes... I hope you at least got a good price. On that rock you've been living under!",
+    "That's pretty rough. It's like you were playing pin the tail on the country. But don't worry—next time, you'll at least hit a continent. Hopefully.",
+    "Well, that was a geography disaster of epic proportions. But hey, every legend has their setbacks. Grab a globe, get serious, and let's aim for a passing grade!"];
 
 /* End main data
 ***********************************************************************************************************************************************************
@@ -137,37 +209,28 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
 // Converts number grade into letter grade. returns a string letter grade
 function convertToLetterGrade(grade) {
     switch(true) {
-        case (97 <= grade && grade <= 100):
+        case (96 <= grade && grade <= 100):
             return "A+";
             break;
-        case (93 <= grade && grade <= 96):
+        case (90 <= grade && grade <= 95):
             return "A";
             break;
-        case (90 <= grade && grade <= 92):
-            return "A-";
-            break;
-        case (87 <= grade && grade <= 89):
+        case (85 <= grade && grade <= 89):
             return "B+";
             break;
-        case (83 <= grade && grade <= 86):
+        case (80 <= grade && grade <= 84):
             return "B";
             break;
-        case (80 <= grade && grade <= 82):
-            return "B-";
-            break;
-        case (77 <= grade && grade <= 79):
+        case (75 <= grade && grade <= 79):
             return "C+";
             break;
-        case (73 <= grade && grade <= 76):
+        case (70 <= grade && grade <= 74):
             return "C";
             break;
-        case (65 <= grade && grade <= 72):
-            return "C-";
-            break;
-        case (50 <= grade && grade <= 64):
+        case (60 <= grade && grade <= 69):
             return "D";
             break;
-        case (grade < 50):
+        case (grade < 60):
             return "F";
             break;
     }
@@ -191,38 +254,58 @@ function correctArticleForGradeHelper(grade) {
 function generateFeedback(score) {
     switch(convertToLetterGrade(score)) {
         case "A+":
-            return "Is there anywhere you haven't been? You know this country like the back of your hand. City expert!";
+            return A_Plus_Responses[randomIndex(A_Plus_Responses.length)];
             break;
         case "A":
-            return "You've been around, huh? You know your cities better than most! Outstanding performance.";
-            break;
-        case "A-":
-            return "Not your first trip around country, is it? You've demonstrated your knowledge of the map on this one. Impressive work!";
+            return A_Responses[randomIndex(A_Responses.length)];
             break;
         case "B+":
-            return "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!";
+            return B_Plus_Responses[randomIndex(B_Plus_Responses.length)];
             break;
         case "B":
-            return "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?";
-            break;
-        case "B-":
-            return "Not too shabby. You've seen some sights, that's for sure!";
+            return B_Responses[randomIndex(B_Responses.length)];
             break;
         case "C+":
-            return "You know the important cities quite well, but show those tier 3 cities some love every now and then!";
+            return C_Plus_Responses[randomIndex(C_Plus_Responses.length)];
             break;
         case "C":
-            return "Okay, okay. You know your cities decently well, but you still have some room to grow. But hey, that's the fun part right?";
-            break;
-        case "C-":
-            return "Something tells me that wasn't your best go. Give it another shot, I know you can do better than that!";
+            return C_Responses[randomIndex(C_Responses.length)];
             break;
         case "D":
-            return "Yikes... I hope you at least got a good price. On that rock you've been living under!";
+            return D_Responses[randomIndex(D_Responses.length)];
             break;
         case "F":
-            return "You should really get out of the house more often! That was hard to watch.";
+            return F_Responses[randomIndex(F_Responses.length)];
             break;
+    }
+}
+
+// currently gives hint by providing a different picture of the same city or country
+function giveHint() {
+    if (hintsRemaining >= 0) // number corresponds to how many hints remain after this one
+    {
+        let differentImageIndex;
+        do {
+            differentImageIndex = randomIndex(cityQueue.peek().imageArray.length)
+        }
+        while (differentImageIndex == randomImageIndex);
+        let newPic = cityQueue.peek().imageArray[differentImageIndex];
+        cityPic.src= newPic;
+
+        if (hintsRemaining == 1)
+        {
+            hintButton.nextSibling.textContent = `${hintsRemaining} left...`;
+        }
+        else if (hintsRemaining == 0)
+        {
+            hintButton.nextSibling.textContent = "$50";
+            hintButton.nextSibling.style.fontSize = "1.5em";
+            hintButton.nextSibling.style.letterSpacing = "0.075em";
+        }
+        else
+        {
+            hintButton.nextSibling.textContent = `${hintsRemaining} remaining`;
+        }
     }
 }
 
@@ -374,6 +457,7 @@ function endGame() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
+        hintsRemaining = 2;
         // clear the queue
         while (!cityQueue.isEmpty())
         {
@@ -526,7 +610,8 @@ function showResults() {
                         resultsSection.childNodes[1].style.color = "rgb(77, 177, 0)";
                         break;
                     case 'C':
-                        resultsSection.childNodes[1].style.color = "rgb(228, 228, 16";
+                        resultsSection.childNodes[1].style.color = "rgb(208, 191, 0";
+                        resultsSection.childNodes[1].style.textShadow = "1px 1px 2px black";
                         break;
                     case 'D':
                         resultsSection.childNodes[1].style.color = "orange";
@@ -569,16 +654,16 @@ function showResults() {
 function nextRound() {
     // update question number and display
     currentRound++;
-    let cityOrCountry;
-    switch(currentRegion) {
-        case usa:
-            cityOrCountry = "City";
-            break;
-        case europe:
-            cityOrCountry = "Country";
-            break;
-    }
-    score.childNodes[0].textContent = `${cityOrCountry} ${currentRound}/${rounds}`;
+    // let cityOrCountry;
+    // switch(currentRegion) {
+    //     case usa:
+    //         cityOrCountry = "City";
+    //         break;
+    //     case europe:
+    //         cityOrCountry = "Country";
+    //         break;
+    // }
+    score.childNodes[0].textContent = `Round: ${currentRound} / ${rounds}`;
 
     // remove most recent city from the queue
     cityQueue.pop();
@@ -590,6 +675,10 @@ function nextRound() {
     displayQuestion();
 
     // make hint section visible again
+    // if (hintsRemaining > 0)
+    // {
+    //     document.getElementById("hints").style.visibility = "visible";
+    // }
     document.getElementById("hints").style.visibility = "visible";
 
     setupNewRound();
@@ -664,8 +753,8 @@ function evaluateAnswer(correct) {
             gradeColor = "red";
             break;
     }
-    score.childNodes[1].textContent = `Current Grade: ${currentGrade}%`;
-    score.childNodes[1].style.color = gradeColor;
+    score.childNodes[1].textContent = `Score: ${currentGrade}%`;
+    // score.childNodes[1].style.color = gradeColor; // this colors the whole line, need to put the actual percentage in a span and color only it
     
     // Logic for any round except the last one
     if (currentRound != rounds)
@@ -691,13 +780,13 @@ function evaluateAnswer(correct) {
             gamePanel.removeChild(answer);
             gamePanel.style.background = null;
             nextRound();
-        }, 3500);
+        }, 2300);
     }
     else // On the last round
     {
         setTimeout(() => {
             showResults();
-        }, 3700);
+        }, 3200);
     }
 }
 
@@ -804,10 +893,11 @@ function setupGameDisplay()
         leftSide.id="leftSide";
         gameContainer.appendChild(leftSide);
         const cityPic = document.createElement("img");
-        cityPic.id="city-pic";
+        cityPic.id="cityPic";
         leftSide.appendChild(cityPic);
         // Set picture to the correct answer city (selecting a random one from its imageArray)
-        let firstPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
+        randomImageIndex = randomIndex(cityQueue.peek().imageArray.length);
+        let firstPic = cityQueue.peek().imageArray[randomImageIndex];
         cityPic.src=firstPic;
         const gamePanel = document.createElement("div"); // add right side section
         gamePanel.classList.add("game-panel");
@@ -827,19 +917,19 @@ function setupGameDisplay()
         score.classList.add("score");
         gamePanel.appendChild(score);
         let questionNumber = document.createElement("p");
-        let cityOrCountry;
-        switch(currentRegion) {
-            case usa:
-                cityOrCountry = "City";
-                break;
-            case europe:
-                cityOrCountry = "Country";
-                break;
-        }
-        questionNumber.textContent = `${cityOrCountry} 1/${rounds}`;
+        // let cityOrCountry;
+        // switch(currentRegion) {
+        //     case usa:
+        //         cityOrCountry = "City";
+        //         break;
+        //     case europe:
+        //         cityOrCountry = "Country";
+        //         break;
+        // }
+        questionNumber.textContent = `Round: 1 / ${rounds}`;
         score.appendChild(questionNumber);
         let grade = document.createElement("p");
-        grade.textContent = "Current Grade: --";
+        grade.textContent = "Score: --";
         score.appendChild(grade);
 
         // Hints section
@@ -848,11 +938,25 @@ function setupGameDisplay()
         hints.classList.add("hints");
         gamePanel.appendChild(hints);
         let hintButton = document.createElement("button");
+        hintButton.id="hintButton";
         hintButton.textContent = "Hint?";
         hints.appendChild(hintButton);
-        let hintsRemaining = document.createElement("p");
-        hintsRemaining.textContent = "3 remaining";
-        hints.appendChild(hintsRemaining);
+        let numHints = document.createElement("p");
+        numHints.textContent = `${hintsRemaining} remaining`;
+        hints.appendChild(numHints);
+
+        hintButton.addEventListener("click", () => {
+            hintsRemaining--;
+            if (hintsRemaining >= 0)
+            {
+                hints.style.visibility = "hidden";
+                giveHint();
+            }
+            else
+            {
+                prompt("$50. Enter your credit card number: ");
+            }
+        })
 
         // Display question and choice buttons
         displayQuestion();
@@ -878,8 +982,9 @@ function setupNewRound() {
     // Set picture to the correct answer city (selecting a random one from its imageArray)
     if (currentRound != 1) // pic is already set by this point if it's the first round
     {
-        let cityPic = cityQueue.peek().imageArray[randomIndex(cityQueue.peek().imageArray.length)];
-        let picContainer = document.getElementById("city-pic");
+        randomImageIndex = randomIndex(cityQueue.peek().imageArray.length);
+        let cityPic = cityQueue.peek().imageArray[randomImageIndex];
+        let picContainer = document.getElementById("cityPic");
         picContainer.src=cityPic;
     }
 
@@ -936,6 +1041,7 @@ function playGame() {
 
 // Start new game button
 const buttonsContainer = document.querySelector(".game-buttons");
+buttonsContainer.id="buttonsContainer";
 const buttonsList = buttonsContainer.querySelectorAll("div");
 
 const usaButton = buttonsList[1].querySelector("button");
@@ -943,20 +1049,28 @@ const euroButton = buttonsList[0].querySelector("button");
 const worldwideButton = buttonsList[2].querySelector("button");
 // U.S. cities button start game on click
 
-for (let i = 0; i < 3; i++)
-{
-    let button = buttonsList[i].querySelector("button");
-    // adding a little style on hover
-    button.addEventListener("mouseenter", () => {
-        // button.childNodes[0].style.opacity = "0.6";
-        button.childNodes[0].style.filter = "brightness(1.25)";
-    })
+
+// for (let i = 0; i < 3; i++)     // Moved this to css with .start-buttons:hover
+// {
+//     let button = buttonsList[i].querySelector("button");
+//     // // adding a little style on hover
+//     // button.addEventListener("mouseenter", () => {
+//     //     // button.childNodes[0].style.opacity = "0.6";
+//     //     button.style.filter = "brightness(1.25)";
+
+//     // })
+
+//     button.addEventListener("mouseover", () => {
+//         // button.childNodes[0].style.opacity = "0.6";
+//         button.style.filter = "brightness(1.25)";
+
+//     })
     
-    button.addEventListener("mouseout", () => {
-        // button.childNodes[0].style.opacity = null;
-        button.childNodes[0].style.filter = null;
-    })
-}
+//     button.addEventListener("mouseout", () => {
+//         // button.childNodes[0].style.opacity = null;
+//         button.style.filter = null;
+//     })
+// }
 
 
 
