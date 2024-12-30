@@ -114,7 +114,7 @@ html, body {
   font-size: calc(14px + .5vw);
 }
 
-.start-buttons { /* actual button */
+.game-buttons a { /* button wrapper */
   padding: 0px;
   width: 100%;
   height: 88%; 
@@ -124,12 +124,27 @@ html, body {
   background: linear-gradient(to bottom right, white, 5%, black);
   /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
   color: white;
-  /* border-radius: 70px; */ border-radius: 6vw;
+  border-radius: 6vw;
   /* border: 3px solid whitesmoke; */
-  /* box-shadow: 2px 2px 4px 2px white; */
   font-weight: 700;
-  box-shadow: -2px -2px 5px 1px rgba(255, 255, 255, 0.6);
-  border: 0.2rem outset black;
+  box-shadow: -2px -2px 5px 2px rgba(255, 255, 255, 0.6);
+  /* border: 0.2rem outset black; */
+}
+
+.start-buttons { /* actual button */
+  padding: 0px;
+  width: 100%;
+  height: 100%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom right, white, 5%, black);
+  /* text-shadow: 3px 3px 1px rgba(60, 90, 190, 0.8); */
+  color: white;
+  border-radius: 6vw;
+  /* border: 3px solid whitesmoke; */
+  font-weight: 700;
+  border: 0.3rem outset black;
 }
 
 #usa-button img, #europe-button img, #worldwide-button img { /* img within button */
@@ -138,13 +153,17 @@ html, body {
   /* border-radius: 70px; */ border-radius: 6vw;
 }
 
-.start-buttons:hover {
+.game-buttons a:hover {
   filter: brightness(1.25);
 }
 
 @media screen and (max-width: 600px) {
   body {
     height: 175%;
+  }
+
+  #game-one, #game-two {
+    height: 100%;
   }
 
   .main-container {

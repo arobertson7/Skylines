@@ -846,43 +846,10 @@ function setupGameDisplay()
     // Setup game container
     const gameContainer = document.querySelector(".game-container-start");
     gameContainer.id="gameContainer";
-    const startButtons = document.querySelector(".game-buttons");
-    if (startButtons) // if first game, remove start button
-    {
-        gameContainer.removeChild(startButtons); // remove start button
-    }
-    const header = document.querySelector(".header");
-    if (header)
-    {
-        gameContainer.removeChild(header);
-    }
+    
 
     // Briefly display the version which was chosen before starting the game
-    const versionDisplayContainer = document.createElement("div");
-    versionDisplayContainer.id="versionDisplayContainer";
-    gameContainer.appendChild(versionDisplayContainer);
-    versionDisplayContainer.appendChild(document.createElement("h2")); // name of version
-    switch (currentRegion) {
-        case usa:
-            versionDisplayContainer.childNodes[0].textContent = "USA";
-            break;
-        case europe:
-            versionDisplayContainer.childNodes[0].textContent = "Europe";
-            break;
-        // case worldwide:
-        //     versionDisplayContainer.childNodes[0].textContent = "Worldwide";
-        //     break;
-    }
-    versionDisplayContainer.appendChild(document.createElement("div")); // image container (probably flag of that region)
-    versionDisplayContainer.childNodes[1].appendChild(document.createElement("img"));
-    switch (currentRegion) {
-        case usa:
-            versionDisplayContainer.childNodes[1].childNodes[0].src = "./images/usa-flag.webp";
-            break;
-        case europe:
-            versionDisplayContainer.childNodes[1].childNodes[0].src = "./images/europe-flag.gif";
-            break;
-    }
+    // const versionDisplayContainer = document.getElementById("versionDisplayContainer");
 
     setTimeout(() => {
         gameContainer.removeChild(versionDisplayContainer);
@@ -1039,47 +1006,39 @@ function playGame() {
 
 }
 
-// Start new game button
-const buttonsContainer = document.querySelector(".game-buttons");
-buttonsContainer.id="buttonsContainer";
-const buttonsList = buttonsContainer.querySelectorAll("div");
+// // Start new game button
+// const buttonsContainer = document.querySelector(".game-buttons");
+// if (buttonsContainer) { // so this doesn't try to run on game page
+//     buttonsContainer.id="buttonsContainer";
+// const buttonsList = buttonsContainer.querySelectorAll("div");
 
-const usaButton = buttonsList[1].querySelector("button");
-const euroButton = buttonsList[0].querySelector("button");
-const worldwideButton = buttonsList[2].querySelector("button");
-// U.S. cities button start game on click
+// const usaButton = buttonsList[1].querySelector("button");
+// const euroButton = buttonsList[0].querySelector("button");
+// const worldwideButton = buttonsList[2].querySelector("button");
+
+// // U.S. cities button start game on click
 
 
-// for (let i = 0; i < 3; i++)     // Moved this to css with .start-buttons:hover
-// {
-//     let button = buttonsList[i].querySelector("button");
-//     // // adding a little style on hover
-//     // button.addEventListener("mouseenter", () => {
-//     //     // button.childNodes[0].style.opacity = "0.6";
-//     //     button.style.filter = "brightness(1.25)";
+// usaButton.addEventListener("click", () => {
+//     currentRegion = usa;
+//     playGame();
+// })
 
-//     // })
-
-//     button.addEventListener("mouseover", () => {
-//         // button.childNodes[0].style.opacity = "0.6";
-//         button.style.filter = "brightness(1.25)";
-
-//     })
-    
-//     button.addEventListener("mouseout", () => {
-//         // button.childNodes[0].style.opacity = null;
-//         button.style.filter = null;
-//     })
+// euroButton.addEventListener("click", () => {
+//     currentRegion = europe;
+//     playGame();
+// })
 // }
 
-
-
-usaButton.addEventListener("click", () => {
-    currentRegion = usa;
-    playGame();
-})
-
-euroButton.addEventListener("click", () => {
-    currentRegion = europe;
-    playGame();
-})
+const versionDisplayContainer = document.getElementById("versionDisplayContainer");
+versionDisplayContainer.id="versionDisplayContainer";
+let region = versionDisplayContainer.childNodes[1].textContent;
+switch(true) {
+    case region == "Europe":
+        currentRegion = europe;
+        break;
+    case region == "USA":
+        currentRegion = usa;
+        break;
+}
+playGame();
