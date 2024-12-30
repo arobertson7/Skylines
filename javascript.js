@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 8;
+const rounds = 3;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
