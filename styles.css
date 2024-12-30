@@ -144,16 +144,15 @@ html, body {
 
 @media screen and (max-width: 600px) {
   body {
-    height: 125%;
+    height: 175%;
   }
 
   .main-container {
-    justify-content: start;
-    padding-top: 3vh;
+    justify-content: center;
   }
 
   .game-container-start {
-    height: 95%;
+    height: 97%;
     justify-content: space-between;
     background: linear-gradient(to right, gray, 1%, black, 98%, gray);
     padding-bottom: 5vh;
@@ -166,8 +165,8 @@ html, body {
   }
 
   .europe, .usa, .worldwide {
-    height: 45vw;
-    width: 45vw;
+    height: 55vw;
+    width: 55vw;
   }
 }
 
