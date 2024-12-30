@@ -225,6 +225,12 @@ html, body {
   gap: 15px;
 }
 
+@media screen and (max-width: 600px) {
+  .game-container-next {
+    height: 97%;
+  }
+}
+
 .city-image {
   border-radius: 40px;
   background-color: white;
