@@ -324,12 +324,12 @@ html, body {
   }
 
   .city-image {
-    height: 50%;
+    height: 60%;
     width: 100%;
   }
 
   .game-panel {
-    height: 50%;
+    height: 40%;
     width: 100%;
   }
 
@@ -337,10 +337,12 @@ html, body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
   }
 
   .choices button {
-    width: 25vw;
+    /* width: 25vw; */
+    width: 40%;
   }
   
 }
