@@ -316,10 +316,13 @@ html, body {
   height: 3em; 
 }
 
-.choices button:hover {
-  background: linear-gradient(to bottom right, black, 20%, white, 90%, black);
-  color: black;
-  box-shadow: 5px 4px 5px gray;
+
+@media screen and (min-width: 601px) {
+  .choices button:hover {
+    background: linear-gradient(to bottom right, black, 20%, white, 90%, black);
+    color: black;
+    box-shadow: 5px 4px 5px gray;
+  }
 }
 
 .hints {
@@ -377,7 +380,7 @@ html, body {
   }
 
   .game-panel {
-    height: 40%;
+    height: calc(40% - 15px);
     width: 100%;
   }
 
