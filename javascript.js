@@ -781,54 +781,51 @@ function evaluateAnswer(correct) {
 }
 
 function displayQuestion() {
-    //Questions section
+    /* --- creating the elements section --- (appending comes after) */
     const questions = document.createElement("div");
     questions.id = "questions";
     questions.classList.add("questions");
-    gamePanel.insertBefore(questions, hints);
-    questions.appendChild(document.createElement("h2"));
-    let cityOrCountry;
-    switch(currentRegion) {
-        case usa:
-            cityOrCountry = "city";
-            break;
-        case europe:
-            cityOrCountry = "country";
-            break;
-    }
-    questions.childNodes[0].textContent = `Which ${cityOrCountry} is this?`;
-    questions.childNodes[0].style.fontSize = "1.75rem";
+    
     let choices = document.createElement("div");
     choices.id = "choices";
     choices.classList.add("choices");
-    questions.appendChild(choices);
     // add 4 answer choice buttons (initialized here with no text content)
     for (let i = 0; i < 4; i++)
     {
         choices.appendChild(document.createElement("button"));
     }
 
-    // Enable functionality for answer choice buttons
+    // answer choice buttons - on click, show answer
     const buttons = choices.childNodes;
     buttons.forEach((button) => {
-        // change color on mouse enter
-        button.addEventListener("mouseenter", () => {
-            button.style.background = "linear-gradient(to bottom right, black, 20%, white, 90%, black)";
-            button.style.color = "black";
-            button.style.boxShadow = "5px 4px 5px gray";
-        })
-        // revert on mouse out
-        button.addEventListener("mouseout", () => {
-            button.style.background = null; // null reverts the style back to how it is set in the stylesheet (removes alterations made here in js)
-            button.style.color = null;
-            button.style.boxShadow = null;
-        })
-        // on click, show answer
         button.addEventListener("click", () => {
             let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
             evaluateAnswer(correctOrIncorrect);
         })
     })
+
+    /* --- appending things section --- */
+
+    gamePanel.insertBefore(questions, hints);
+
+    // *** Include "`Which ${cityOrCountry} is this?'" only if screen size > 600px
+    const mediaQuery = window.matchMedia('(min-width: 601px)');
+    if (mediaQuery.matches) {
+        questions.appendChild(document.createElement("h2")); // **** this should be if screen size
+        let cityOrCountry;
+        switch(currentRegion) {
+            case usa:
+                cityOrCountry = "city";
+                break;
+            case europe:
+                cityOrCountry = "country";
+                break;
+        }
+        questions.childNodes[0].textContent = `Which ${cityOrCountry} is this?`;
+        questions.childNodes[0].style.fontSize = "1.75rem";
+    }
+    
+    questions.appendChild(choices);
 }
 
 function setupGameDisplay()
@@ -839,32 +836,36 @@ function setupGameDisplay()
     
 
     // Briefly display the version which was chosen before starting the game
-    // const versionDisplayContainer = document.getElementById("versionDisplayContainer");
+    // const versionDisplayContainer = document.getElementById("versionDisplayContainer"); // hello there1
 
     setTimeout(() => {
+        /* --- creating new elements section --- (appending comes after) */
+
+        // remove version display
         gameContainer.removeChild(versionDisplayContainer);
         gameContainer.classList.remove("game-container-start");
         gameContainer.classList.add("game-container-next");
+
+        // create leftside
         const leftSide = document.createElement("div"); // add picture section
         leftSide.classList.add("city-image");
         leftSide.id="leftSide";
-        gameContainer.appendChild(leftSide);
+        
+        // create img container
         const cityPic = document.createElement("img");
         cityPic.id="cityPic";
-        leftSide.appendChild(cityPic);
-        // Set picture to the correct answer city (selecting a random one from its imageArray)
-        randomImageIndex = randomIndex(cityQueue.peek().imageArray.length);
+        randomImageIndex = randomIndex(cityQueue.peek().imageArray.length); // Set picture to the correct answer city (selecting a random one from its imageArray)
         let firstPic = cityQueue.peek().imageArray[randomImageIndex];
         cityPic.src=firstPic;
-        const gamePanel = document.createElement("div"); // add right side section
+
+        // create right side
+        const gamePanel = document.createElement("div");
         gamePanel.classList.add("game-panel");
         gamePanel.id="gamePanel";
-        gameContainer.appendChild(gamePanel);
+        
 
 
-        // Setup right side of game panel
-
-        // Score section
+        // create score section
         let score = document.createElement("div");
         score.id = "score"; /* id allows ability to access dynamically created dom object. i don't think we can reference globally though or it will throw error
                             from the start. will essentially have to pass around through functions once game starts it seems. For example create the game panel here
@@ -872,35 +873,21 @@ function setupGameDisplay()
                             call it at the end of this function and then be able to access the dynamically created dom elements from there since they will now
                             be in the dom. */
         score.classList.add("score");
-        gamePanel.appendChild(score);
         let questionNumber = document.createElement("p");
-        // let cityOrCountry;
-        // switch(currentRegion) {
-        //     case usa:
-        //         cityOrCountry = "City";
-        //         break;
-        //     case europe:
-        //         cityOrCountry = "Country";
-        //         break;
-        // }
         questionNumber.textContent = `Round: 1 / ${rounds}`;
-        score.appendChild(questionNumber);
         let grade = document.createElement("p");
         grade.textContent = "Score: --";
-        score.appendChild(grade);
 
-        // Hints section
+
+        // create hints section
         let hints = document.createElement("div");
         hints.id = "hints";
         hints.classList.add("hints");
-        gamePanel.appendChild(hints);
         let hintButton = document.createElement("button");
         hintButton.id="hintButton";
         hintButton.textContent = "Hint?";
-        hints.appendChild(hintButton);
         let numHints = document.createElement("p");
         numHints.textContent = `${hintsRemaining} remaining`;
-        hints.appendChild(numHints);
 
         hintButton.addEventListener("click", () => {
             hintsRemaining--;
@@ -914,6 +901,46 @@ function setupGameDisplay()
                 prompt("$50. Enter your credit card number: ");
             }
         })
+
+        /* --- appending things section --- */
+
+        const mediaQuery = window.matchMedia('(min-width: 601px)');
+
+        if (mediaQuery.matches) { // if window size above 600px
+            // appending left side
+            gameContainer.appendChild(leftSide);
+            leftSide.appendChild(cityPic);
+
+            // appending game panel
+            gameContainer.appendChild(gamePanel);
+
+            // appending score
+            gamePanel.appendChild(score);
+            score.appendChild(questionNumber);
+            score.appendChild(grade);
+
+            // appending hints section
+            gamePanel.appendChild(hints);
+            hints.appendChild(hintButton);
+            hints.appendChild(numHints);
+        }
+        else { // if window size <= 600px
+            // appending top
+            gameContainer.appendChild(leftSide);
+            leftSide.appendChild(score);
+            score.appendChild(questionNumber);
+            score.appendChild(grade);
+            leftSide.appendChild(cityPic);
+
+            // appending bottom
+            gameContainer.appendChild(gamePanel);
+            gamePanel.appendChild(hints);
+            hints.appendChild(hintButton);
+            hints.appendChild(numHints);
+        }
+
+        
+
 
         // Display question and choice buttons
         displayQuestion();
