@@ -409,19 +409,20 @@ html, body {
 /* END GAME DISPLAY PAGE */
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
-.calculating-container {
-  border-bottom: 2px solid rgb(255, 255, 255, 0.8);
+.game-container-end { /* styling for final game display" */
+  background: linear-gradient(to top left, gray, 5%, black);
+  box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
+  width:95%;
+  height: 90%;
+  border-radius: 50px;
+  padding: 20px;
   display: flex;
+  /* flex-direction: column; that's the main thing that changes */
+  align-items: center;
   justify-content: center;
-  width: 70%;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-#calc {
-  display: flex;
-  justify-content: start;
-  width: 80%;
+  color: white;
+  font-weight: 700;
+  gap: 20px;
 }
 
 .results {
@@ -439,6 +440,21 @@ html, body {
   /* box-shadow: 10px 6px 4px 4px rgba(255, 255, 255, 0.5); */
   box-shadow: 6px 2px 4px 6px rgba(120, 145, 253, 0.3), 7px 3px 4px 6px rgba(100, 125, 253, 0.35), 8px 4px 4px 6px rgba(80, 105, 253, 0.4),
   9px 5px 4px 6px rgba(60, 85, 253, 0.45), 10px 6px 4px 6px rgba(40, 65, 253, 0.5);
+}
+
+.calculating-container {
+  border-bottom: 2px solid rgb(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+#calc {
+  display: flex;
+  justify-content: start;
+  width: 80%;
 }
 
 #resultsHeader {
@@ -495,22 +511,6 @@ html, body {
 
 .results-sections span {
   font-weight: 500;
-}
-
-.game-container-end { /* styling for final game display" */
-  background: linear-gradient(to top left, gray, 5%, black);
-  box-shadow: 12px 10px 7px 15px rgba(0, 0, 0, 0.5);
-  width:95%;
-  height: 90%;
-  border-radius: 50px;
-  padding: 20px;
-  display: flex;
-  /* flex-direction: column; that's the main thing that changes */
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  gap: 20px;
 }
 
 #leftEnd {
@@ -589,4 +589,29 @@ html, body {
 .new-game-button:hover {
   margin-right: -2px;
   margin-top: 2px;
+}
+
+/* END RESULTS PAGE (For screen size > 600px) */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+/* RESULTS PAGE ON SCREEN SIZE <= 600px */
+
+@media screen and (max-width: 600px) {
+  .game-container-end {
+    height: 97%;
+    flex-direction: column;
+    justify-content: start;
+  }
+}
+
+#resultsHeaderContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#calcContainer {
+  display: flex;
+  justify-content: start;
+  width: 38ch;
+  font-size: 3vw;
 }

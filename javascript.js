@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 3;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -491,7 +491,51 @@ function endGame() {
     rightEnd.style.visibility = "visible";
 }
 
-function showResults() {
+function showResultsSmallScreen() {
+    //remove pic and game panel
+    gameContainer.removeChild(leftSide);
+    gameContainer.removeChild(gamePanel);
+    gameContainer.classList.remove("game-container-next"); // revert style
+    gameContainer.classList.add("game-container-end");
+
+    const resultsHeaderContainer = document.createElement("div");
+    resultsHeaderContainer.id="resultsHeaderContainer";
+    gameContainer.appendChild(resultsHeaderContainer);
+    const calcContainer = document.createElement("div");
+    calcContainer.id="calcContainer";
+    resultsHeaderContainer.appendChild(calcContainer);
+    calcContainer.appendChild(document.createElement("h1"));
+    
+    calcContainer.childNodes[0].textContent = "Calculating your results";
+    // there's probably a way better way to do this but...
+    let timer = 275;
+    for (let i = 0; i < 3; i++)
+    {
+        for (let j = 0; j < 4; j++)
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent += ". ";
+            }, timer);
+            timer += 275;
+        }
+        timer += 50;
+        if (i != 2) // leaves dots on final iteration
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent = "Calculating your results";
+            }, timer);
+        }
+        timer += 275;
+    }
+    setTimeout(() => {
+        calcContainer.childNodes[0].textContent = "Calculating your results  ";
+        calcContainer.childNodes[0].textContent += "      \u2714";
+
+    }, timer);
+    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+}
+
+function showResultsLargeScreen() {
     //remove pic and game panel
     gameContainer.removeChild(leftSide);
     gameContainer.removeChild(gamePanel);
@@ -774,8 +818,16 @@ function evaluateAnswer(correct) {
     }
     else // On the last round
     {
+        const mediaQuery = window.matchMedia('(min-width: 601px)');
+
         setTimeout(() => {
-            showResults();
+            if (mediaQuery.matches) { // for screen size > 600px
+                showResultsLargeScreen();
+            }
+            else { // for screen size <= 600px
+                showResultsSmallScreen();
+            }
+            
         }, 3200);
     }
 }
