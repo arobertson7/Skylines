@@ -207,11 +207,11 @@ html, body {
 #versionDisplayContainer div {
   height: 52%;
   width: 52%;
-  border-radius: 20px;
+  border-radius: 2.5vw;
 }
 
 #versionDisplayContainer div>img {
-  border-radius: 20px;
+  border-radius: 2.5vw;
 }
 
 #game-one > .main-container > .game-container-start, #game-two > .main-container > .game-container-start { /* center the version display */
@@ -227,8 +227,8 @@ html, body {
   }
 
   #versionDisplayContainer div {
-    height: 45vh;
-    width: 45vw;
+    height: 55vh;
+    width: 55vw;
   }
 
 }
