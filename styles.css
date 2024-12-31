@@ -381,6 +381,10 @@ html, body {
     width: 100%;
   }
 
+  .questions {
+    justify-content: center;
+  }
+
   .choices {
     flex-direction: row;
     flex-wrap: wrap;
@@ -391,6 +395,10 @@ html, body {
   .choices button {
     /* width: 25vw; */
     width: 40%;
+  }
+
+  .hints {
+    gap: 10px;
   }
   
 }
