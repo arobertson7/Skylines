@@ -599,7 +599,7 @@ html, body {
   .game-container-end {
     height: 97%;
     flex-direction: column;
-    justify-content: start;
+    background: linear-gradient(to right, gray, 1%, black, 98%, gray);
   }
 }
 
@@ -607,11 +607,12 @@ html, body {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-top: -20vh;
 }
 
 #calcContainer {
   display: flex;
   justify-content: start;
   width: 38ch;
-  font-size: 3vw;
+  font-size: 3.2vw;
 }
