@@ -698,17 +698,7 @@ function evaluateAnswer(correct) {
     answer.childNodes[0].style.fontSize = "2.5rem";
     // for comments
     answer.appendChild(document.createElement("p"));
-    //next question button
-    const nextQuestionButton = document.createElement("button");
-    // adding a little style on hover
-    nextQuestionButton.addEventListener("mouseenter", () => {
-        nextQuestionButton.style.background = "linear-gradient(to bottom right, white, 15%, black)";
-    })
-    nextQuestionButton.addEventListener("mouseout", () => {
-        nextQuestionButton.style.background = null;
-    })
-    nextQuestionButton.classList.add("next-question-button");
-    nextQuestionButton.textContent = "Next City " + '\u2192';
+    
     gamePanel.insertBefore(answer, hints);
 
     if (correct == true)
