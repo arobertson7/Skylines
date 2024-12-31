@@ -216,12 +216,14 @@ html, body {
 
 #game-one > .main-container > .game-container-start, #game-two > .main-container > .game-container-start { /* center the version display */
   justify-content: center;
+
 }
 
 @media screen and (max-width: 600px) {
   #versionDisplayContainer {
     width: 45vw;
     height: 45vh;
+    margin-bottom: 0%;
   }
 
   #versionDisplayContainer div {
