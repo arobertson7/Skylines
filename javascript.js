@@ -505,34 +505,38 @@ function showResultsSmallScreen() {
     calcContainer.id="calcContainer";
     resultsHeaderContainer.appendChild(calcContainer);
     calcContainer.appendChild(document.createElement("h1"));
-    
-    calcContainer.childNodes[0].textContent = "Calculating your results";
-    // there's probably a way better way to do this but...
-    let timer = 275;
-    for (let i = 0; i < 3; i++)
-    {
-        for (let j = 0; j < 4; j++)
-        {
-            setTimeout(() => {
-                calcContainer.childNodes[0].textContent += ". ";
-            }, timer);
-            timer += 275;
-        }
-        timer += 50;
-        if (i != 2) // leaves dots on final iteration
-        {
-            setTimeout(() => {
-                calcContainer.childNodes[0].textContent = "Calculating your results";
-            }, timer);
-        }
-        timer += 275;
-    }
-    setTimeout(() => {
-        calcContainer.childNodes[0].textContent = "Calculating your results  ";
-        calcContainer.childNodes[0].textContent += "      \u2714";
 
-    }, timer);
-    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+    /* ------ uncomment this whole section below to put calc back
+    
+    // calcContainer.childNodes[0].textContent = "Calculating your results";
+    // // there's probably a way better way to do this but...
+    // let timer = 275;
+    // for (let i = 0; i < 3; i++)
+    // {
+    //     for (let j = 0; j < 4; j++)
+    //     {
+    //         setTimeout(() => {
+    //             calcContainer.childNodes[0].textContent += ". ";
+    //         }, timer);
+    //         timer += 275;
+    //     }
+    //     timer += 50;
+    //     if (i != 2) // leaves dots on final iteration
+    //     {
+    //         setTimeout(() => {
+    //             calcContainer.childNodes[0].textContent = "Calculating your results";
+    //         }, timer);
+    //     }
+    //     timer += 275;
+    // }
+    // setTimeout(() => {
+    //     calcContainer.childNodes[0].textContent = "Calculating your results  ";
+    //     calcContainer.childNodes[0].textContent += "      \u2714";
+
+    // }, timer);
+    // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+
+    */
 
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
@@ -540,6 +544,7 @@ function showResultsSmallScreen() {
         gameContainer.style.gap = "15%";
         gameContainer.style.paddingTop = "30px";
         calcContainer.style.justifyContent = "center";
+        calcContainer.style.fontSize = "3.5vw";
         calcContainer.childNodes[0].textContent = "Let's see how you did...";
 
         // containers for all the results to be displayed
@@ -557,9 +562,9 @@ function showResultsSmallScreen() {
         gameContainer.appendChild(resultsDisplay);
         // initialize it with the first set of results (still hidden)
         evaluationType.childNodes[0].textContent = "Correct answers:";
-        evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}!`;
+        evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}`;
         
-    }, timer);
+    }, 0); // <--- set this back to 'timer' instead of 0 when putting calc back
 }
 
 function showResultsLargeScreen() {

@@ -356,6 +356,7 @@ html, body {
     height: 97%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to right, gray, 1%, black, 98%, gray);
   }
 
   #leftSide { /* the same element with class '.city-image' above */
@@ -368,6 +369,7 @@ html, body {
     color: white;
     font-weight: 700;
     gap: 10px;
+    background: transparent;
   }
 
   .score {
@@ -382,6 +384,7 @@ html, body {
   .game-panel {
     height: calc(40% - 15px);
     width: 100%;
+    background: linear-gradient(to right, gray, 1%, black, 98%, gray)
   }
 
   .questions {
@@ -398,6 +401,7 @@ html, body {
   .choices button {
     /* width: 25vw; */
     width: 40%;
+    box-shadow: 2px 2px 3px .7px white;
   }
 
   .hints {
@@ -626,24 +630,27 @@ html, body {
   flex-direction: column;
   align-items: center;
   border-radius: 5vw;
+  gap: 20px;
+  padding-bottom: 10px;
 }
 
 #evaluationType {
-  height: 20%;
+  height: calc(20% - 10px);
   width: 80%;
   border-bottom: solid 2px black;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: antiquewhite;
 }
 
 #evaluation {
-  height: 80%;
+  height: calc(80% - 30px);
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: gray;
-  font-size: 8vw;
+  font-size: 10vw;
+  border-radius: 5vw;
+  /* box-shadow: inset 0px 0px 3px 5px blanchedalmond; */
+  background: radial-gradient(white, 50%, blanchedalmond);
 }
