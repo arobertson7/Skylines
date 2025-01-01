@@ -533,6 +533,33 @@ function showResultsSmallScreen() {
 
     }, timer);
     timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+
+    setTimeout(() => {
+        resultsHeaderContainer.style.marginTop = "0vh";
+        gameContainer.style.justifyContent = "start";
+        gameContainer.style.gap = "15%";
+        gameContainer.style.paddingTop = "30px";
+        calcContainer.style.justifyContent = "center";
+        calcContainer.childNodes[0].textContent = "Let's see how you did...";
+
+        // containers for all the results to be displayed
+        const resultsDisplay = document.createElement("div");
+        resultsDisplay.id="resultsDisplay";
+        // resultsDisplay.style.visibility = "hidden"; // initialize it as hidden
+        const evaluationType = document.createElement("div");
+        evaluationType.id="evaluationType";
+        evaluationType.appendChild(document.createElement("h3"));
+        const evaluation = document.createElement("div");
+        evaluation.id="evaluation";
+        evaluation.appendChild(document.createElement("p"));
+        resultsDisplay.appendChild(evaluationType);
+        resultsDisplay.appendChild(evaluation);
+        gameContainer.appendChild(resultsDisplay);
+        // initialize it with the first set of results (still hidden)
+        evaluationType.childNodes[0].textContent = "Correct answers:";
+        evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}!`;
+        
+    }, timer);
 }
 
 function showResultsLargeScreen() {
