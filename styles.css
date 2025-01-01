@@ -373,7 +373,7 @@ html, body {
   }
 
   #leftSide { /* the same element with class '.city-image' above */
-    height: 60%;
+    height: 75%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -398,7 +398,7 @@ html, body {
   }
 
   .game-panel {
-    height: calc(40% - 15px);
+    height: calc(25% - 15px);
     width: 100%;
     /* background: linear-gradient(to right, gray, 1%, black, 98%, gray); */
     background: transparent;
