@@ -328,7 +328,7 @@ function swivelResultSlide(direction) {
             evaluationType.childNodes[0].textContent = "Grade:";
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
             evaluation.childNodes[0].style.fontWeight = "800";
-            evaluation.childNodes[0].style.fontSize = null;
+            evaluation.childNodes[0].style.fontSize = "14vw";
             // apply color to letter grade
             switch((convertToLetterGrade(currentGrade))[0])
             {
@@ -358,6 +358,7 @@ function swivelResultSlide(direction) {
             evaluationType.childNodes[0].textContent = "Score:";
             evaluation.childNodes[0].textContent = `${currentGrade}%`;
             evaluation.childNodes[0].style.fontWeight = null;
+            evaluation.childNodes[0].style.fontSize = null;
             evaluation.childNodes[0].style.color = null;
             currentSlide--;
             break;
@@ -382,6 +383,7 @@ function swivelResultSlide(direction) {
             evaluationType.childNodes[0].textContent = "Grade:";
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
             evaluation.childNodes[0].style.fontWeight = "800";
+            evaluation.childNodes[0].style.fontSize = "14vw";
             // apply color to letter grade
             switch((convertToLetterGrade(currentGrade))[0])
             {
@@ -726,6 +728,7 @@ function showResultsSmallScreen() {
     setTimeout(() => {
         evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
         evaluation.childNodes[0].style.fontWeight = "800";
+        evaluation.childNodes[0].style.fontSize = "14vw";
         // apply color to letter grade
         switch((convertToLetterGrade(currentGrade))[0])
         {
