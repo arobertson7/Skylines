@@ -615,38 +615,38 @@ function showResultsSmallScreen() {
     resultsHeaderContainer.appendChild(calcContainer);
     calcContainer.appendChild(document.createElement("h1"));
 
-    /* ------ uncomment this whole section below to put calc back
-    
-    // calcContainer.childNodes[0].textContent = "Calculating your results";
-    // // there's probably a way better way to do this but...
-    // let timer = 275;
-    // for (let i = 0; i < 3; i++)
-    // {
-    //     for (let j = 0; j < 4; j++)
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent += ". ";
-    //         }, timer);
-    //         timer += 275;
-    //     }
-    //     timer += 50;
-    //     if (i != 2) // leaves dots on final iteration
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent = "Calculating your results";
-    //         }, timer);
-    //     }
-    //     timer += 275;
-    // }
-    // setTimeout(() => {
-    //     calcContainer.childNodes[0].textContent = "Calculating your results  ";
-    //     calcContainer.childNodes[0].textContent += "      \u2714";
+// ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
 
-    // }, timer);
-    // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+    calcContainer.childNodes[0].textContent = "Calculating your results";
+    // there's probably a way better way to do this but...
+    let timer = 275;
+    for (let i = 0; i < 3; i++)
+    {
+        for (let j = 0; j < 4; j++)
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent += ". ";
+            }, timer);
+            timer += 275;
+        }
+        timer += 50;
+        if (i != 2) // leaves dots on final iteration
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent = "Calculating your results";
+            }, timer);
+        }
+        timer += 275;
+    }
+    setTimeout(() => {
+        calcContainer.childNodes[0].textContent = "Calculating your results  ";
+        calcContainer.childNodes[0].textContent += "      \u2714";
 
-    */
-    let timer = 0 // <--- remove this when putting calc back
+    }, timer);
+    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+
+// ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
+
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
         gameContainer.style.justifyContent = "start";
