@@ -315,26 +315,53 @@ function giveHint() {
 }
 
 // helper function for operating swivel button functionality
-// gets called on button click event listener
-// @param: currentSlide
+// gets called on swivel button click event listener
 // @param: direction (of button pressed) , takes integer: either 0 (left) or 1 (right)
-function swivelResultSlide(currentSlide, direction) {
+function swivelResultSlide(direction) {
     // direction argument is either 0 (left) or 1 (right)
     switch(true) {
+        // invalid
         case (currentSlide == 1 && direction == 0) || (currentSlide == 4 && direction == 1):
             return;
+        // slide 3 <- slide 4
         case currentSlide == 4 && direction == 0: // left from slide 4
             evaluationType.childNodes[0].textContent = "Grade:";
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
+            evaluation.childNodes[0].style.fontWeight = "800";
+            evaluation.childNodes[0].style.fontSize = null;
+            // apply color to letter grade
+            switch((convertToLetterGrade(currentGrade))[0])
+            {
+                case 'A':
+                    evaluation.childNodes[0].style.color = "rgb(18, 162, 18)";
+                    break;
+                case 'B':
+                    evaluation.childNodes[0].style.color = "rgb(77, 177, 0)";
+                    break;
+                case 'C':
+                    evaluation.childNodes[0].style.color = "rgb(208, 191, 0";
+                    evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
+                    break;
+                case 'D':
+                    evaluation.childNodes[0].style.color = "orange";
+                    break;
+                case 'F':
+                    evaluation.childNodes[0].style.color = "red";
+                    break;
+            }
             currentSlide--;
             // Ungray out right button
             swivelButtonsContainer.childNodes[1].style.opacity = "1";
             break;
+        // slide 2 <- slide 3
         case currentSlide == 3 && direction == 0: // left from slide 3
             evaluationType.childNodes[0].textContent = "Score:";
             evaluation.childNodes[0].textContent = `${currentGrade}%`;
+            evaluation.childNodes[0].style.fontWeight = null;
+            evaluation.childNodes[0].style.color = null;
             currentSlide--;
             break;
+        // slide 1 <- slide 2
         case currentSlide == 2 && direction == 0: // left from slide 2
             evaluationType.childNodes[0].textContent = "Correct answers:";
             evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}`;
@@ -342,6 +369,7 @@ function swivelResultSlide(currentSlide, direction) {
             // gray out left button
             swivelButtonsContainer.childNodes[0].style.opacity = "0.5";
             break;
+        // slide 1 -> slide 2
         case currentSlide == 1 && direction == 1: // right from slide 1
             evaluationType.childNodes[0].textContent = "Score:";
             evaluation.childNodes[0].textContent = `${currentGrade}%`;
@@ -349,14 +377,40 @@ function swivelResultSlide(currentSlide, direction) {
             // Ungray out left button
             swivelButtonsContainer.childNodes[0].style.opacity = "1";
             break;
+        // slide 2 -> slide 3
         case currentSlide == 2 && direction == 1: // right from slide 2
             evaluationType.childNodes[0].textContent = "Grade:";
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
+            evaluation.childNodes[0].style.fontWeight = "800";
+            // apply color to letter grade
+            switch((convertToLetterGrade(currentGrade))[0])
+            {
+                case 'A':
+                    evaluation.childNodes[0].style.color = "rgb(18, 162, 18)";
+                    break;
+                case 'B':
+                    evaluation.childNodes[0].style.color = "rgb(77, 177, 0)";
+                    break;
+                case 'C':
+                    evaluation.childNodes[0].style.color = "rgb(208, 191, 0";
+                    evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
+                    break;
+                case 'D':
+                    evaluation.childNodes[0].style.color = "orange";
+                    break;
+                case 'F':
+                    evaluation.childNodes[0].style.color = "red";
+                    break;
+            }
             currentSlide++;
             break;
+        // slide 3 -> slide 4
         case currentSlide == 3 && direction == 1: // right from slide 3
             evaluationType.childNodes[0].textContent = "Assessment:";
             evaluation.childNodes[0].textContent = assessmentFeedback;
+            evaluation.childNodes[0].style.fontWeight = null;
+            evaluation.childNodes[0].style.color = null;
+            evaluation.childNodes[0].style.fontSize = "4vw";
             currentSlide++;
             // gray out right button
             swivelButtonsContainer.childNodes[1].style.opacity = "0.5";
@@ -718,17 +772,9 @@ function showResultsSmallScreen() {
         swivelButtonsContainer.style.visibility = "visible";
         for (let i = 0; i < 2; i++)
         {
-            if (i == 0) {
-                swivelButtonsContainer.childNodes[i].addEventListener("click", () => {
-                    currentSlide++;
-                    swivelResultSlide(currentSlide - 1, i); // using i to determine direction 0 == left, 1 == right
-                });
-            }
-            else {
-                swivelButtonsContainer.childNodes[i].addEventListener("click", () => {
-                    swivelResultSlide(currentSlide, i); // using i to determine direction 0 == left, 1 == right
-                });
-            }
+            swivelButtonsContainer.childNodes[i].addEventListener("click", () => {
+                swivelResultSlide(i); // using i to determine direction 0 == left, 1 == right
+            });
         }
     }, timer);
 
