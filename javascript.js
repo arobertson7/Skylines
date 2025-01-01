@@ -537,7 +537,7 @@ function showResultsSmallScreen() {
     // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
     */
-
+    let timer = 0 // <--- remove this when putting calc back
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
         gameContainer.style.justifyContent = "start";
@@ -550,7 +550,7 @@ function showResultsSmallScreen() {
         // containers for all the results to be displayed
         const resultsDisplay = document.createElement("div");
         resultsDisplay.id="resultsDisplay";
-        // resultsDisplay.style.visibility = "hidden"; // initialize it as hidden
+        resultsDisplay.style.visibility = "hidden"; // initialize it as hidden
         const evaluationType = document.createElement("div");
         evaluationType.id="evaluationType";
         evaluationType.appendChild(document.createElement("h3"));
@@ -563,8 +563,83 @@ function showResultsSmallScreen() {
         // initialize it with the first set of results (still hidden)
         evaluationType.childNodes[0].textContent = "Correct answers:";
         evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}`;
+        evaluation.childNodes[0].style.visibility = "hidden"; // initialize as hidden
         
-    }, 0); // <--- set this back to 'timer' instead of 0 when putting calc back
+    }, timer);
+
+    // Display # of correct answers
+    timer += 1500;
+    setTimeout(() => {
+        resultsDisplay.style.visibility = "visible";
+    }, timer);
+    timer += 2000;
+    setTimeout(() => {
+        evaluation.childNodes[0].style.visibility = "visible";
+    }, timer);
+
+
+    // Display Score
+    timer += 2500;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = ""; // empty evaluation field
+        evaluationType.childNodes[0].textContent = "Score:";
+    }, timer);
+    timer += 2000;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = `${currentGrade}%`;
+    }, timer);
+
+
+    // Display Grade
+    timer += 2500;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = ""; // empty evaluation field
+        evaluationType.childNodes[0].textContent = "Grade:";
+    }, timer);
+    timer += 2000;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
+        evaluation.childNodes[0].style.fontWeight = "800";
+        // apply color to letter grade
+        switch((convertToLetterGrade(currentGrade))[0])
+        {
+            case 'A':
+                evaluation.childNodes[0].style.color = "rgb(18, 162, 18)";
+                break;
+            case 'B':
+                evaluation.childNodes[0].style.color = "rgb(77, 177, 0)";
+                break;
+            case 'C':
+                evaluation.childNodes[0].style.color = "rgb(208, 191, 0";
+                evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
+                break;
+            case 'D':
+                evaluation.childNodes[0].style.color = "orange";
+                break;
+            case 'F':
+                evaluation.childNodes[0].style.color = "red";
+                break;
+        }
+    }, timer);
+
+
+    // Display Assessment
+    timer += 2500;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = ""; // empty evaluation field
+        evaluationType.childNodes[0].textContent = "Assessment:";
+        // on this one particularly, reset the font weight and text color
+        evaluation.childNodes[0].style.fontWeight = null;
+        evaluation.childNodes[0].style.color = null;
+        evaluation.childNodes[0].style.fontSize = "4vw";
+    }, timer);
+    timer += 2000;
+    setTimeout(() => {
+        evaluation.childNodes[0].textContent = generateFeedback(currentGrade);
+    }, timer);
+
+
+       
 }
 
 function showResultsLargeScreen() {

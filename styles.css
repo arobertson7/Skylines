@@ -653,4 +653,5 @@ html, body {
   border-radius: 5vw;
   /* box-shadow: inset 0px 0px 3px 5px blanchedalmond; */
   background: radial-gradient(white, 50%, blanchedalmond);
+  text-align: center;
 }
