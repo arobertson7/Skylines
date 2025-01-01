@@ -303,12 +303,6 @@ function giveHint() {
         {
             hintButton.nextSibling.textContent = `${hintsRemaining} left...`;
         }
-        else if (hintsRemaining == 0)
-        {
-            hintButton.nextSibling.textContent = "$50";
-            hintButton.nextSibling.style.fontSize = "1.5em";
-            hintButton.nextSibling.style.letterSpacing = "0.075em";
-        }
         else
         {
             hintButton.nextSibling.textContent = `${hintsRemaining} remaining`;
@@ -621,36 +615,36 @@ function showResultsSmallScreen() {
 
 // ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
 
-    // calcContainer.childNodes[0].textContent = "Calculating your results";
-    // // there's probably a way better way to do this but...
-    // let timer = 275;
-    // for (let i = 0; i < 3; i++)
-    // {
-    //     for (let j = 0; j < 4; j++)
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent += ". ";
-    //         }, timer);
-    //         timer += 275;
-    //     }
-    //     timer += 50;
-    //     if (i != 2) // leaves dots on final iteration
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent = "Calculating your results";
-    //         }, timer);
-    //     }
-    //     timer += 275;
-    // }
-    // setTimeout(() => {
-    //     calcContainer.childNodes[0].textContent = "Calculating your results  ";
-    //     calcContainer.childNodes[0].textContent += "      \u2714";
+    calcContainer.childNodes[0].textContent = "Calculating your results";
+    // there's probably a way better way to do this but...
+    let timer = 275;
+    for (let i = 0; i < 3; i++)
+    {
+        for (let j = 0; j < 4; j++)
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent += ". ";
+            }, timer);
+            timer += 275;
+        }
+        timer += 50;
+        if (i != 2) // leaves dots on final iteration
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent = "Calculating your results";
+            }, timer);
+        }
+        timer += 275;
+    }
+    setTimeout(() => {
+        calcContainer.childNodes[0].textContent = "Calculating your results  ";
+        calcContainer.childNodes[0].textContent += "      \u2714";
 
-    // }, timer);
-    // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+    }, timer);
+    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
 // ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
-    timer = 0; // <-- remove when replacing calculating
+    // timer = 0; // <-- remove when replacing calculating
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
         gameContainer.style.justifyContent = "start";
@@ -974,15 +968,22 @@ function nextRound() {
     // {
     //     document.getElementById("hints").style.visibility = "visible";
     // }
-    document.getElementById("hints").style.visibility = "visible";
+    const theseHints = document.getElementById("hints");
+    if (theseHints) {
+        document.getElementById("hints").style.visibility = "visible";
+    }
 
     setupNewRound();
 }
 
 function evaluateAnswer(correct) {
+    const mediaQuery = window.matchMedia('(min-width: 601px)');
 
     // temporarily hide hints section
-    document.getElementById("hints").style.visibility = "hidden";
+    const theHints = document.getElementById("hints");
+    if (theHints) {
+        theHints.style.visibility = "hidden";
+    }
     // temporarily remove question and buttons
     gamePanel.removeChild(questions);
 
@@ -992,9 +993,13 @@ function evaluateAnswer(correct) {
     answer.appendChild(document.createElement("h2"));
     answer.appendChild(document.createElement("p"));
     
-    gamePanel.insertBefore(answer, hints);
+    if (mediaQuery.matches) {
+        gamePanel.insertBefore(answer, hints);
+    }
+    else {
+        gamePanel.appendChild(answer);
+    }
 
-    const mediaQuery = window.matchMedia('(min-width: 601px)');
     if (correct == true)
     {
         let response = correctResponses[randomIndex(correctResponses.length)]; // random response for correct answer
@@ -1085,7 +1090,6 @@ function evaluateAnswer(correct) {
     }
     else // On the last round
     {
-        const mediaQuery = window.matchMedia('(min-width: 601px)');
 
         setTimeout(() => {
             if (mediaQuery.matches) { // for screen size > 600px
@@ -1102,6 +1106,8 @@ function evaluateAnswer(correct) {
 
 function displayQuestion() {
     /* --- creating the elements section --- (appending comes after) */
+    const mediaQuery = window.matchMedia('(min-width: 601px)');
+
     const questions = document.createElement("div");
     questions.id = "questions";
     questions.classList.add("questions");
@@ -1126,11 +1132,11 @@ function displayQuestion() {
 
     /* --- appending things section --- */
 
-    gamePanel.insertBefore(questions, hints);
+    
 
     // *** Include "`Which ${cityOrCountry} is this?'" only if screen size > 600px
-    const mediaQuery = window.matchMedia('(min-width: 601px)');
     if (mediaQuery.matches) {
+        gamePanel.insertBefore(questions, hints);
         questions.appendChild(document.createElement("h2")); // **** this should be if screen size
         let cityOrCountry;
         switch(currentRegion) {
@@ -1143,6 +1149,9 @@ function displayQuestion() {
         }
         questions.childNodes[0].textContent = `Which ${cityOrCountry} is this?`;
         questions.childNodes[0].style.fontSize = "1.75rem";
+    }
+    else {
+        gamePanel.appendChild(questions);
     }
     
     questions.appendChild(choices);
@@ -1216,10 +1225,6 @@ function setupGameDisplay()
                 hints.style.visibility = "hidden";
                 giveHint();
             }
-            else
-            {
-                prompt("$50. Enter your credit card number: ");
-            }
         })
 
         /* --- appending things section --- */
@@ -1254,9 +1259,9 @@ function setupGameDisplay()
 
             // appending bottom
             gameContainer.appendChild(gamePanel);
-            gamePanel.appendChild(hints);
-            hints.appendChild(hintButton);
-            hints.appendChild(numHints);
+            // gamePanel.appendChild(hints);
+            // hints.appendChild(hintButton); // removing hints on this screen size for now
+            // hints.appendChild(numHints);
         }
 
         
