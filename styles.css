@@ -92,6 +92,7 @@ html, body {
 
 .header {
   font-size: 1.2em;
+  letter-spacing: 0.08em;
 }
 
 .game-buttons { /* container for all buttons */
@@ -102,6 +103,7 @@ html, body {
   justify-content: center;
   gap: 4%; /* 20px */
   text-align: center;
+  letter-spacing: 0.08em;
 }
 
 .europe, .usa, .worldwide { /* container for each label + button (which contains img) */
@@ -202,6 +204,7 @@ html, body {
   gap: 20px;
   font-size: 1.5em;
   margin-bottom: 75px;
+  letter-spacing: 0.08em;
 }
 
 #versionDisplayContainer div {
@@ -351,6 +354,15 @@ html, body {
   justify-content: center;
 }
 
+#answer h2 {
+  font-size: 2.5rem;
+}
+
+#answer p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 600px) {
   .game-container-next {
     height: 97%;
@@ -376,10 +388,13 @@ html, body {
   .score {
     height: 8%;
     border: none;
+    padding: 0px 8% 0px 8%;
+    letter-spacing: 0.07em;
   }
 
   #leftSide img {
     height: 92%;
+    border: outset 7px rgb(100, 100, 100, 0.8);
   }
 
   .game-panel {
@@ -408,6 +423,7 @@ html, body {
     /* width: 25vw; */
     width: 44%;
     box-shadow: 2px 2px 3px .7px white;
+    letter-spacing: 0.07em;
   }
 
   .hints {
@@ -634,6 +650,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  letter-spacing: 0.05em;
 }
 
 #resultsDisplay {
@@ -646,14 +663,14 @@ html, body {
   flex-direction: column;
   align-items: center;
   border-radius: 5vw;
-  gap: 20px;
+  gap: 5px;
   padding-bottom: 10px;
 }
 
 #evaluationType {
-  height: calc(20% - 10px);
+  height: calc(20%);
   width: 80%;
-  border-bottom: solid 2px black;
+  /* border-bottom: solid 2px black; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -661,6 +678,7 @@ html, body {
 
 #evaluationType h3 {
   font-weight: 800;
+  font-size: 5vw;
 }
 
 #evaluation {
@@ -687,7 +705,7 @@ html, body {
 }
 
 #swivelButtonsContainer button {
-  height: 100%;
+  height: 90%;
   width: 20%;
   border-radius: 15vw;
   display: flex;

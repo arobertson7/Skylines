@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 1;
+const rounds = 5;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -132,7 +132,9 @@ let currentSlide = 4;
 let assessmentFeedback = "";
 
 // an array holding various responses to display when answer is correct
-const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done."];
+const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler.", "Wunderbar!"];
+
+const WrongResponses = ["Nope!", "Not this time!", "Next try!", "Nö", "Not quite!"];
 
 const A_Plus_Responses = ["Geography Genius! You've officially reached 'World Traveler' status. If there were a Nobel Prize for geography, you'd have at least three by now. The UN should call you for advice!",
     "Top of the Class! You've got the geography skills of a well-traveled detective! Sherlock Holmes would call you for tips on finding obscure countries. You're basically the Indiana Jones of map-reading.",
@@ -619,36 +621,36 @@ function showResultsSmallScreen() {
 
 // ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
 
-    calcContainer.childNodes[0].textContent = "Calculating your results";
-    // there's probably a way better way to do this but...
-    let timer = 275;
-    for (let i = 0; i < 3; i++)
-    {
-        for (let j = 0; j < 4; j++)
-        {
-            setTimeout(() => {
-                calcContainer.childNodes[0].textContent += ". ";
-            }, timer);
-            timer += 275;
-        }
-        timer += 50;
-        if (i != 2) // leaves dots on final iteration
-        {
-            setTimeout(() => {
-                calcContainer.childNodes[0].textContent = "Calculating your results";
-            }, timer);
-        }
-        timer += 275;
-    }
-    setTimeout(() => {
-        calcContainer.childNodes[0].textContent = "Calculating your results  ";
-        calcContainer.childNodes[0].textContent += "      \u2714";
+    // calcContainer.childNodes[0].textContent = "Calculating your results";
+    // // there's probably a way better way to do this but...
+    // let timer = 275;
+    // for (let i = 0; i < 3; i++)
+    // {
+    //     for (let j = 0; j < 4; j++)
+    //     {
+    //         setTimeout(() => {
+    //             calcContainer.childNodes[0].textContent += ". ";
+    //         }, timer);
+    //         timer += 275;
+    //     }
+    //     timer += 50;
+    //     if (i != 2) // leaves dots on final iteration
+    //     {
+    //         setTimeout(() => {
+    //             calcContainer.childNodes[0].textContent = "Calculating your results";
+    //         }, timer);
+    //     }
+    //     timer += 275;
+    // }
+    // setTimeout(() => {
+    //     calcContainer.childNodes[0].textContent = "Calculating your results  ";
+    //     calcContainer.childNodes[0].textContent += "      \u2714";
 
-    }, timer);
-    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+    // }, timer);
+    // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
 // ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
-
+    timer = 0; // <-- remove when replacing calculating
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
         gameContainer.style.justifyContent = "start";
@@ -770,7 +772,7 @@ function showResultsSmallScreen() {
 
     
     // Show swivel buttons
-    timer += 2000;
+    timer += 2500;
     setTimeout(() => {
         swivelButtonsContainer.style.visibility = "visible";
         for (let i = 0; i < 2; i++)
@@ -988,12 +990,11 @@ function evaluateAnswer(correct) {
     const answer = document.createElement("div");
     answer.id = "answer";
     answer.appendChild(document.createElement("h2"));
-    answer.childNodes[0].style.fontSize = "2.5rem";
-    // for comments
     answer.appendChild(document.createElement("p"));
     
     gamePanel.insertBefore(answer, hints);
 
+    const mediaQuery = window.matchMedia('(min-width: 601px)');
     if (correct == true)
     {
         let response = correctResponses[randomIndex(correctResponses.length)]; // random response for correct answer
@@ -1010,16 +1011,28 @@ function evaluateAnswer(correct) {
         {
             answer.childNodes[0].style.fontSize = "1.75rem";
         }
-        gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
+
+        if (mediaQuery.matches) {
+            gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
+        }
+        else {
+            gameContainer.style.background = "linear-gradient(to top, rgb(55,55,55), 2%, rgb(0, 128, 0, 0.9))";
+        }
         correctCount++;
 
     }
     else
     {
-        answer.childNodes[0].textContent = "Nein!";
-        answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name} my friend.`;
+        let response = WrongResponses[randomIndex(WrongResponses.length)]; // random response for wrong answer
+        answer.childNodes[0].textContent = response;
+        answer.childNodes[1].textContent =  `That's ${cityQueue.peek().name}.`;
         answer.style.justifyContent = "space-around"; // when there're two text elements
-        gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
+        if (mediaQuery.matches) {
+            gamePanel.style.background = "linear-gradient(to top left, white, 0%, rgb(178, 13, 13))";
+        }
+        else {
+            gameContainer.style.background = "linear-gradient(to top, rgb(55,55,55), 2%, rgb(178, 13, 13))";
+        }
         
     }
     // update display of current grade
@@ -1061,7 +1074,12 @@ function evaluateAnswer(correct) {
         // goes straight to next question after 3 seconds. loses the next question button
         setTimeout(() => {
             gamePanel.removeChild(answer);
-            gamePanel.style.background = null;
+            if (mediaQuery.matches) {
+                gamePanel.style.background = null;
+            }
+            else {
+                gameContainer.style.background = null;
+            }
             nextRound();
         }, 2300);
     }
@@ -1074,6 +1092,7 @@ function evaluateAnswer(correct) {
                 showResultsLargeScreen();
             }
             else { // for screen size <= 600px
+                gameContainer.style.background = null;
                 showResultsSmallScreen();
             }
             
