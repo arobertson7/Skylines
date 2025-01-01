@@ -125,6 +125,11 @@ let currentGrade = Math.round((correctCount / currentRound) * 100);
 let randomImageIndex;
 // currently using global vars for hint functionality
 let hintsRemaining = 2;
+// global variable for keeping track of which 'result' slide we're on (for swivel buttons)
+// initialized to 4 because that's slide that is up when the swivel buttons appear
+let currentSlide = 4;
+// global variable for storing current assessment feedback
+let assessmentFeedback = "";
 
 // an array holding various responses to display when answer is correct
 const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done."];
@@ -306,6 +311,56 @@ function giveHint() {
         {
             hintButton.nextSibling.textContent = `${hintsRemaining} remaining`;
         }
+    }
+}
+
+// helper function for operating swivel button functionality
+// gets called on button click event listener
+// @param: currentSlide
+// @param: direction (of button pressed) , takes integer: either 0 (left) or 1 (right)
+function swivelResultSlide(currentSlide, direction) {
+    // direction argument is either 0 (left) or 1 (right)
+    switch(true) {
+        case (currentSlide == 1 && direction == 0) || (currentSlide == 4 && direction == 1):
+            return;
+        case currentSlide == 4 && direction == 0: // left from slide 4
+            evaluationType.childNodes[0].textContent = "Grade:";
+            evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
+            currentSlide--;
+            // Ungray out right button
+            swivelButtonsContainer.childNodes[1].style.opacity = "1";
+            break;
+        case currentSlide == 3 && direction == 0: // left from slide 3
+            evaluationType.childNodes[0].textContent = "Score:";
+            evaluation.childNodes[0].textContent = `${currentGrade}%`;
+            currentSlide--;
+            break;
+        case currentSlide == 2 && direction == 0: // left from slide 2
+            evaluationType.childNodes[0].textContent = "Correct answers:";
+            evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}`;
+            currentSlide--;
+            // gray out left button
+            swivelButtonsContainer.childNodes[0].style.opacity = "0.5";
+            break;
+        case currentSlide == 1 && direction == 1: // right from slide 1
+            evaluationType.childNodes[0].textContent = "Score:";
+            evaluation.childNodes[0].textContent = `${currentGrade}%`;
+            currentSlide++;
+            // Ungray out left button
+            swivelButtonsContainer.childNodes[0].style.opacity = "1";
+            break;
+        case currentSlide == 2 && direction == 1: // right from slide 2
+            evaluationType.childNodes[0].textContent = "Grade:";
+            evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
+            currentSlide++;
+            break;
+        case currentSlide == 3 && direction == 1: // right from slide 3
+            evaluationType.childNodes[0].textContent = "Assessment:";
+            evaluation.childNodes[0].textContent = assessmentFeedback;
+            currentSlide++;
+            // gray out right button
+            swivelButtonsContainer.childNodes[1].style.opacity = "0.5";
+            break;
     }
 }
 
@@ -548,6 +603,10 @@ function showResultsSmallScreen() {
         calcContainer.childNodes[0].textContent = "Let's see how you did...";
 
         // containers for all the results to be displayed
+
+        const resultsContainer = document.createElement("div");
+        resultsContainer.id="resultsContainer";
+        // ^ container for holding results display and swivel buttons
         const resultsDisplay = document.createElement("div");
         resultsDisplay.id="resultsDisplay";
         resultsDisplay.style.visibility = "hidden"; // initialize it as hidden
@@ -559,7 +618,20 @@ function showResultsSmallScreen() {
         evaluation.appendChild(document.createElement("p"));
         resultsDisplay.appendChild(evaluationType);
         resultsDisplay.appendChild(evaluation);
-        gameContainer.appendChild(resultsDisplay);
+        // ^ everything resultsDisplay
+        const swivelButtonsContainer = document.createElement("div");
+        swivelButtonsContainer.id="swivelButtonsContainer";
+        swivelButtonsContainer.style.visibility = "hidden"; // initialize hidden
+        swivelButtonsContainer.appendChild(document.createElement("button"));
+        swivelButtonsContainer.appendChild(document.createElement("button"));
+        swivelButtonsContainer.childNodes[0].textContent = '\u2190';
+        swivelButtonsContainer.childNodes[1].textContent = '\u2192';
+        swivelButtonsContainer.childNodes[1].style.opacity = "0.5"; // initialize grayed out
+        // ^ everything swivel buttons
+        resultsContainer.appendChild(resultsDisplay);
+        resultsContainer.appendChild(swivelButtonsContainer);
+        gameContainer.appendChild(resultsContainer);
+        
         // initialize it with the first set of results (still hidden)
         evaluationType.childNodes[0].textContent = "Correct answers:";
         evaluation.childNodes[0].textContent = `${correctCount} / ${rounds}`;
@@ -635,9 +707,30 @@ function showResultsSmallScreen() {
     }, timer);
     timer += 2000;
     setTimeout(() => {
-        evaluation.childNodes[0].textContent = generateFeedback(currentGrade);
+        assessmentFeedback = generateFeedback(currentGrade)
+        evaluation.childNodes[0].textContent = assessmentFeedback;
     }, timer);
 
+    
+    // Show swivel buttons
+    timer += 2000;
+    setTimeout(() => {
+        swivelButtonsContainer.style.visibility = "visible";
+        for (let i = 0; i < 2; i++)
+        {
+            if (i == 0) {
+                swivelButtonsContainer.childNodes[i].addEventListener("click", () => {
+                    currentSlide++;
+                    swivelResultSlide(currentSlide - 1, i); // using i to determine direction 0 == left, 1 == right
+                });
+            }
+            else {
+                swivelButtonsContainer.childNodes[i].addEventListener("click", () => {
+                    swivelResultSlide(currentSlide, i); // using i to determine direction 0 == left, 1 == right
+                });
+            }
+        }
+    }, timer);
 
        
 }
