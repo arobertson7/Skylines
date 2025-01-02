@@ -1335,6 +1335,8 @@ function setupGameDisplay()
         randomImageIndex = randomIndex(cityQueue.peek().imageArray.length); // Set picture to the correct answer city (selecting a random one from its imageArray)
         let firstPic = cityQueue.peek().imageArray[randomImageIndex];
         cityPic.src=firstPic;
+        cityPic.style.opacity = "0.4";
+        cityPic.classList.add("changeOpacity");
 
         // create right side
         const gamePanel = document.createElement("div");
@@ -1405,6 +1407,28 @@ function setupGameDisplay()
             score.appendChild(questionNumber);
             score.appendChild(grade);
             leftSide.appendChild(cityPic);
+            
+
+            // add temporary message "Can you guess the city/country?"
+            leftSide.appendChild(document.createElement("h3")); // absolute positioning
+            switch(true) {
+                case currentRegion == europe:
+                    leftSide.childNodes[2].textContent = "Can you guess the country?";
+                    break;
+                case currentRegion == usa:
+                    leftSide.childNodes[2].textContent = "Can you guess the city?";
+                    break;
+            }
+            leftSide.childNodes[2].classList.add("changeOpacity");
+            // change opacities
+            setTimeout(() => {
+                cityPic.style.opacity = null; // to full opacity
+                leftSide.childNodes[2].style.opacity = "0"; // to invisible
+            }, 500);
+            // remove the text after even though it is invisible
+            setTimeout(() => {
+                leftSide.removeChild(leftSide.childNodes[2]);
+            }, 3000);
 
             // appending bottom
             gameContainer.appendChild(gamePanel);
@@ -1412,8 +1436,6 @@ function setupGameDisplay()
             // hints.appendChild(hintButton); // removing hints on this screen size for now
             // hints.appendChild(numHints);
         }
-
-        
 
 
         // Display question and choice buttons

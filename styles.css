@@ -384,6 +384,7 @@ html, body {
     font-weight: 700;
     gap: 8px;
     background: transparent;
+    position: relative;
   }
 
   .score {
@@ -396,6 +397,18 @@ html, body {
   #leftSide img {
     height: 92%;
     border: outset 7px rgb(100, 100, 100, 0.8);
+  }
+
+  #leftSide h3 { /* "Can you guess the city/country?" */
+    position: absolute;
+    top: calc(50% + 8px);
+    left: 12vw;
+    font-size: 5vw;
+  }
+
+  .changeOpacity { /* for the above message and picture at the start of the game
+    /* opacity: 1; */
+    transition: opacity 2.5s ease-in-out;
   }
 
   .game-panel {
