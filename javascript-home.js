@@ -1,3 +1,6 @@
+const body = document.querySelector("body");
+// body.style.height = "100%";
+
 const mediaQuery = window.matchMedia('(min-width: 601px)');
 const header = document.querySelector(".header");
 // divs for buttons including their labels
@@ -32,6 +35,7 @@ if (!mediaQuery.matches) { // small screen
     // display them all
     timer += 2000;
     setTimeout(() => {
+        // body.style.height = null;
         header.childNodes[1].textContent = "Skylines";
         topButton.childNodes[1].textContent = "Europe";
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/europe3.webp";
