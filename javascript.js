@@ -526,14 +526,20 @@ function endGameSmallScreen() {
         nextGame.classList.add(`nextGame${i + 1}`);
         nextGame.appendChild(document.createElement("label"));
         nextGame.appendChild(document.createElement("button"));
-        nextGame.childNodes[1].style.opacity = "0.5"; // initalize with lower opacity
+        if (i != 0) {
+            nextGame.childNodes[1].style.opacity = "0.5"; // initalize with lower opacity
+        }
         nextGame.childNodes[1].classList.add("nextGameButton");
         nextGameButtonsContainer.appendChild(nextGame);
         
     }
-    // gameContainer.removeChild(resultsHeaderContainer);
-    resultsHeaderContainer.style.visibility = "hidden"; // instead of removing, just hide and absolutely position buttons.
-    gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
+    
+    // give a second or so before adding new game buttons
+    let timer = 3500;
+    setTimeout(() => {
+        resultsHeaderContainer.style.visibility = "hidden";
+        gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
+    }, timer);
 
     // set the next games button with the correct versions
     switch(true) {
@@ -570,8 +576,8 @@ function endGameSmallScreen() {
     };
 
     // one by one light up the next game buttons
-    let timer = 1500;
-    for (let i = 0; i < 3; i++) {
+    timer += 1500;
+    for (let i = 1; i < 3; i++) {
         setTimeout(() => {
             nextGameButtonsContainer.childNodes[i].childNodes[1].style.opacity = "1";
         }, timer);
@@ -752,36 +758,36 @@ function showResultsSmallScreen() {
 
 // ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
 
-    // calcContainer.childNodes[0].textContent = "Calculating your results";
-    // // there's probably a way better way to do this but...
-    // let timer = 275;
-    // for (let i = 0; i < 3; i++)
-    // {
-    //     for (let j = 0; j < 4; j++)
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent += ". ";
-    //         }, timer);
-    //         timer += 275;
-    //     }
-    //     timer += 50;
-    //     if (i != 2) // leaves dots on final iteration
-    //     {
-    //         setTimeout(() => {
-    //             calcContainer.childNodes[0].textContent = "Calculating your results";
-    //         }, timer);
-    //     }
-    //     timer += 275;
-    // }
-    // setTimeout(() => {
-    //     calcContainer.childNodes[0].textContent = "Calculating your results  ";
-    //     calcContainer.childNodes[0].textContent += "      \u2714";
+    calcContainer.childNodes[0].textContent = "Calculating your results";
+    // there's probably a way better way to do this but...
+    let timer = 275;
+    for (let i = 0; i < 3; i++)
+    {
+        for (let j = 0; j < 4; j++)
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent += ". ";
+            }, timer);
+            timer += 275;
+        }
+        timer += 50;
+        if (i != 2) // leaves dots on final iteration
+        {
+            setTimeout(() => {
+                calcContainer.childNodes[0].textContent = "Calculating your results";
+            }, timer);
+        }
+        timer += 275;
+    }
+    setTimeout(() => {
+        calcContainer.childNodes[0].textContent = "Calculating your results  ";
+        calcContainer.childNodes[0].textContent += "      \u2714";
 
-    // }, timer);
-    // timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
+    }, timer);
+    timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
 // ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
-    timer = 0; // <-- remove when replacing calculating
+    // timer = 0; // <-- remove when replacing calculating
     setTimeout(() => {
         resultsHeaderContainer.style.marginTop = "0vh";
         gameContainer.style.justifyContent = "start";
@@ -829,41 +835,39 @@ function showResultsSmallScreen() {
     }, timer);
 
     // Display # of correct answers
-    // timer += 1500;
-    timer += 10;
     setTimeout(() => {
         resultsDisplay.style.visibility = "visible";
     }, timer);
-    // timer += 2000;
-    timer += 10;
+    timer += 2200;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].style.visibility = "visible";
     }, timer);
 
 
     // Display Score
-    // timer += 2500;
-    timer += 10;
+    timer += 2200;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Score:";
     }, timer);
-    // timer += 2000;
-    timer += 10;
+    timer += 1500;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].textContent = `${currentGrade}%`;
     }, timer);
 
 
     // Display Grade
-    // timer += 2500;
-    timer += 10;
+    timer += 2200;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Grade:";
     }, timer);
-    // timer += 2000;
-    timer += 10;
+    timer += 1500;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
         evaluation.childNodes[0].style.fontWeight = "800";
@@ -892,8 +896,8 @@ function showResultsSmallScreen() {
 
 
     // Display Assessment
-    // timer += 2500;
-    timer += 10;
+    timer += 2200;
+    // timer += 10; // testing
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Assessment:";
@@ -902,8 +906,8 @@ function showResultsSmallScreen() {
         evaluation.childNodes[0].style.color = null;
         evaluation.childNodes[0].style.fontSize = "4vw";
     }, timer);
-    // timer += 2000;
-    timer += 10;
+    timer += 1500;
+    // timer += 10; // testing
     setTimeout(() => {
         assessmentFeedback = generateFeedback(currentGrade)
         evaluation.childNodes[0].textContent = assessmentFeedback;
@@ -911,7 +915,7 @@ function showResultsSmallScreen() {
 
     
     // Show swivel buttons
-    timer += 2500;
+    timer += 2200;
     setTimeout(() => {
         swivelButtonsContainer.style.visibility = "visible";
         for (let i = 0; i < 2; i++)
