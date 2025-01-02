@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 5;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -517,8 +517,134 @@ function displayNextGameButtons() {
     });
 }
 
+function endGameSmallScreen() {
+    // create next game buttons
+    const nextGameButtonsContainer = document.createElement("div");
+    nextGameButtonsContainer.id="nextGameButtonsContainer";
+    for (let i = 0; i < 3; i++) {
+        const nextGame = document.createElement("div");
+        nextGame.classList.add(`nextGame${i + 1}`);
+        nextGame.appendChild(document.createElement("label"));
+        nextGame.appendChild(document.createElement("button"));
+        nextGame.childNodes[1].classList.add("nextGameButton");
+        nextGameButtonsContainer.appendChild(nextGame);
+        
+    }
+    // gameContainer.removeChild(resultsHeaderContainer);
+    resultsHeaderContainer.style.visibility = "hidden"; // instead of removing, just hide and absolutely position buttons.
+    gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
+
+    // set the next games button with the correct versions
+    switch(true) {
+        case currentRegion == usa:
+            // first button is US
+            nextGameButtonsContainer.childNodes[0].childNodes[0].textContent = "Go again!";
+            nextGameButtonsContainer.childNodes[0].childNodes[0].setAttribute("for", "usa");
+            nextGameButtonsContainer.childNodes[0].childNodes[1].style.backgroundImage = "url('./images/us-flag3d.webp')";
+            // second button is europe
+            nextGameButtonsContainer.childNodes[1].childNodes[0].textContent = "Europe";
+            nextGameButtonsContainer.childNodes[1].childNodes[0].setAttribute("for", "europe");
+            nextGameButtonsContainer.childNodes[1].childNodes[1].style.backgroundImage = "url('./images/eu-flag3d.png')";
+            nextGameButtonsContainer.childNodes[1].childNodes[1].style.backgroundPosition = "center";
+            // third button is worldwide
+            nextGameButtonsContainer.childNodes[2].childNodes[0].textContent = "Worldwide";
+            nextGameButtonsContainer.childNodes[2].childNodes[0].setAttribute("for", "worldwide");
+            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/world-flag.gif')";
+            break;
+        case currentRegion == europe:
+            // first button is US
+            nextGameButtonsContainer.childNodes[0].childNodes[0].textContent = "Go again!";
+            nextGameButtonsContainer.childNodes[0].childNodes[0].setAttribute("for", "europe");
+            nextGameButtonsContainer.childNodes[0].childNodes[1].style.backgroundImage = "url('./images/eu-flag3d.png')";
+            nextGameButtonsContainer.childNodes[1].childNodes[1].style.backgroundPosition = "center";
+            // second button is europe
+            nextGameButtonsContainer.childNodes[1].childNodes[0].textContent = "USA";
+            nextGameButtonsContainer.childNodes[1].childNodes[0].setAttribute("for", "usa");
+            nextGameButtonsContainer.childNodes[1].childNodes[1].style.backgroundImage = "url('./images/us-flag3d.webp')";
+            // third button is worldwide
+            nextGameButtonsContainer.childNodes[2].childNodes[0].textContent = "Worldwide";
+            nextGameButtonsContainer.childNodes[2].childNodes[0].setAttribute("for", "worldwide");
+            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/world-flag.gif')";
+            break;
+    };
+
+    // add event listeners for new game
+
+    // button 1 - always holds the current region so just reset variables and display and start new game
+    nextGameButtonsContainer.childNodes[0].childNodes[1].addEventListener("click", () => {
+        gameContainer.classList.remove("game-container-end"); // reset game container class
+        gameContainer.classList.add("game-container-start");
+
+        gameContainer.removeChild(resultsHeaderContainer);
+        gameContainer.removeChild(nextGameButtonsContainer);
+        gameContainer.removeChild(resultsContainer);
+        gameContainer.appendChild(versionDisplayContainer);
+
+        //reset gameContainer styles which were changed on results
+        gameContainer.style.justifyContent = null;
+        gameContainer.style.gap = null;
+        gameContainer.style.paddingTop = null;
+
+        // reset global variables for next game
+        currentRound = 1;
+        correctCount = 0;
+        hintsRemaining = 2;
+        currentSlide = 4;
+        // clear the queue
+        while (!cityQueue.isEmpty())
+        {
+            cityQueue.pop();
+        }
+        playGame();
+    });
+
+    // button 2
+    nextGameButtonsContainer.childNodes[1].childNodes[1].addEventListener("click", () => {
+        gameContainer.classList.remove("game-container-end"); // reset game container class
+        gameContainer.classList.add("game-container-start");
+
+        gameContainer.removeChild(resultsHeaderContainer);
+        gameContainer.removeChild(nextGameButtonsContainer);
+        gameContainer.removeChild(resultsContainer);
+
+        //reset gameContainer styles which were changed on results
+        gameContainer.style.justifyContent = null;
+        gameContainer.style.gap = null;
+        gameContainer.style.paddingTop = null;
+
+        // choose correct version and display for next game
+        switch(true) {
+            case currentRegion == europe:
+                currentRegion = usa;
+                versionDisplayContainer.childNodes[1].textContent = "USA";
+                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/usa-flag.webp";
+                break;
+            case currentRegion == usa:
+                currentRegion = europe;
+                versionDisplayContainer.childNodes[1].textContent = "Europe";
+                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/europe-flag.gif";
+                break;
+        }
+        gameContainer.appendChild(versionDisplayContainer);
+
+        // reset global variables for next game
+        currentRound = 1;
+        correctCount = 0;
+        hintsRemaining = 2;
+        currentSlide = 4;
+        // clear the queue
+        while (!cityQueue.isEmpty())
+        {
+            cityQueue.pop();
+        }
+        playGame();
+    });
+
+
+}
+
 // function to wrap the game up: display buttons for next game(s), etc. reset any necessary variables for next game.
-function endGame() {
+function endGameLargeScreen() {
     
      // add event listeners for play again button (same version)
      newGameButtonSame.addEventListener("click", () => {
@@ -533,6 +659,7 @@ function endGame() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
+        hintsRemaining = 2;
         // clear the queue
         while (!cityQueue.isEmpty())
         {
@@ -692,35 +819,41 @@ function showResultsSmallScreen() {
     }, timer);
 
     // Display # of correct answers
-    timer += 1500;
+    // timer += 1500;
+    timer += 10;
     setTimeout(() => {
         resultsDisplay.style.visibility = "visible";
     }, timer);
-    timer += 2000;
+    // timer += 2000;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].style.visibility = "visible";
     }, timer);
 
 
     // Display Score
-    timer += 2500;
+    // timer += 2500;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Score:";
     }, timer);
-    timer += 2000;
+    // timer += 2000;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].textContent = `${currentGrade}%`;
     }, timer);
 
 
     // Display Grade
-    timer += 2500;
+    // timer += 2500;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Grade:";
     }, timer);
-    timer += 2000;
+    // timer += 2000;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
         evaluation.childNodes[0].style.fontWeight = "800";
@@ -749,7 +882,8 @@ function showResultsSmallScreen() {
 
 
     // Display Assessment
-    timer += 2500;
+    // timer += 2500;
+    timer += 10;
     setTimeout(() => {
         evaluation.childNodes[0].textContent = ""; // empty evaluation field
         evaluationType.childNodes[0].textContent = "Assessment:";
@@ -758,7 +892,8 @@ function showResultsSmallScreen() {
         evaluation.childNodes[0].style.color = null;
         evaluation.childNodes[0].style.fontSize = "4vw";
     }, timer);
-    timer += 2000;
+    // timer += 2000;
+    timer += 10;
     setTimeout(() => {
         assessmentFeedback = generateFeedback(currentGrade)
         evaluation.childNodes[0].textContent = assessmentFeedback;
@@ -775,6 +910,7 @@ function showResultsSmallScreen() {
                 swivelResultSlide(i); // using i to determine direction 0 == left, 1 == right
             });
         }
+        endGameSmallScreen();
     }, timer);
 
        
@@ -936,7 +1072,7 @@ function showResultsLargeScreen() {
 
     timer += 3000; // 2 second delay before calling final function of the game
     setTimeout(() => {
-        endGame();
+        endGameLargeScreen();
     }, timer);
 }
 

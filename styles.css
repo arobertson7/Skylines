@@ -626,6 +626,7 @@ html, body {
     height: 97%;
     flex-direction: column;
     background: linear-gradient(to right, gray, 1%, black, 98%, gray);
+    /* gap is 20px - set above */
   }
 }
 
@@ -713,4 +714,37 @@ html, body {
   align-items: center;
   font-weight: 800;
   font-size: 5vh;
+}
+
+#nextGameButtonsContainer {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  height: 14vh;
+  position: absolute;
+  top: 5vh;
+}
+
+.nextGame1, .nextGame2, .nextGame3 {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  letter-spacing: 0.05em;
+  align-items: center;
+}
+
+.nextGame1 label, .nextGame2 label, .nextGame3 label {
+  font-size: 3vw;
+}
+
+.nextGameButton { /* selects all 3 next game buttons */
+  width: 90%;
+  height: 90%;
+  border-radius: 3vw;
+  background-size: 105%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
