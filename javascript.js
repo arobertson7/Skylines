@@ -531,13 +531,6 @@ function endGameSmallScreen() {
         nextGameButtonsContainer.appendChild(nextGame);
         
     }
-    
-    // give a second or so before adding new game buttons
-    let timer = 3000;
-    setTimeout(() => {
-        resultsHeaderContainer.style.visibility = "hidden";
-        gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
-    }, timer);
 
     // set the next games button with the correct versions
     switch(true) {
@@ -572,6 +565,16 @@ function endGameSmallScreen() {
             nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/worldwide-button.jpeg')";
             break;
     };
+
+    gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
+    nextGameButtonsContainer.style.visibility = "hidden";
+    // give a second or so before adding new game buttons
+    let timer = 3000;
+    setTimeout(() => {
+        resultsHeaderContainer.style.visibility = "hidden";
+        nextGameButtonsContainer.style.visibility = "visible";
+        // gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
+    }, timer);
 
     // one by one light up the next game buttons
     timer += 1500;

@@ -187,6 +187,10 @@ html, body {
     gap: 6%;
   }
 
+  .game-buttons a {
+    box-shadow: -2px -2px 4px 1px rgba(255, 255, 255, 0.6);
+  }
+
   .europe, .usa, .worldwide {
     height: 62vw;
     width: 62vw;
