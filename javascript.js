@@ -132,7 +132,7 @@ let currentSlide = 4;
 let assessmentFeedback = "";
 
 // an array holding various responses to display when answer is correct
-const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler.", "Wunderbar!"];
+const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler", "Wunderbar!"];
 
 const WrongResponses = ["Nope!", "Not this time!", "Next try!", "Nö", "Not quite!"];
 
@@ -526,6 +526,7 @@ function endGameSmallScreen() {
         nextGame.classList.add(`nextGame${i + 1}`);
         nextGame.appendChild(document.createElement("label"));
         nextGame.appendChild(document.createElement("button"));
+        nextGame.childNodes[1].style.opacity = "0.5"; // initalize with lower opacity
         nextGame.childNodes[1].classList.add("nextGameButton");
         nextGameButtonsContainer.appendChild(nextGame);
         
@@ -549,7 +550,7 @@ function endGameSmallScreen() {
             // third button is worldwide
             nextGameButtonsContainer.childNodes[2].childNodes[0].textContent = "Worldwide";
             nextGameButtonsContainer.childNodes[2].childNodes[0].setAttribute("for", "worldwide");
-            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/world-flag.gif')";
+            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/worldwide-button.jpeg')";
             break;
         case currentRegion == europe:
             // first button is US
@@ -564,8 +565,17 @@ function endGameSmallScreen() {
             // third button is worldwide
             nextGameButtonsContainer.childNodes[2].childNodes[0].textContent = "Worldwide";
             nextGameButtonsContainer.childNodes[2].childNodes[0].setAttribute("for", "worldwide");
-            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/world-flag.gif')";
+            nextGameButtonsContainer.childNodes[2].childNodes[1].style.backgroundImage = "url('./images/worldwide-button.jpeg')";
             break;
+    };
+
+    // one by one light up the next game buttons
+    let timer = 1500;
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            nextGameButtonsContainer.childNodes[i].childNodes[1].style.opacity = "1";
+        }, timer);
+        timer += 1500;
     };
 
     // add event listeners for new game
