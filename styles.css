@@ -161,7 +161,7 @@ html, body {
 
 @media screen and (max-width: 600px) {
   body {
-    height: 175%;
+    height: 275vw;
   }
 
   #game-one, #game-two {
@@ -174,15 +174,17 @@ html, body {
 
   .game-container-start {
     height: 97%;
-    justify-content: space-between;
+    justify-content: start;
     background: linear-gradient(to right, gray, 1%, black, 98%, gray);
     padding-bottom: 5vh;
+    gap: max(5vw, 30px);
   }
 
   .game-buttons {
     flex-direction: column;
-    width: 60vh;
-    height: 100%;
+    width: 60vw;
+    height: 250vw;
+    gap: 6%;
   }
 
   .europe, .usa, .worldwide {
