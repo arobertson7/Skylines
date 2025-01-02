@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 1;
+const rounds = 10;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -458,7 +458,7 @@ function displayNextGameButtons() {
     leftSideDiv.appendChild(newGameButtonSame);
     // adding a little style on hover
     newGameButtonSame.addEventListener("mouseenter", () => {
-        newGameButtonSame.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
+        newGameButtonSame.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
     });
     newGameButtonSame.addEventListener("mouseout", () => {
         newGameButtonSame.style.background = null;
@@ -502,7 +502,7 @@ function displayNextGameButtons() {
 
     // adding a little style on hover - button 1
     newGameButtonDiff1.addEventListener("mouseenter", () => {
-        newGameButtonDiff1.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
+        newGameButtonDiff1.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
     });
     newGameButtonDiff1.addEventListener("mouseout", () => {
         newGameButtonDiff1.style.background = null;
@@ -510,7 +510,7 @@ function displayNextGameButtons() {
 
     // adding a little style on hover - button 2
     newGameButtonDiff2.addEventListener("mouseenter", () => {
-        newGameButtonDiff2.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8)";
+        newGameButtonDiff2.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
     });
     newGameButtonDiff2.addEventListener("mouseout", () => {
         newGameButtonDiff2.style.background = null;
@@ -574,7 +574,7 @@ function endGameSmallScreen() {
     };
 
     // one by one light up the next game buttons
-    timer += 1700;
+    timer += 1500;
     for (let i = 0; i < 3; i++) {
         setTimeout(() => {
             nextGameButtonsContainer.childNodes[i].childNodes[1].style.opacity = "1";
@@ -782,6 +782,7 @@ function showResultsSmallScreen() {
         calcContainer.childNodes[0].textContent += "      \u2714";
 
     }, timer);
+
     timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
 
 // ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
