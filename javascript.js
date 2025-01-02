@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 3;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -325,6 +325,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
             evaluation.childNodes[0].style.fontWeight = "800";
             evaluation.childNodes[0].style.fontSize = "14vw";
+            evaluation.childNodes[0].style.textShadow = null;
             // apply color to letter grade
             switch((convertToLetterGrade(currentGrade))[0])
             {
@@ -409,6 +410,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].style.fontWeight = null;
             evaluation.childNodes[0].style.color = null;
             evaluation.childNodes[0].style.fontSize = "4vw";
+            evaluation.childNodes[0].style.textShadow = "none";
             currentSlide++;
             // gray out right button
             swivelButtonsContainer.childNodes[1].style.opacity = "0.5";
@@ -907,6 +909,7 @@ function showResultsSmallScreen() {
         evaluation.childNodes[0].style.fontWeight = null;
         evaluation.childNodes[0].style.color = null;
         evaluation.childNodes[0].style.fontSize = "4vw";
+        evaluation.childNodes[0].style.textShadow = "none";
     }, timer);
     timer += 1500;
     // timer += 10; // testing

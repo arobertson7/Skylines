@@ -701,6 +701,7 @@ html, body {
 #evaluationType h3 {
   font-weight: 800;
   font-size: 5vw;
+  text-shadow: 0.5px 0.5px 1px black;
 }
 
 #evaluation {
@@ -715,6 +716,10 @@ html, body {
   background: radial-gradient(white, 60%, rgb(86, 135, 205, 0.2));
   text-align: center;
   padding: 10px;
+}
+
+#evaluation p {
+  text-shadow: 1px 1px 2px black;
 }
 
 #swivelButtonsContainer {
