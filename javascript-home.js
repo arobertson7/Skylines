@@ -1,28 +1,53 @@
 const mediaQuery = window.matchMedia('(min-width: 601px)');
-const gameButtons = document.querySelector(".game-buttons");
 const header = document.querySelector(".header");
-if (mediaQuery.matches) {
+// divs for buttons including their labels
+const topButton = document.getElementById("europe");
+const middleButton = document.getElementById("usa");
+const bottomButton = document.getElementById("worldwide");
+// disable first button link until display is over
+topButton.childNodes[3].removeAttribute("href");
+
+if (!mediaQuery.matches) { // small screen
+    // initalize bottom buttons to be hidden
+    middleButton.style.visibility = "hidden";
+    bottomButton.style.visibility = "hidden";
+
+    
+    // change to usa
+    let timer = 1700;
     setTimeout(() => {
         header.childNodes[1].textContent = "Welcome";
-    }, 1700);
+        topButton.childNodes[1].textContent = "USA";
+        topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/usa2.avif";
+    }, timer);
     
+    // change to worldwide
+    timer += 1700;
     setTimeout(() => {
         header.childNodes[1].textContent = "欢迎";
-    }, 3400);
-}
-else {
-    for (let i = 3; i < 6; i += 2) {
-        gameButtons.childNodes[i].style.opacity = "0.7";
-    }
-    
+        topButton.childNodes[1].textContent = "Worldwide";
+        topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/worldwide.avif";
+    }, timer);
+
+    timer += 2000;
     setTimeout(() => {
-        gameButtons.childNodes[3].style.opacity = "1";
-        header.childNodes[1].textContent = "Welcome";
-    }, 1700);
-    
+        header.childNodes[1].textContent = "Guess";
+    }, timer);
+    timer += 800;
     setTimeout(() => {
-        gameButtons.childNodes[5].style.opacity = "1";
-        header.childNodes[1].textContent = "欢迎";
-    }, 3400);
+        header.childNodes[1].textContent = "these";
+    }, timer);
+
+    // display them all
+    timer += 800;
+    setTimeout(() => {
+        header.childNodes[1].textContent = "Skylines";
+        topButton.childNodes[1].textContent = "Europe";
+        topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/europe3.webp";
+        middleButton.style.visibility = "visible";
+        bottomButton.style.visibility = "visible";
+        // enable link
+        topButton.childNodes[3].setAttribute("href", "./europe.html");
+    }, timer);
 }
 
