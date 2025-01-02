@@ -29,17 +29,8 @@ if (!mediaQuery.matches) { // small screen
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/worldwide.avif";
     }, timer);
 
-    timer += 2000;
-    setTimeout(() => {
-        header.childNodes[1].textContent = "Guess";
-    }, timer);
-    timer += 800;
-    setTimeout(() => {
-        header.childNodes[1].textContent = "these";
-    }, timer);
-
     // display them all
-    timer += 800;
+    timer += 2000;
     setTimeout(() => {
         header.childNodes[1].textContent = "Skylines";
         topButton.childNodes[1].textContent = "Europe";

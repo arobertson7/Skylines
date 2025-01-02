@@ -667,6 +667,7 @@ html, body {
   border-radius: 5vw;
   gap: 5px;
   padding-bottom: 10px;
+  border: outset 4px black;
 }
 
 #evaluationType {
