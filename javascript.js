@@ -1335,7 +1335,7 @@ function setupGameDisplay()
         randomImageIndex = randomIndex(cityQueue.peek().imageArray.length); // Set picture to the correct answer city (selecting a random one from its imageArray)
         let firstPic = cityQueue.peek().imageArray[randomImageIndex];
         cityPic.src=firstPic;
-        cityPic.style.opacity = "0.4";
+        cityPic.style.opacity = "0.2";
         cityPic.classList.add("changeOpacity");
 
         // create right side
@@ -1424,11 +1424,11 @@ function setupGameDisplay()
             setTimeout(() => {
                 cityPic.style.opacity = null; // to full opacity
                 leftSide.childNodes[2].style.opacity = "0"; // to invisible
-            }, 500);
+            }, 1000);
             // remove the text after even though it is invisible
             setTimeout(() => {
                 leftSide.removeChild(leftSide.childNodes[2]);
-            }, 3000);
+            }, 3500);
 
             // appending bottom
             gameContainer.appendChild(gamePanel);
