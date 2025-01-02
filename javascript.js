@@ -526,16 +526,14 @@ function endGameSmallScreen() {
         nextGame.classList.add(`nextGame${i + 1}`);
         nextGame.appendChild(document.createElement("label"));
         nextGame.appendChild(document.createElement("button"));
-        if (i != 0) {
-            nextGame.childNodes[1].style.opacity = "0.5"; // initalize with lower opacity
-        }
+        nextGame.childNodes[1].style.opacity = "0.5"; // initalize with lower opacity
         nextGame.childNodes[1].classList.add("nextGameButton");
         nextGameButtonsContainer.appendChild(nextGame);
         
     }
     
     // give a second or so before adding new game buttons
-    let timer = 3500;
+    let timer = 3000;
     setTimeout(() => {
         resultsHeaderContainer.style.visibility = "hidden";
         gameContainer.insertBefore(nextGameButtonsContainer, resultsContainer);
@@ -576,8 +574,8 @@ function endGameSmallScreen() {
     };
 
     // one by one light up the next game buttons
-    timer += 1500;
-    for (let i = 1; i < 3; i++) {
+    timer += 1700;
+    for (let i = 0; i < 3; i++) {
         setTimeout(() => {
             nextGameButtonsContainer.childNodes[i].childNodes[1].style.opacity = "1";
         }, timer);
@@ -915,7 +913,7 @@ function showResultsSmallScreen() {
 
     
     // Show swivel buttons
-    timer += 2200;
+    timer += 4000;
     setTimeout(() => {
         swivelButtonsContainer.style.visibility = "visible";
         for (let i = 0; i < 2; i++)

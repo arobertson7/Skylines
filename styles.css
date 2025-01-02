@@ -716,7 +716,7 @@ html, body {
   font-weight: 800;
   font-size: 5vh;
   border: outset 2px black;
-  background: linear-gradient(to right, gray, 25% white, 90%, gray);
+  background: linear-gradient(to right, white, 90%, gray);
 }
 
 #nextGameButtonsContainer {
