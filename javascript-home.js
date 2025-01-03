@@ -1,5 +1,5 @@
 const body = document.querySelector("body");
-// body.style.height = "100%";
+body.style.height = "100%";
 
 const mediaQuery = window.matchMedia('(min-width: 601px)');
 const header = document.querySelector(".header");
@@ -7,15 +7,15 @@ const header = document.querySelector(".header");
 const topButton = document.getElementById("europe");
 const middleButton = document.getElementById("usa");
 const bottomButton = document.getElementById("worldwide");
+const buttonsContainer = document.querySelector(".game-buttons");
+
 // disable first button link until display is over
 topButton.childNodes[3].removeAttribute("href");
 
 if (!mediaQuery.matches) { // small screen
-    // initalize bottom buttons to be hidden
-    middleButton.style.visibility = "hidden";
-    bottomButton.style.visibility = "hidden";
+    buttonsContainer.removeChild(middleButton);
+    buttonsContainer.removeChild(bottomButton);
 
-    
     // change to usa
     let timer = 1700;
     setTimeout(() => {
@@ -35,7 +35,9 @@ if (!mediaQuery.matches) { // small screen
     // display them all
     timer += 2000;
     setTimeout(() => {
-        // body.style.height = null;
+        buttonsContainer.appendChild(middleButton);
+        buttonsContainer.appendChild(bottomButton);
+        body.style.height = null;
         header.childNodes[1].textContent = "Skylines";
         topButton.childNodes[1].textContent = "Europe";
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/europe3.webp";

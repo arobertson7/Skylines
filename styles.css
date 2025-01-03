@@ -169,21 +169,24 @@ html, body {
   }
 
   .main-container {
-    justify-content: center;
+    padding-top: 2.5vw;
+    padding-bottom: 2.5vw;
   }
 
   .game-container-start {
-    height: 97%;
+    height: 100%;
     justify-content: start;
     background: linear-gradient(to right, gray, 1%, black, 98%, gray);
     padding-bottom: 5vh;
-    gap: max(5vw, 30px);
+    padding-top: 5vh;
+    gap: 9vh;
   }
 
   .game-buttons {
     flex-direction: column;
+    justify-content: start;
     width: 60vw;
-    height: 250vw;
+    height: 225vw;
     gap: 6%;
   }
 
