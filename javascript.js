@@ -762,9 +762,6 @@ function showResultsSmallScreen() {
     calcContainer.appendChild(document.createElement("h1"));
 
 // ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
-
-    gameContainer.classList.add("calcTransition");
-    gameContainer.style.background = "linear-gradient(to top, green, 99%, black)";
     // 4275
     calcContainer.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
@@ -794,7 +791,6 @@ function showResultsSmallScreen() {
     }, timer);
 
     timer += 2000 // wait two second before next step (which is removing "Calculating your results..." and starting to display results)
-
 // ----------- end calulating container stuff (can remove everything between while not using calc part) ------------ //
     // timer = 0; // <-- remove when replacing calculating
     setTimeout(() => {
@@ -1289,7 +1285,7 @@ function displayQuestion() {
             let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
             setTimeout(() => {
                 evaluateAnswer(correctOrIncorrect);
-            }, 200);
+            }, 300);
         })
     })
 

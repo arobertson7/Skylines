@@ -315,6 +315,7 @@ html, body {
   flex-direction: column;
   gap: 30px; 
   justify-content: space-between;
+  position: relative;
 }
 
 .choices button {
@@ -330,9 +331,10 @@ html, body {
 }
 
 .choices button:active {
+  position: relative;
   background: linear-gradient(to top left, white, 5%, black);
-  height: 5em;
-  transition: height 0.3s ease-in;
+  height: 4em;
+  transition: height 0.1s ease-in;
 }
 
 
@@ -675,7 +677,7 @@ html, body {
 }
 
 .calcTransition {
-  transition: backgroun
+  transition: background-color 4.2s ease-in-out;
 }
 
 #resultsContainer {
