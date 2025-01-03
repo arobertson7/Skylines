@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 1;
+const rounds = 3;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -130,6 +130,8 @@ let hintsRemaining = 2;
 let currentSlide = 4;
 // global variable for storing current assessment feedback
 let assessmentFeedback = "";
+// global variable for tracking how many games have been played (initiated)
+let gamesPlayed = 0;
 
 // an array holding various responses to display when answer is correct
 const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler", "Wunderbar!"];
@@ -1283,9 +1285,10 @@ function displayQuestion() {
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
             let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
-            setTimeout(() => {
-                evaluateAnswer(correctOrIncorrect);
-            }, 300);
+            evaluateAnswer(correctOrIncorrect);
+            // setTimeout(() => {
+            //     evaluateAnswer(correctOrIncorrect);
+            // }, 300);
         })
     })
 
@@ -1345,8 +1348,6 @@ function setupGameDisplay()
         randomImageIndex = randomIndex(cityQueue.peek().imageArray.length); // Set picture to the correct answer city (selecting a random one from its imageArray)
         let firstPic = cityQueue.peek().imageArray[randomImageIndex];
         cityPic.src=firstPic;
-        cityPic.style.opacity = "0.2";
-        cityPic.classList.add("changeOpacity");
 
         // create right side
         const gamePanel = document.createElement("div");
@@ -1419,30 +1420,32 @@ function setupGameDisplay()
             leftSide.appendChild(cityPic);
             
 
-            // add temporary message "Can you guess the city/country?"
-            leftSide.appendChild(document.createElement("h3")); // absolute positioning
-            switch(true) {
-                case currentRegion == europe:
-                    leftSide.childNodes[2].textContent = "Can you guess the country?";
-                    break;
-                case currentRegion == usa:
-                    leftSide.childNodes[2].textContent = "Can you guess the city?";
-                    leftSide.childNodes[2].style.left = "17vw";
-                    break;
+            if (gamesPlayed == 1) {
+                // add temporary message "Can you guess the city/country?"
+                cityPic.style.opacity = "0.2";
+                cityPic.classList.add("changeOpacity");
+                leftSide.appendChild(document.createElement("h3")); // absolute positioning
+                switch(true) {
+                    case currentRegion == europe:
+                        leftSide.childNodes[2].textContent = "Can you guess the country?";
+                        break;
+                    case currentRegion == usa:
+                        leftSide.childNodes[2].textContent = "Can you guess the city?";
+                        leftSide.childNodes[2].style.left = "17vw";
+                        break;
+                }
+                leftSide.childNodes[2].classList.add("changeOpacity");
+                // change opacities
+                setTimeout(() => {
+                    cityPic.style.opacity = null; // to full opacity
+                    leftSide.childNodes[2].style.opacity = "0"; // to invisible
+                }, 1000);
+                // remove the text after even though it is invisible.
+                setTimeout(() => {
+                    leftSide.removeChild(leftSide.childNodes[2]);
+                    cityPic.classList.remove("changeOpacity");
+                }, 3000);
             }
-            leftSide.childNodes[2].classList.add("changeOpacity");
-            // change opacities
-            setTimeout(() => {
-                cityPic.style.opacity = null; // to full opacity
-                leftSide.childNodes[2].style.opacity = "0"; // to invisible
-            }, 1000);
-            // remove the text after even though it is invisible.
-            // remove class so it only happens this first time
-            setTimeout(() => {
-                leftSide.removeChild(leftSide.childNodes[2]);
-                leftSide.childNodes[2].classList.remove("changeOpacity");
-                cityPic.classList.remove("changeOpacity");
-            }, 3000);
 
             // appending bottom
             gameContainer.appendChild(gamePanel);
@@ -1519,6 +1522,7 @@ function setupNewRound() {
 
 // Play new game
 function playGame() {
+    gamesPlayed++;
 
     // Set up a new queue of (number of rounds) random cities for the game
     setupCitiesQueue();
