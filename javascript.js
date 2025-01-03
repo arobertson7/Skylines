@@ -639,16 +639,11 @@ function endGameSmallScreen() {
         switch(true) {
             case currentRegion == europe:
                 currentRegion = usa;
-                versionDisplayContainer.childNodes[1].textContent = "USA";
-                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/usa-flag.webp";
                 break;
             case currentRegion == usa:
                 currentRegion = europe;
-                versionDisplayContainer.childNodes[1].textContent = "Europe";
-                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/europe-flag.gif";
                 break;
         }
-        gameContainer.appendChild(versionDisplayContainer);
 
         // reset global variables for next game
         currentRound = 1;
@@ -1324,6 +1319,21 @@ function setupGameDisplay()
     // Setup game container
     const gameContainer = document.querySelector(".game-container-start");
     gameContainer.id="gameContainer";
+
+    if (gamesPlayed != 1) {
+        // choose correct version and display for next game
+        switch(true) {
+            case currentRegion == usa:
+                versionDisplayContainer.childNodes[1].textContent = "USA";
+                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/usa-flag.webp";
+                break;
+            case currentRegion == europe:
+                versionDisplayContainer.childNodes[1].textContent = "Europe";
+                versionDisplayContainer.childNodes[3].childNodes[0].src = "./images/europe-flag.gif";
+                break;
+        }
+        gameContainer.appendChild(versionDisplayContainer);
+    }
     
 
     // Briefly display the version which was chosen before starting the game

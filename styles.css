@@ -383,7 +383,7 @@ html, body {
 
 @media screen and (max-width: 600px) {
   .game-container-next {
-    height: 100%;
+    height: 100%; /* height: 97%; */
     display: flex;
     flex-direction: column;
     background: linear-gradient(to top, gray, 4%, black),
@@ -655,7 +655,7 @@ html, body {
 
 @media screen and (max-width: 600px) {
   .game-container-end {
-    height: 100%;
+    height: 100%; /* height: 97%; */
     flex-direction: column;
     background: linear-gradient(to right, gray, 1%, black, 98%, gray);
     /* gap is 20px - set above */
