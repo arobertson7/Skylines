@@ -9,8 +9,6 @@ const middleButton = document.getElementById("usa");
 const bottomButton = document.getElementById("worldwide");
 const buttonsContainer = document.querySelector(".game-buttons");
 
-// disable first button link until display is over
-topButton.childNodes[3].removeAttribute("href");
 
 if (!mediaQuery.matches) { // small screen
     buttonsContainer.removeChild(middleButton);
@@ -22,6 +20,7 @@ if (!mediaQuery.matches) { // small screen
         header.childNodes[1].textContent = "Welcome";
         topButton.childNodes[1].textContent = "USA";
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/usa2.avif";
+        topButton.childNodes[3].setAttribute("href", "./usa.html");
     }, timer);
     
     // change to worldwide
@@ -30,6 +29,7 @@ if (!mediaQuery.matches) { // small screen
         header.childNodes[1].textContent = "欢迎";
         topButton.childNodes[1].textContent = "Worldwide";
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/worldwide.avif";
+        topButton.childNodes[3].removeAttribute("href");
     }, timer);
 
     // display them all
@@ -41,6 +41,7 @@ if (!mediaQuery.matches) { // small screen
         header.childNodes[1].textContent = "Skylines";
         topButton.childNodes[1].textContent = "Europe";
         topButton.childNodes[3].childNodes[0].childNodes[0].src = "./images/europe3.webp";
+        topButton.childNodes[3].setAttribute("href", "./europe.html");
         middleButton.style.visibility = "visible";
         bottomButton.style.visibility = "visible";
         // enable link

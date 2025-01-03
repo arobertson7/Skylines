@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 3;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -325,7 +325,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
             evaluation.childNodes[0].style.fontWeight = "800";
             evaluation.childNodes[0].style.fontSize = "14vw";
-            evaluation.childNodes[0].style.textShadow = null;
+            evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
             // apply color to letter grade
             switch((convertToLetterGrade(currentGrade))[0])
             {
@@ -357,6 +357,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].style.fontWeight = null;
             evaluation.childNodes[0].style.fontSize = null;
             evaluation.childNodes[0].style.color = null;
+            evaluation.childNodes[0].style.textShadow = null;
             currentSlide--;
             break;
         // slide 1 <- slide 2
@@ -381,6 +382,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
             evaluation.childNodes[0].style.fontWeight = "800";
             evaluation.childNodes[0].style.fontSize = "14vw";
+            evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
             // apply color to letter grade
             switch((convertToLetterGrade(currentGrade))[0])
             {
@@ -410,7 +412,7 @@ function swivelResultSlide(direction) {
             evaluation.childNodes[0].style.fontWeight = null;
             evaluation.childNodes[0].style.color = null;
             evaluation.childNodes[0].style.fontSize = "4vw";
-            evaluation.childNodes[0].style.textShadow = "none";
+            evaluation.childNodes[0].style.textShadow = null;
             currentSlide++;
             // gray out right button
             swivelButtonsContainer.childNodes[1].style.opacity = "0.5";
@@ -761,6 +763,9 @@ function showResultsSmallScreen() {
 
 // ----------- begin calulating container stuff (can remove everything between while not using calc part) ------------ //
 
+    gameContainer.classList.add("calcTransition");
+    gameContainer.style.background = "linear-gradient(to top, green, 99%, black)";
+    // 4275
     calcContainer.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
     let timer = 275;
@@ -876,6 +881,7 @@ function showResultsSmallScreen() {
         evaluation.childNodes[0].textContent = `${convertToLetterGrade(currentGrade)}`;
         evaluation.childNodes[0].style.fontWeight = "800";
         evaluation.childNodes[0].style.fontSize = "14vw";
+        evaluation.childNodes[0].style.textShadow = "1px 1px 2px black";
         // apply color to letter grade
         switch((convertToLetterGrade(currentGrade))[0])
         {
@@ -909,7 +915,7 @@ function showResultsSmallScreen() {
         evaluation.childNodes[0].style.fontWeight = null;
         evaluation.childNodes[0].style.color = null;
         evaluation.childNodes[0].style.fontSize = "4vw";
-        evaluation.childNodes[0].style.textShadow = "none";
+        evaluation.childNodes[0].style.textShadow = null;
     }, timer);
     timer += 1500;
     // timer += 10; // testing
@@ -1281,7 +1287,9 @@ function displayQuestion() {
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
             let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
-            evaluateAnswer(correctOrIncorrect);
+            setTimeout(() => {
+                evaluateAnswer(correctOrIncorrect);
+            }, 200);
         })
     })
 
@@ -1423,6 +1431,7 @@ function setupGameDisplay()
                     break;
                 case currentRegion == usa:
                     leftSide.childNodes[2].textContent = "Can you guess the city?";
+                    leftSide.childNodes[2].style.left = "17vw";
                     break;
             }
             leftSide.childNodes[2].classList.add("changeOpacity");
@@ -1431,10 +1440,13 @@ function setupGameDisplay()
                 cityPic.style.opacity = null; // to full opacity
                 leftSide.childNodes[2].style.opacity = "0"; // to invisible
             }, 1000);
-            // remove the text after even though it is invisible
+            // remove the text after even though it is invisible.
+            // remove class so it only happens this first time
             setTimeout(() => {
                 leftSide.removeChild(leftSide.childNodes[2]);
-            }, 3500);
+                leftSide.childNodes[2].classList.remove("changeOpacity");
+                cityPic.classList.remove("changeOpacity");
+            }, 3000);
 
             // appending bottom
             gameContainer.appendChild(gamePanel);

@@ -325,7 +325,14 @@ html, body {
   border-radius: 40px;
   border: 1px solid whitesmoke;
   box-shadow: 2px 2px 4px 2px white;
-  height: 3em; 
+  height: 3em;
+  position: relative;
+}
+
+.choices button:active {
+  background: linear-gradient(to top left, white, 5%, black);
+  height: 5em;
+  transition: height 0.3s ease-in;
 }
 
 
@@ -410,14 +417,14 @@ html, body {
 
   #leftSide h3 { /* "Can you guess the city/country?" */
     position: absolute;
-    top: calc(50% + 8px);
+    top: calc(50%);
     left: 12vw;
     font-size: 5vw;
   }
 
   .changeOpacity { /* for the above message and picture at the start of the game
     /* opacity: 1; */
-    transition: opacity 2.5s ease-in-out;
+    transition: opacity 2s ease-in;
   }
 
   .game-panel {
@@ -667,6 +674,10 @@ html, body {
   font-size: 3.2vw;
 }
 
+.calcTransition {
+  transition: backgroun
+}
+
 #resultsContainer {
   height: 55vh;
   width: 90%;
@@ -720,9 +731,7 @@ html, body {
   padding: 10px;
 }
 
-#evaluation p {
-  text-shadow: 1px 1px 2px black;
-}
+
 
 #swivelButtonsContainer {
   width: 100%;
