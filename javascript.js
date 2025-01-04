@@ -10,28 +10,28 @@ class City {
 
 // U.S. cities
 const ny = new City("New York City", ["./images/nyc1.jpg", "./images/nyc2.avif", "./images/nyc3.jpg", "./images/nyc4.webp", "./images/nyc5.webp", "./images/nyc6.jpg", "./images/nyc7.jpg"], "The greatest city in the world (Unopinionated).");
-const la = new City("Los Angeles", ["./images/la1.avif", "./images/la2.jpg", "./images/la3.jpg", "./images/la4.jpg", "./images/la5.jpeg", "./images/la6.jpeg", "./images/la7.jpg"], '\u266B' + " Californiaaa.. knows how to party.." + '\u266B' + ". In the cityyyy of __. " + '\u266B');
-const sf = new City("San Francisco", ["./images/sf1.jpg", "./images/sf2.webp", "./images/sf3.jpeg", "./images/sf4.jpg"], "They named their most famous bridge with a different color than it actually is.");
-const seattle = new City("Seattle", ["./images/seattle1.jpg", "./images/seattle2.jpg"], "That's the space needle.");
-const chicago = new City("Chicago", ["./images/chicago1.avif", "./images/chicago2.jpg", "./images/chicago3.webp"], "chicago hint");
-const lv = new City("Las Vegas", ["./images/lv1.avif", "./images/lv2.jpg", "./images/lv3.jpg", "./images/lv4.jpg"], "lv hint");
-const philly = new City("Philadelphia", ["./images/philly1.jpg", "./images/philly2.jpg", "./images/philly3.jpg", "./images/philly4.jpg"], "philly hint");
-const dc = new City("Washington D.C.", ["./images/dc1.jpg", "./images/dc2.jpeg", "./images/dc3.webp"], "dc hint");
-const miami = new City("Miami", ["./images/miami1.jpg", "./images/miami2.jpeg", "./images/miami3.jpg"], "miami hint");
-const atl = new City("Atlanta", ["./images/atl1.webp", "./images/atl2.jpg"], "atl hint");
-const denver = new City("Denver", ["./images/denver1.avif", "./images/denver2.jpg"], "denver hint");
-const phx = new City("Phoenix", ["./images/phx1.jpg", "./images/phx2.jpg", "./images/phx3.png"], "phx hint");
-const boston = new City("Boston", ["./images/boston1.jpg", "./images/boston2.jpg", "./images/boston3.jpg", "./images/boston4.webp", "./images/boston5.webp"], "boston hint");
-const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif"], "nash hint");
-const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.webp"], "stl hint");
-const portland = new City("Portland", ["./images/portland1.jpg", "./images/portland2.webp"], "portland hint");
-const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.jpg"], "knox hint");
-// const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
+const la = new City("Los Angeles", ["./images/la1.avif", "./images/la2.jpg", "./images/la3.jpg", "./images/la4.jpg", "./images/la5.jpeg", "./images/la6.jpeg", "./images/la7.jpg", "./images/la8.jpg", "./images/la9.webp"], '\u266B' + " Californiaaa.. knows how to party.." + '\u266B' + ". In the cityyyy of __. " + '\u266B');
+const sf = new City("San Francisco", ["./images/sf1.jpg", "./images/sf2.jpg", "./images/sf3.jpeg", "./images/sf4.jpg", "./images/sf5.webp", "./images/sf6.webp"], "They named their most famous bridge with a different color than it actually is.");
+const seattle = new City("Seattle", ["./images/seattle1.jpg", "./images/seattle2.jpg", "./images/seattle3.jpg", "./images/seattle4.webp", "./images/seattle5.jpg", "./images/seattle6.webp"], "That's the space needle.");
+const chicago = new City("Chicago", ["./images/chicago1.avif", "./images/chicago2.jpg", "./images/chicago3.webp", "./images/chicago4.webp", "./images/chicago5.webp", "./images/chicago6.jpg", "./images/chicago7.jpg"], "chicago hint");
+const lv = new City("Las Vegas", ["./images/lv1.avif", "./images/lv2.jpg", "./images/lv3.jpg", "./images/lv4.jpg", "./images/lv5.webp", "./images/lv6.jpg", "./images/lv7.avif"], "lv hint");
+const philly = new City("Philadelphia", ["./images/philly1.jpg", "./images/philly2.jpg", "./images/philly3.jpg", "./images/philly4.jpg", "./images/philly5.jpg", "./images/philly6.jpg", "./images/philly7.avif"], "philly hint");
+const dc = new City("Washington D.C.", ["./images/dc1.webp", "./images/dc2.jpeg", "./images/dc3.webp", "./images/dc4.jpg", "./images/dc5.jpeg", "./images/dc6.jpg", "./images/dc7.jpg"], "dc hint");
+const miami = new City("Miami", ["./images/miami1.avif", "./images/miami2.jpeg", "./images/miami3.jpg", "./images/miami4.jpg", "./images/miami5.webp", "./images/miami6.webp"], "miami hint");
+const atl = new City("Atlanta", ["./images/atl1.webp", "./images/atl2.jpg", "./images/atl3.jpg", "./images/atl4.webp", "./images/atl5.jpg", "./images/atl6.jpg", "./images/atl7.jpg"], "atl hint");
+const denver = new City("Denver", ["./images/denver1.avif", "./images/denver2.jpg", "./images/denver3.jpg", "./images/denver4.webp", "./images/denver5.jpeg", "./images/denver6.jpg"], "denver hint");
+const phx = new City("Phoenix", ["./images/phx1.jpg", "./images/phx2.jpg", "./images/phx3.png", "./images/phx4.jpg", "./images/phx5.webp", "./images/phx6.jpg"], "phx hint");
+const boston = new City("Boston", ["./images/boston1.jpg", "./images/boston2.jpg", "./images/boston3.jpg", "./images/boston4.webp", "./images/boston5.webp", "./images/boston6.webp", "./images/boston7.jpg"], "boston hint");
+const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif", "./images/nash3.jpg", "./images/nash4.jpg", "./images/nash5.jpg"], "nash hint");
+const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.jpg", "./images/stl3.jpg", "./images/stl4.webp", "./images/stl5.jpg"], "stl hint");
+const portland = new City("Portland", ["./images/portland1.webp", "./images/portland2.webp", "./images/portland3.jpg", "./images/portland4.jpg", "./images/portland5.jpg", "./images/portland6.jpg"], "portland hint");
+const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.webp", "./images/knox4.jpg", "./images/knox5.jpg"], "knox hint");
+const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
 const newOrleans = new City("New Orleans", ["./images/new-orleans1.avif", "./images/new-orleans2.webp", "./images/new-orleans3.jpg", "./images/new-orleans4.avif", "./images/new-orleans5.jpg"], "new orleans hint");
 const sanDiego = new City("San Diego", ["./images/sd1.avif", "./images/sd2.jpeg", "./images/sd3.jpg", "./images/sd4.jpg", "./images/sd5.jpg"], "sd hint");
-const honolulu = new City("Honolulu", ["./images/honolulu1.jpg", "./images/honolulu2.webp", "./images/honolulu3.jpg", "./images/honolulu4.jpg"], "honolulu hint");
-const dallas = new City("Dallas", ["./images/dallas1.jpeg", "./images/dallas2.avif", "./images/dallas3.jpeg", "./images/dallas4.jpg"], "dallas hint");
-const charleston = new City("Charleston", ["./images/charleston1.jpg", "./images/charleston2.jpg", "./images/charleston3.jpg", "./images/charleston4.jpg"], "charleston hint");
+const honolulu = new City("Honolulu", ["./images/honolulu1.jpg", "./images/honolulu2.webp", "./images/honolulu3.jpg", "./images/honolulu4.jpg", "./images/honolulu5.jpg", "./images/honolulu6.jpg"], "honolulu hint");
+const dallas = new City("Dallas", ["./images/dallas1.jpeg", "./images/dallas2.avif", "./images/dallas3.jpeg", "./images/dallas4.jpg", "./images/dallas5.avif"], "dallas hint");
+const charleston = new City("Charleston", ["./images/charleston1.jpg", "./images/charleston2.jpg", "./images/charleston3.jpg", "./images/charleston4.jpg", "./images/charleston5.jpg"], "charleston hint");
 const detroit = new City("Detroit", ["./images/detroit1.webp", "./images/detroit2.jpeg", "./images/detroit3.avif", "./images/detroit4.jpg", "./images/detroit5.webp"], "detroit hint");
 const houston = new City("Houston", ["./images/houston1.jpg", "./images/houston2.avif", "./images/houston3.jpg", "./images/houston4.jpg", "./images/houston5.jpg", "./images/houston6.jpg"], "houston hint");
 const charlotte = new City("Charlotte", ["./images/charlotte1.jpg", "./images/charlotte2.webp", "./images/charlotte3.jpg", "./images/charlotte4.jpeg", "./images/charlotte5.jpg", "./images/charlotte6.webp"], "charlotte hint");
@@ -46,7 +46,7 @@ const newportRI = new City("Newport, RI", ["./images/newport1.jpg", "./images/ne
 
 // U.S. cities array
 const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox, newOrleans, sanDiego, honolulu,
-                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI];
+                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI, cross];
 
 
 // European countries
@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 10;
+const rounds = 8;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -161,13 +161,13 @@ const B_Responses = [  "Great job! You've got a solid grip on geography, but you
     "Nice! You've got a strong geography game, but you're not quite a globe-trotting superhero yet. A little more practice and you'll be in the A-range!",
     "Solid work! You know your cities, but now it's time to hit the accelerator and aim for an A. You've got this, just a few more places to learn!",
     "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?"];
-const C_Plus_Responses = ["Nice try! You've got the basics down, but it's clear you're still warming up. Don't worry, you'll be a geography whiz in no time with a little more practice!",
-    "You're getting there! A C+ means you've got potential, like a map with a few blank spots. Keep going, and soon you'll have the whole world covered!",
-    "Not bad! You've got some good knowledge under your belt, but now it's time to get serious. Think of this as the first lap of your geography marathon!",
-    "You're on the right track! A C+ is like a halfway point on a road trip—there's still some driving left to do, but you're headed in the right direction!",
-    "C+? Not bad! You're definitely on the right continent… just maybe need to zoom in a little!",
-    "C+? Not quite *world* traveler yet, but you're definitely a *tourist* in the making!",
-    "You know the important cities quite well, but show those tier 3 cities some love every now and then!"];
+// const C_Plus_Responses = ["Nice try! You've got the basics down, but it's clear you're still warming up. Don't worry, you'll be a geography whiz in no time with a little more practice!",
+//     "You're getting there! A C+ means you've got potential, like a map with a few blank spots. Keep going, and soon you'll have the whole world covered!",
+//     "Not bad! You've got some good knowledge under your belt, but now it's time to get serious. Think of this as the first lap of your geography marathon!",
+//     "You're on the right track! A C+ is like a halfway point on a road trip—there's still some driving left to do, but you're headed in the right direction!",
+//     "C+? Not bad! You're definitely on the right continent… just maybe need to zoom in a little!",
+//     "C+? Not quite *world* traveler yet, but you're definitely a *tourist* in the making!",
+//     "You know the important cities quite well, but show those tier 3 cities some love every now and then!"];
 const C_Responses = [  "Not bad! You've got a solid start, but you might want to swap your world map for a pair of glasses. A little more effort, and you'll be cruising through this!",
     "You're halfway there! A C means you're on the map, but not quite the one showing the best tourist spots. Keep at it, and you'll level up in no time!",
     "You've got the basics down! Now it's time to dust off that globe and get serious—there's a whole world waiting for you to explore!",
@@ -218,28 +218,25 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
 // Converts number grade into letter grade. returns a string letter grade
 function convertToLetterGrade(grade) {
     switch(true) {
-        case (96 <= grade && grade <= 100):
+        case (89 <= grade && grade <= 100):
             return "A+";
             break;
-        case (90 <= grade && grade <= 95):
+        case (76 <= grade && grade <= 88):
             return "A";
             break;
-        case (85 <= grade && grade <= 89):
+        case (64 <= grade && grade <= 75):
             return "B+";
             break;
-        case (80 <= grade && grade <= 84):
+        case (51 <= grade && grade <= 63):
             return "B";
             break;
-        case (75 <= grade && grade <= 79):
-            return "C+";
-            break;
-        case (70 <= grade && grade <= 74):
+        case (39 <= grade && grade <= 50):
             return "C";
             break;
-        case (60 <= grade && grade <= 69):
+        case (26 <= grade && grade <= 38):
             return "D";
             break;
-        case (grade < 60):
+        case (grade < 26):
             return "F";
             break;
     }
@@ -273,9 +270,6 @@ function generateFeedback(score) {
             break;
         case "B":
             return B_Responses[randomIndex(B_Responses.length)];
-            break;
-        case "C+":
-            return C_Plus_Responses[randomIndex(C_Plus_Responses.length)];
             break;
         case "C":
             return C_Responses[randomIndex(C_Responses.length)];
@@ -1230,7 +1224,7 @@ function evaluateAnswer(correct) {
         // })
 
 
-        // goes straight to next question after 3 seconds. loses the next question button
+        // goes straight to next question after 3 seconds. loses the next question button.
         setTimeout(() => {
             gamePanel.removeChild(answer);
             if (mediaQuery.matches) {
