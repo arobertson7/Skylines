@@ -114,7 +114,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 3;
+const rounds = 10;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -1364,8 +1364,6 @@ function setupGameDisplay()
         gamePanel.classList.add("game-panel");
         gamePanel.id="gamePanel";
         
-
-
         // create score section
         let score = document.createElement("div");
         score.id = "score"; /* id allows ability to access dynamically created dom object. i don't think we can reference globally though or it will throw error

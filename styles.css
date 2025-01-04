@@ -415,6 +415,7 @@ html, body {
   #leftSide img {
     height: 92%;
     border: outset 7px rgb(100, 100, 100, 0.8);
+    object-fit: cover;
   }
 
   #leftSide h3 { /* "Can you guess the city/country?" */
