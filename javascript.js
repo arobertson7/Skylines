@@ -12,7 +12,7 @@ class City {
 const ny = new City("New York City", ["./images/nyc1.jpg", "./images/nyc2.avif", "./images/nyc3.jpg", "./images/nyc4.webp", "./images/nyc5.webp", "./images/nyc6.jpg", "./images/nyc7.jpg"], "The greatest city in the world (Unopinionated).");
 const la = new City("Los Angeles", ["./images/la1.avif", "./images/la2.jpg", "./images/la3.jpg", "./images/la4.jpg", "./images/la5.jpeg", "./images/la6.jpeg", "./images/la7.jpg", "./images/la8.jpg", "./images/la9.webp"], '\u266B' + " Californiaaa.. knows how to party.." + '\u266B' + ". In the cityyyy of __. " + '\u266B');
 const sf = new City("San Francisco", ["./images/sf1.jpg", "./images/sf2.jpg", "./images/sf3.jpeg", "./images/sf4.jpg", "./images/sf5.webp", "./images/sf6.webp"], "They named their most famous bridge with a different color than it actually is.");
-const seattle = new City("Seattle", ["./images/seattle1.jpg", "./images/seattle2.jpg", "./images/seattle3.jpg", "./images/seattle4.webp", "./images/seattle5.jpg", "./images/seattle6.webp"], "That's the space needle.");
+const seattle = new City("Seattle", ["./images/seattle1.jpg", "./images/seattle2.jpg", "./images/seattle3.jpg", "./images/seattle4.webp", "./images/seattle5.jpg", "./images/seattle6.jpg"], "That's the space needle.");
 const chicago = new City("Chicago", ["./images/chicago1.avif", "./images/chicago2.jpg", "./images/chicago3.webp", "./images/chicago4.webp", "./images/chicago5.webp", "./images/chicago6.jpg", "./images/chicago7.jpg"], "chicago hint");
 const lv = new City("Las Vegas", ["./images/lv1.avif", "./images/lv2.jpg", "./images/lv3.jpg", "./images/lv4.jpg", "./images/lv5.webp", "./images/lv6.jpg", "./images/lv7.avif"], "lv hint");
 const philly = new City("Philadelphia", ["./images/philly1.jpg", "./images/philly2.jpg", "./images/philly3.jpg", "./images/philly4.jpg", "./images/philly5.jpg", "./images/philly6.jpg", "./images/philly7.avif"], "philly hint");
@@ -26,7 +26,7 @@ const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif",
 const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.jpg", "./images/stl3.jpg", "./images/stl4.webp", "./images/stl5.jpg"], "stl hint");
 const portland = new City("Portland", ["./images/portland1.webp", "./images/portland2.webp", "./images/portland3.jpg", "./images/portland4.jpg", "./images/portland5.jpg", "./images/portland6.jpg"], "portland hint");
 const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.webp", "./images/knox4.jpg", "./images/knox5.jpg"], "knox hint");
-const cross = new City("Crossville, Tennessee", ["./images/cross.jpg"], "cross hint");
+// const cross = new City("Crossville, Tennessee", ["./images/cross1.jpg"], "cross hint");
 const newOrleans = new City("New Orleans", ["./images/new-orleans1.avif", "./images/new-orleans2.webp", "./images/new-orleans3.jpg", "./images/new-orleans4.avif", "./images/new-orleans5.jpg"], "new orleans hint");
 const sanDiego = new City("San Diego", ["./images/sd1.avif", "./images/sd2.jpeg", "./images/sd3.jpg", "./images/sd4.jpg", "./images/sd5.jpg"], "sd hint");
 const honolulu = new City("Honolulu", ["./images/honolulu1.jpg", "./images/honolulu2.webp", "./images/honolulu3.jpg", "./images/honolulu4.jpg", "./images/honolulu5.jpg", "./images/honolulu6.jpg"], "honolulu hint");
@@ -46,22 +46,29 @@ const newportRI = new City("Newport, RI", ["./images/newport1.jpg", "./images/ne
 
 // U.S. cities array
 const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox, newOrleans, sanDiego, honolulu,
-                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI, cross];
+                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI];
 
 
 // European countries
-const germany = new City("Germany", ["./images/munich.avif", "./images/berlin1.avif", "./images/berlin2.jpg", "./images/bayern.jpg"], "germany hint");
-const france = new City("France", ["./images/paris1.jpg", "./images/paris2.webp", "./images/paris3.jpeg"], "france hint");
-const england = new City("England", ["./images/london1.jpg", "./images/london2.jpg", "./images/london3.webp", "./images/london4.jpg"], "england hint");
-const spain = new City("Spain", ["./images/barcelona1.webp", "./images/barcelona2.jpg", "./images/barcelona3.jpeg"], "spain hint");
-const norway = new City("Norway", ["./images/norway.jpg", "./images/oslo1.webp"], "norway hint");
-const denmark = new City("Denmark", ["./images/copenhagen1.jpg", "./images/copenhagen2.jpg", "./images/copenhagen3.jpg"], "denmark hint");
-const netherlands = new City("The Netherlands", ["./images/amsterdam1.jpg", "./images/amsterdam2.jpg", "./images/utrecht.webp"], "netherlands hint");
-const czech = new City("Czech Republic", ["./images/prague1.jpg", "./images/prague2.jpg", "./images/prague3.jpg", "./images/prague4.webp"], "czech republic hint");
-const portugal = new City("Portugal", ["./images/lisbon1.webp", "./images/nazare.jpg", "./images/lisbon2.jpg"], "portugal hint");
-const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2.jpg", "./images/austria3.jpg"], "austria hint");
-const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/zurich1.jpg", "./images/zurich2.jpeg", "./images/zurich3.jpg", "./images/zurich4.jpg", "./images/lucerne1.jpg", "./images/lucerne2.webp"], "switzerland hint");
-const italy = new City("Italy", ["./images/milan.webp", "./images/siena.jpeg", "./images/tuscany.jpg", "./images/florence.jpg", "./images/amalfi.webp"], "italy hint");
+const germany = new City("Germany", ["./images/germany1.avif", "./images/germany2.avif", "./images/germany3.jpg", "./images/germany4.jpg", "./images/germany5.jpg", "./images/germany6.jpg", "./images/germany7.jpg", "./images/germany8.jpg", "./images/germany9.jpg", "./images/germany10.jpg", "./images/germany11.jpg", "./images/germany12.jpg", "./images/germany13.png", "./images/germany14.jpg", "./images/germany15.jpeg", "./images/germany16.jpg", "./images/germany17.jpg", "./images/germany18.jpg"], "germany hint");
+const france = new City("France", ["./images/france1.jpg", "./images/france2.webp", "./images/france3.jpeg", "./images/france4.webp", "./images/france5.webp", "./images/france6.webp", "./images/france7.webp", "./images/france8.avif", "./images/france9.webp", "./images/france10.jpg"], "france hint");
+const england = new City("England", ["./images/england1.jpg", "./images/england2.jpg", "./images/england3.webp", "./images/england4.webp", "./images/england5.jpg", "./images/england6.avif", "./images/england7.jpg", "./images/england8.jpeg", "./images/england9.webp", "./images/england10.jpg", "./images/england11.jpg", "./images/england12.avif"], "england hint");
+const spain = new City("Spain", ["./images/spain1.webp", "./images/spain2.jpg", "./images/spain3.jpeg", "./images/spain4.avif", "./images/spain5.jpg", "./images/spain6.webp", './images/spain7.jpg', "./images/spain8.jpg", './images/spain9.jpg', "./images/spain10.jpg"], "spain hint");
+const norway = new City("Norway", ["./images/norway1.jpg", "./images/norway2.webp", "./images/norway3.jpg", "./images/norway4.jpg", "./images/norway5.jpg", "./images/norway6.jpg", "./images/norway7.webp", "./images/norway8.jpg", "./images/norway9.jpg", "./images/norway10.jpg"], "norway hint");
+const denmark = new City("Denmark", ["./images/denmark1.jpg", "./images/denmark2.jpg", "./images/denmark3.jpg", "./images/denmark4.webp", "./images/denmark5.jpg", "./images/denmark6.jpg", "./images/denmark7.jpg", "./images/denmark8.jpeg", "./images/denmark9.avif", "./images/denmark10.jpg", "./images/denmark11.webp"], "denmark hint");
+const netherlands = new City("The Netherlands", ["./images/netherlands1.jpg", "./images/netherlands2.jpg", "./images/netherlands3.webp", "./images/netherlands4.jpeg", "./images/netherlands5.jpg", "./images/netherlands6.jpeg", "./images/netherlands7.jpg", "./images/netherlands8.jpg", "./images/netherlands9.jpg", "./images/netherlands10.jpg"], "netherlands hint");
+const czech = new City("Czech Republic", ["./images/czech1.jpg", "./images/czech2.jpg", "./images/czech3.jpg", "./images/czech4.webp", "./images/czech5.jpeg", "./images/czech6.jpg", "./images/czech7.jpg", "./images/czech8.jpg", "./images/czech9.jpg", "./images/czech10.jpg", "./images/czech11.jpeg"], "czech republic hint");
+const portugal = new City("Portugal", ["./images/portugal1.webp", "./images/portugal2.jpg", "./images/portugal3.jpg", "./images/portugal4.jpg", "./images/portugal5.jpg", "./images/portugal6.jpg", "./images/portugal7.webp", "./images/portugal8.jpg", "./images/portugal9.jpg", "./images/portugal10.webp"], "portugal hint");
+const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2.jpg", "./images/austria3.jpg", "./images/austria4.webp", "./images/austria5.jpeg", "./images/austria6.avif", "./images/austria7.jpg", "./images/austria8.webp", "./images/austria9.jpg", "./images/austria10.jpg", "./images/austria11.webp"], "austria hint");
+const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/switzerland2.jpg", "./images/switzerland3.jpeg", "./images/switzerland4.jpg", "./images/switzerland5.jpg", "./images/switzerland6.jpg", "./images/switzerland7.webp", "./images/switzerland8.webp", "./images/switzerland9.jpg", "./images/switzerland10.jpg", "./images/switzerland11.jpg", './images/switzerland12.jpg'], "switzerland hint");
+const italy = new City("Italy", ["./images/italy1.webp", "./images/italy2.jpeg", "./images/italy3.jpg", "./images/italy4.jpg", "./images/italy5.webp", "./images/italy6.webp", "./images/italy7.jpeg", "./images/italy8.jpeg", "./images/italy9.jpg", "./images/italy10.jpeg", "./images/italy11.jpg", "./images/italy12.jpg", "./images/italy13.jpg", "./images/italy14.jpg", "./images/italy15.avif", "./images/italy16.webp"], "italy hint");
+const belgium = new City();
+const greece = new City();
+const ireland = new City();
+const sweden = new City();
+const finland = new City();
+const hungary = new City();
+const poland = new City();
 
 
 // European countries array
