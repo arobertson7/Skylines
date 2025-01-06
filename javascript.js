@@ -149,10 +149,10 @@ const A_Plus_Responses = ["Geography Genius! You've officially reached 'World Tr
     "Top of the Class! You've got the geography skills of a well-traveled detective! Sherlock Holmes would call you for tips on finding obscure countries. You're basically the Indiana Jones of map-reading.",
     "Are You a Map? You've navigated your way to an A+, making even Google Maps jealous. If there's a lost city of Atlantis, you'd probably find it before breakfast.",
     "Geography? More like Ge-uh, this is easy. You've crushed this quiz like you were born with a passport in one hand and a globe in the other. NASA is considering hiring you as a consultant.",
-    "World-Class Expert! A+! You've officially unlocked 'Superhuman Geography Powers'. At this rate, the only continent you haven't visited is Antarctica... and that's only because penguins don't need your help."];
-const A_Responses = [  "Nice job! You're officially a geography prodigy—at least until someone asks you about Antarctica. But hey, nobody's perfect, right?",
+    "World-Class Expert! A+! You've officially unlocked 'Superhuman Geography Powers'. At this rate, the only continent you haven't visited is Antarctica..."];
+const A_Responses = [  // "Nice job! You're officially a geography prodigy—at least until someone asks you about Antarctica. But hey, nobody's perfect, right?",
     "A solid A! You've got a brain like Google Maps... if Google Maps had a caffeine addiction. Keep it up, and you'll be leading world tours in no time!",
-    "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
+    // "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
     "Well done! You're just a few maps away from being the human equivalent of Google Earth. Still need to work on those street names, though.",
     "You nailed it! You've got more geography knowledge than a globe, and you don't even need to spin yourself to show off. But A+ is still calling your name!",
     "You've been around, huh? You know your cities better than most! Outstanding performance."];
@@ -177,11 +177,11 @@ const C_Responses = [  // "Not bad! You've got a solid start, but you might want
     "You're halfway there! A C means you're on the map, but not quite the one showing the best tourist spots. Keep at it, and you'll level up in no time!",
     "You've got the basics down! Now it's time to dust off that globe and get serious—there's a whole world waiting for you to explore!",
     "Alright, you're not quite a geography master yet, but hey, you're closer than most people who just use maps for decoration. A little more work and you'll get there!",
-    "Decent start! A C means you know *some* geography, but not enough to impress your friends at trivia night. But don't worry, it's not too late to level up!",
-    "C? Hey, you're not lost… you just haven't found the right map yet.",
+    // "Decent start! A C means you know *some* geography, but not enough to impress your friends at trivia night. But don't worry, it's not too late to level up!",
     "Okay, okay. You know your cities decently well, but you still have some room to grow. But hey, that's the fun part right?"];
 const D_Responses = [// "D? Well, at least you know the *Earth* exists, that's a start!",
     "A D?! Looks like you're a world traveler… but you've lost your passport. Let's find it and bump that grade up. Give it another shot!",
+    "D? Hey, you're not lost… you just haven't found the right map yet.",
     // "D? You're not quite lost in the world yet, but you're definitely wandering off track!",
     // "D? Hey, you *almost* know where you are. Just maybe not on the map.",
     // "D?! You've got a better chance of finding Waldo than finding all the countries.",
