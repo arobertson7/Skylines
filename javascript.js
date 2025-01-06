@@ -155,24 +155,14 @@ const A_Responses = [  // "Nice job! You're officially a geography prodigy—at 
     // "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
     "Well done! You're just a few maps away from being the human equivalent of Google Earth. Still need to work on those street names, though.",
     "You nailed it! You've got more geography knowledge than a globe, and you don't even need to spin yourself to show off. But A+ is still calling your name!",
-    "You've been around, huh? You know your cities better than most! Outstanding performance."];
-const B_Plus_Responses = [
-    "B+? You're basically the GPS we all turn to when Google Maps glitches!",
-    "B+? You're like the world's most knowledgeable tourist. Soon you'll be giving guided tours!",
-    "Well done! A B+ means you're in the top tier of geography geniuses. You've got the map memorized—just a few more cities to make it perfect!",
-    "Impressive! A B+ means you're a geography rockstar. You've got more cities under your belt than most people even know exist—keep it up!",
+    "You've been around, huh? You know your cities better than most! Outstanding performance.",
     "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"];
 const B_Responses = [  "Great job! You've got a solid grip on geography, but you're just one step away from being a map wizard. Keep going, the A's are within reach!",
     "Nice work! You're doing awesome—think of this as a high-five from the geography gods. A little more effort and you'll be in the A+ club before you know it!",
     "Well done! A B is a great score, and you've got a fantastic base of knowledge. A few more cities and you'll be on top of the world!",
-    "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?"];
-// const C_Plus_Responses = ["Nice try! You've got the basics down, but it's clear you're still warming up. Don't worry, you'll be a geography whiz in no time with a little more practice!",
-//     "You're getting there! A C+ means you've got potential, like a map with a few blank spots. Keep going, and soon you'll have the whole world covered!",
-//     "Not bad! You've got some good knowledge under your belt, but now it's time to get serious. Think of this as the first lap of your geography marathon!",
-//     "You're on the right track! A C+ is like a halfway point on a road trip—there's still some driving left to do, but you're headed in the right direction!",
-//     "C+? Not bad! You're definitely on the right continent… just maybe need to zoom in a little!",
-//     "C+? Not quite *world* traveler yet, but you're definitely a *tourist* in the making!",
-//     "You know the important cities quite well, but show those tier 3 cities some love every now and then!"];
+    "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?",
+    "B? You're basically the GPS we all turn to when Google Maps glitches!",
+    "B? You're like the world's most knowledgeable tourist. Soon you'll be giving guided tours!"];
 const C_Responses = [  // "Not bad! You've got a solid start, but you might want to swap your world map for a pair of glasses. A little more effort, and you'll be cruising through this!",
     "You're halfway there! A C means you're on the map, but not quite the one showing the best tourist spots. Keep at it, and you'll level up in no time!",
     "You've got the basics down! Now it's time to dust off that globe and get serious—there's a whole world waiting for you to explore!",
@@ -231,18 +221,15 @@ function convertToLetterGrade(grade) {
             return "A";
             break;
         case (64 <= grade && grade <= 75):
-            return "B+";
-            break;
-        case (51 <= grade && grade <= 63):
             return "B";
             break;
-        case (39 <= grade && grade <= 50):
+        case (51 <= grade && grade <= 63):
             return "C";
             break;
-        case (26 <= grade && grade <= 38):
+        case (39 <= grade && grade <= 50):
             return "D";
             break;
-        case (grade < 26):
+        case (grade < 39):
             return "F";
             break;
     }
@@ -270,9 +257,6 @@ function generateFeedback(score) {
             break;
         case "A":
             return A_Responses[randomIndex(A_Responses.length)];
-            break;
-        case "B+":
-            return B_Plus_Responses[randomIndex(B_Plus_Responses.length)];
             break;
         case "B":
             return B_Responses[randomIndex(B_Responses.length)];
