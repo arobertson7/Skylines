@@ -121,7 +121,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 5;
+const rounds = 8;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -164,9 +164,7 @@ const B_Plus_Responses = [
     "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"];
 const B_Responses = [  "Great job! You've got a solid grip on geography, but you're just one step away from being a map wizard. Keep going, the A's are within reach!",
     "Nice work! You're doing awesome—think of this as a high-five from the geography gods. A little more effort and you'll be in the A+ club before you know it!",
-    "Well done! A B is a great score, and you've got a fantastic base of knowledge. A few more cities and you'll be on top of the world—literally!",
-    "Nice! You've got a strong geography game, but you're not quite a globe-trotting superhero yet. A little more practice and you'll be in the A-range!",
-    "Solid work! You know your cities, but now it's time to hit the accelerator and aim for an A. You've got this, just a few more places to learn!",
+    "Well done! A B is a great score, and you've got a fantastic base of knowledge. A few more cities and you'll be on top of the world!",
     "B-B-B-eautiful performance. You've been watching the travel channel, haven't you?"];
 // const C_Plus_Responses = ["Nice try! You've got the basics down, but it's clear you're still warming up. Don't worry, you'll be a geography whiz in no time with a little more practice!",
 //     "You're getting there! A C+ means you've got potential, like a map with a few blank spots. Keep going, and soon you'll have the whole world covered!",
@@ -175,26 +173,27 @@ const B_Responses = [  "Great job! You've got a solid grip on geography, but you
 //     "C+? Not bad! You're definitely on the right continent… just maybe need to zoom in a little!",
 //     "C+? Not quite *world* traveler yet, but you're definitely a *tourist* in the making!",
 //     "You know the important cities quite well, but show those tier 3 cities some love every now and then!"];
-const C_Responses = [  "Not bad! You've got a solid start, but you might want to swap your world map for a pair of glasses. A little more effort, and you'll be cruising through this!",
+const C_Responses = [  // "Not bad! You've got a solid start, but you might want to swap your world map for a pair of glasses. A little more effort, and you'll be cruising through this!",
     "You're halfway there! A C means you're on the map, but not quite the one showing the best tourist spots. Keep at it, and you'll level up in no time!",
     "You've got the basics down! Now it's time to dust off that globe and get serious—there's a whole world waiting for you to explore!",
     "Alright, you're not quite a geography master yet, but hey, you're closer than most people who just use maps for decoration. A little more work and you'll get there!",
     "Decent start! A C means you know *some* geography, but not enough to impress your friends at trivia night. But don't worry, it's not too late to level up!",
     "C? Hey, you're not lost… you just haven't found the right map yet.",
     "Okay, okay. You know your cities decently well, but you still have some room to grow. But hey, that's the fun part right?"];
-const D_Responses = ["D? Well, at least you know the *Earth* exists, that's a start!",
-    "A D?! Looks like you're a world traveler… but you've lost your passport.",
-    "D? You're not quite lost in the world yet, but you're definitely wandering off track!",
-    "D? Hey, you *almost* know where you are. Just maybe not on the map.",
-    "D?! You've got a better chance of finding Waldo than finding all the countries.",
-    "D?! You've definitely been to Earth. But as for the rest of the globe… unclear.",
-    "D? You might not know where you're going, but at least you're going somewhere!",
-    "C? At least you didn't fail! That's a win in some countries, right?"];
-const F_Responses = ["Well... that was *something*, wasn't it? You've got the geography knowledge of a potato. But hey, potatoes can grow into French fries with a little time. Try again!",
-    "You should really get out of the house more often! That was hard to watch.",
-    "Yikes... I hope you at least got a good price. On that rock you've been living under!",
-    "That's pretty rough. It's like you were playing pin the tail on the country. But don't worry—next time, you'll at least hit a continent. Hopefully.",
-    "Well, that was a geography disaster of epic proportions. But hey, every legend has their setbacks. Grab a globe, get serious, and let's aim for a passing grade!"];
+const D_Responses = [// "D? Well, at least you know the *Earth* exists, that's a start!",
+    "A D?! Looks like you're a world traveler… but you've lost your passport. Let's find it and bump that grade up. Give it another shot!",
+    // "D? You're not quite lost in the world yet, but you're definitely wandering off track!",
+    // "D? Hey, you *almost* know where you are. Just maybe not on the map.",
+    // "D?! You've got a better chance of finding Waldo than finding all the countries.",
+    // "D?! You've definitely been to Earth. But as for the rest of the globe… unclear.",
+    // "D? You might not know where you're going, but at least you're going somewhere!",
+    "D? At least you didn't fail! That's a win in some countries, right?"];
+const F_Responses = [// "Well... that was *something*, wasn't it? You've got the geography knowledge of a potato. But hey, potatoes can grow into French fries with a little time. Try again!",
+    // "You should really get out of the house more often! That was hard to watch.",
+    // "Yikes... I hope you at least got a good price. On that rock you've been living under!",
+    "Yikes. It's like you were playing pin the tail on the country. But don't worry, that was clearly not your best. Next time, you're gonna nail it!",
+    "Well, that was a geography disaster of epic proportions. But hey, every legend has their setbacks. Grab a globe and let's aim for a passing grade!",
+    "Well hey, you can't win em all. The A's wouldn't be so rewarding if we didn't pick up an F every now and then!"];
 
 /* End main data
 ***********************************************************************************************************************************************************
