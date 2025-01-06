@@ -121,7 +121,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 8;
+const rounds = 1;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -443,7 +443,7 @@ function displayNextGameButtons() {
     gameContainer.insertBefore(leftEnd, results);
     results.after(rightEnd);
 
-    // Play again prompt/buttons (same version)
+    // Play again button - same version
     const leftSideDiv = document.createElement("div");
     leftEnd.appendChild(leftSideDiv);
     leftSideDiv.id="leftSideDiv";
@@ -460,68 +460,59 @@ function displayNextGameButtons() {
     leftSideDiv.childNodes[0].textContent = `More ${cityOrCountry}!`; // "More cities where those came from!""
     const newGameButtonSame = document.createElement("button");
     newGameButtonSame.id = "newGameButtonSame";
-    newGameButtonSame.textContent = "Play Again " + '\u2192';
     newGameButtonSame.classList.add("new-game-button");
+    switch(true) {
+        case currentRegion == usa:
+            newGameButtonSame.style.backgroundImage = "url('./images/usa-flag2.png')";
+            break;
+        case currentRegion == europe:
+            newGameButtonSame.style.backgroundImage = "url('./images/eu-flag.png')";
+            break;
+    }
     leftSideDiv.appendChild(newGameButtonSame);
-    // adding a little style on hover
-    newGameButtonSame.addEventListener("mouseenter", () => {
-        newGameButtonSame.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
-    });
-    newGameButtonSame.addEventListener("mouseout", () => {
-        newGameButtonSame.style.background = null;
-    });
 
-
-    // Play again prompt/button (different version)
+    // Play again buttons - other versions
     const rightSideDiv = document.createElement("div");
     rightEnd.appendChild(rightSideDiv);
     rightSideDiv.id="rightSideDiv";
     rightSideDiv.appendChild(document.createElement("h3"));
-    rightSideDiv.childNodes[0].textContent = "Broaden your horizons";
+    rightSideDiv.childNodes[0].textContent = "Or..."; // "Broaden your horizons"
+
+    const otherVersionsContainer = document.createElement("div");
+    otherVersionsContainer.id = "otherVersionsContainer";
+    rightSideDiv.appendChild(otherVersionsContainer);
+
+    const diffGame1 = document.createElement("div");
+    const diffGame2 = document.createElement("div");
+    otherVersionsContainer.appendChild(diffGame1);
+    otherVersionsContainer.appendChild(diffGame2);
+    diffGame1.classList.add("diffGameContainer");
+    diffGame2.classList.add("diffGameContainer");
+    diffGame1.appendChild(document.createElement("label"));
+    diffGame2.appendChild(document.createElement("label"));
     const newGameButtonDiff1 = document.createElement("button"); // different version 1
+    newGameButtonDiff1.classList.add("new-game-button");
     newGameButtonDiff1.id="newGameButtonDiff1";
     const newGameButtonDiff2 = document.createElement("button"); // different version 2
-    newGameButtonDiff2.id="newGameButtonDiff2";
-    // to properly name the newGameButtonDiff buttons
-    let otherVersion1;
-    let otherVersion2;
-    if (currentRegion == usa)
-    {
-        otherVersion1 = "Europe";
-        otherVersion2 = "Worldwide";
-    }
-    else if (currentRegion == europe)
-    {
-        otherVersion1 = "USA";
-        otherVersion2 = "Worldwide";
-    }
-    else
-    {
-        otherVersion1 = "Europe";
-        otherVersion1 = "USA";
-    }
-    newGameButtonDiff1.textContent = `${otherVersion1} ` + '\u2192';
-    newGameButtonDiff2.textContent = `${otherVersion2} ` + '\u2192';
-    newGameButtonDiff1.classList.add("new-game-button");
     newGameButtonDiff2.classList.add("new-game-button");
-    rightSideDiv.appendChild(newGameButtonDiff1);
-    rightSideDiv.appendChild(newGameButtonDiff2);
+    newGameButtonDiff2.id="newGameButtonDiff2";
+    diffGame1.appendChild(newGameButtonDiff1);
+    diffGame2.appendChild(newGameButtonDiff2);
 
-    // adding a little style on hover - button 1
-    newGameButtonDiff1.addEventListener("mouseenter", () => {
-        newGameButtonDiff1.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
-    });
-    newGameButtonDiff1.addEventListener("mouseout", () => {
-        newGameButtonDiff1.style.background = null;
-    });
-
-    // adding a little style on hover - button 2
-    newGameButtonDiff2.addEventListener("mouseenter", () => {
-        newGameButtonDiff2.style.background = "linear-gradient(to bottom left, white, 1%, rgb(27, 79, 235, 0.8))";
-    });
-    newGameButtonDiff2.addEventListener("mouseout", () => {
-        newGameButtonDiff2.style.background = null;
-    });
+    switch(true) {
+        case currentRegion == europe:
+            diffGame1.childNodes[0].textContent = "USA";
+            newGameButtonDiff1.style.backgroundImage = 'url("./images/usa-flag2.png")';
+            diffGame2.childNodes[0].textContent = "Worldwide";
+            newGameButtonDiff2.style.backgroundImage = 'url("./images/world-flag.gif")';
+            break;
+        case currentRegion == usa:
+            diffGame1.childNodes[0].textContent = "Europe";
+            newGameButtonDiff1.style.backgroundImage = 'url("./images/eu-flag.png")';
+            diffGame2.childNodes[0].textContent = "Worldwide";
+            newGameButtonDiff2.style.backgroundImage = 'url("./images/world-flag.gif")';
+            break;
+    }
 }
 
 function endGameSmallScreen() {
@@ -693,12 +684,12 @@ function endGameLargeScreen() {
         gameContainer.classList.add("game-container-start");
 
         // set correct version for next game
-        switch(newGameButtonDiff1.textContent.split(' ')[0]) {
-            case "Europe":
-                currentRegion = europe;
-                break;
-            case "USA":
+        switch(true) {
+            case currentRegion == europe:
                 currentRegion = usa;
+                break;
+            case currentRegion == usa:
+                currentRegion = europe;
                 break;
         }
 
@@ -1089,7 +1080,7 @@ function showResultsLargeScreen() {
         timer += 2300; // 1.5 seconds between displaying each line
     }
 
-    timer += 3000; // 2 second delay before calling final function of the game
+    timer += 2000; // 2 second delay before calling final function of the game
     setTimeout(() => {
         endGameLargeScreen();
     }, timer);
@@ -1419,6 +1410,33 @@ function setupGameDisplay()
             gamePanel.appendChild(hints);
             hints.appendChild(hintButton);
             hints.appendChild(numHints);
+
+            if (gamesPlayed == 1) {
+                // add temporary message "Can you guess the city/country?"
+                cityPic.style.opacity = "0.3";
+                cityPic.classList.add("changeOpacity");
+                leftSide.appendChild(document.createElement("h3")); // absolute positioning
+                switch(true) {
+                    case currentRegion == europe:
+                        leftSide.childNodes[1].textContent = "Can you guess the country?";
+                        leftSide.childNodes[1].style.left = "23vw";
+                        break;
+                    case currentRegion == usa:
+                        leftSide.childNodes[1].textContent = "Can you guess the city?";
+                        break;
+                }
+                leftSide.childNodes[1].classList.add("changeOpacity");
+                // change opacities
+                setTimeout(() => {
+                    cityPic.style.opacity = null; // to full opacity
+                    leftSide.childNodes[1].style.opacity = "0"; // to invisible
+                }, 1000);
+                // remove the text after even though it is invisible.
+                setTimeout(() => {
+                    leftSide.removeChild(leftSide.childNodes[1]);
+                    cityPic.classList.remove("changeOpacity");
+                }, 3000);
+            }
         }
         else { // if window size <= 600px
             // appending top
@@ -1427,11 +1445,10 @@ function setupGameDisplay()
             score.appendChild(questionNumber);
             score.appendChild(grade);
             leftSide.appendChild(cityPic);
-            
 
             if (gamesPlayed == 1) {
                 // add temporary message "Can you guess the city/country?"
-                cityPic.style.opacity = "0.2";
+                cityPic.style.opacity = "0.3";
                 cityPic.classList.add("changeOpacity");
                 leftSide.appendChild(document.createElement("h3")); // absolute positioning
                 switch(true) {

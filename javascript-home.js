@@ -13,6 +13,7 @@ const buttonsContainer = document.querySelector(".game-buttons");
 if (!mediaQuery.matches) { // small screen
     buttonsContainer.removeChild(middleButton);
     buttonsContainer.removeChild(bottomButton);
+    header.childNodes[1].textContent = "Willkommen";
 
     // change to usa
     let timer = 1700;
@@ -46,6 +47,23 @@ if (!mediaQuery.matches) { // small screen
         bottomButton.style.visibility = "visible";
         // enable link
         topButton.childNodes[3].setAttribute("href", "./europe.html");
+
+        // currently disabling worldwide
+        bottomButton.childNodes[3].style.opacity = "0.3";
+        bottomButton.childNodes[3].removeAttribute("href");
+        const comingSoon = document.createElement("p");
+        comingSoon.id = "comingSoon";
+        comingSoon.textContent = "Coming soon...";
+        bottomButton.appendChild(comingSoon);
     }, timer);
 }
 
+if (mediaQuery.matches) { // large screen
+    // currently disabling worldwide
+    bottomButton.childNodes[3].style.opacity = "0.2";
+    bottomButton.childNodes[3].removeAttribute("href");
+    const comingSoon = document.createElement("p");
+    comingSoon.id = "comingSoon";
+    comingSoon.textContent = "Coming soon...";
+    bottomButton.appendChild(comingSoon);
+}
