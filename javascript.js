@@ -223,10 +223,10 @@ function convertToLetterGrade(grade) {
         case (64 <= grade && grade <= 75):
             return "B";
             break;
-        case (51 <= grade && grade <= 63):
+        case (50 <= grade && grade <= 63):
             return "C";
             break;
-        case (39 <= grade && grade <= 50):
+        case (39 <= grade && grade <= 49):
             return "D";
             break;
         case (grade < 39):
