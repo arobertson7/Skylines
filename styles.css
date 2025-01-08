@@ -113,7 +113,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  font-size: calc(14px + .5vw);
+  font-size: max(1.4vw, 14px);
 }
 
 .game-buttons a { /* button wrapper */
@@ -211,6 +211,7 @@ html, body {
   .europe, .usa, .worldwide {
     height: 62vw;
     width: 62vw;
+    font-size: calc(14px + .5vw);
   }
 
   #comingSoon { /* worldwide button currently disabled */
@@ -330,6 +331,17 @@ html, body {
   height: 60%; 
 }
 
+@media screen and (max-width: 900px) { /* remove "Which city is this?" below 900px width */
+    .questions h2 {
+      position: relative;
+      visibility: hidden;
+    }
+}
+
+.questions h2 {
+  font-size: 2vw; /* 1.75rem */
+}
+
 .choices {
   width: 70%;
   display: flex;
@@ -377,6 +389,10 @@ html, body {
     left: 25vw;
     font-size: 2vw;
     color: white;
+  }
+
+  .score {
+    font-size: max(14px, 1.25vw);
   }
 }
 

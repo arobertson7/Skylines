@@ -1280,7 +1280,6 @@ function displayQuestion() {
                 break;
         }
         questions.childNodes[0].textContent = `Which ${cityOrCountry} is this?`;
-        questions.childNodes[0].style.fontSize = "1.75rem";
     }
     else {
         gamePanel.appendChild(questions);
