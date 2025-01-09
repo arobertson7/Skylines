@@ -131,7 +131,7 @@ let currentGrade = Math.round((correctCount / currentRound) * 100);
 // currently using a global var for tracking index of currently used photo so able to show a different one when hint button is clicked
 let randomImageIndex;
 // currently using global vars for hint functionality
-let hintsRemaining = 2;
+let hintsRemaining = 3;
 // global variable for keeping track of which 'result' slide we're on (for swivel buttons)
 // initialized to 4 because that's slide that is up when the swivel buttons appear
 let currentSlide = 4;
@@ -139,6 +139,7 @@ let currentSlide = 4;
 let assessmentFeedback = "";
 // global variable for tracking how many games have been played (initiated)
 let gamesPlayed = 0;
+
 
 // an array holding various responses to display when answer is correct
 const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler", "Wunderbar!"];
@@ -277,21 +278,66 @@ function generateFeedback(score) {
 function giveHint() {
     if (hintsRemaining >= 0) // number corresponds to how many hints remain after this one
     {
-        let differentImageIndex;
-        do {
-            differentImageIndex = randomIndex(cityQueue.peek().imageArray.length)
-        }
-        while (differentImageIndex == randomImageIndex);
-        let newPic = cityQueue.peek().imageArray[differentImageIndex];
-        cityPic.src= newPic;
+        // *** the below code gives a secong picture
 
-        if (hintsRemaining == 1)
-        {
-            hintButton.nextSibling.textContent = `${hintsRemaining} left...`;
+        // let differentImageIndex;
+        // do {
+        //     differentImageIndex = randomIndex(cityQueue.peek().imageArray.length)
+        // }
+        // while (differentImageIndex == randomImageIndex);
+        // let newPic = cityQueue.peek().imageArray[differentImageIndex];
+        // cityPic.src= newPic;
+
+        // for giving 50/50 hint
+        let usedIndexes = [];
+        for (let i = 0; i < 4; i++) {
+            if (choices.childNodes[i].textContent == cityQueue.peek().name) {
+                usedIndexes.push(i);
+            }
         }
-        else
-        {
-            hintButton.nextSibling.textContent = `${hintsRemaining} remaining`;
+        for (let i = 0; i < 2; i++) { // 2 iterations for finding 2 buttons that aren't answer
+            let randomButtonIndex;
+            do {
+                randomButtonIndex = randomIndex(4);
+            }
+            while (indexAlreadyUsed(usedIndexes, randomButtonIndex));
+            let button = choices.childNodes[randomButtonIndex];
+            
+            // remove event listener via removing button and replacing with an indentical. neither abortSignal nor removeEventListener
+            let replacement = document.createElement("button");
+            replacement.textContent = button.textContent;
+            choices.removeChild(button);
+            switch(true) {
+                case randomButtonIndex == 0:
+                    choices.insertBefore(replacement, choices.childNodes[0]);
+                    break;
+                case randomButtonIndex == 1:
+                    choices.insertBefore(replacement, choices.childNodes[1]);
+                    break;
+                case randomButtonIndex == 2:
+                    choices.insertBefore(replacement, choices.childNodes[2]);
+                    break;
+                case randomButtonIndex == 3:
+                    choices.appendChild(replacement);
+                    break;
+            }
+            replacement.style.opacity = "0.3";
+            usedIndexes.push(randomButtonIndex);
+        }
+
+        switch(true) {
+            case hintsRemaining == 2:
+                hintButton.style.background = "linear-gradient(to right, rgb(203, 186, 0), 66%, black, 66%, black, 97%, gray)";
+                hintButton.textContent = "2 remaining";
+                break
+            case hintsRemaining == 1:
+                hintButton.textContent = "1 left...";
+                hintButton.style.background = "linear-gradient(to right, orange, 29%, black, 29%, black, 97%, gray)";
+                break;
+            case hintsRemaining == 0:
+                hintButton.textContent = "All out..";
+                hintButton.style.background = "linear-gradient(to right, red, 4%, black, 4%, black, 97%, gray)";
+                break;
         }
     }
 }
@@ -1248,19 +1294,10 @@ function displayQuestion() {
     for (let i = 0; i < 4; i++)
     {
         choices.appendChild(document.createElement("button"));
+        choices.childNodes[i].classList.add("choiceButtonHover");
     }
+    
 
-    // answer choice buttons - on click, show answer
-    const buttons = choices.childNodes;
-    buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-            let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
-            evaluateAnswer(correctOrIncorrect);
-            // setTimeout(() => {
-            //     evaluateAnswer(correctOrIncorrect);
-            // }, 300);
-        })
-    })
 
     /* --- appending things section --- */
 
@@ -1354,13 +1391,14 @@ function setupGameDisplay()
 
         // create hints section
         let hints = document.createElement("div");
+        hints.style.visibility = "hidden";
         hints.id = "hints";
         hints.classList.add("hints");
         let hintButton = document.createElement("button");
         hintButton.id="hintButton";
-        hintButton.textContent = "Hint?";
+        hintButton.textContent = `${hintsRemaining} remaining`;
         let numHints = document.createElement("p");
-        numHints.textContent = `${hintsRemaining} remaining`;
+        numHints.textContent = "Hint?";
 
         hintButton.addEventListener("click", () => {
             hintsRemaining--;
@@ -1390,8 +1428,8 @@ function setupGameDisplay()
 
             // appending hints section
             gamePanel.appendChild(hints);
-            hints.appendChild(hintButton);
             hints.appendChild(numHints);
+            hints.appendChild(hintButton);
 
             if (gamesPlayed == 1) {
                 // add temporary message "Can you guess the city/country?"
@@ -1418,6 +1456,21 @@ function setupGameDisplay()
                     leftSide.removeChild(leftSide.childNodes[1]);
                     cityPic.classList.remove("changeOpacity");
                 }, 3000);
+                setTimeout(() => {
+                    hintButton.style.background = "none";
+                    hintButton.backgroundColor = "black";
+                    hintButton.classList.add("chargeHintButton");
+                    hints.style.visibility = "visible";
+
+                    setTimeout(() => {
+                        hintButton.style.backgroundColor = "rgb(35, 181, 58)";
+                        setTimeout(() => {
+                            hintButton.classList.remove("chargeHintButton");
+                            hintButton.style.backgroundColor = null;
+                            hintButton.style.background = null;
+                        }, 1500);
+                    }, 500);
+                }, 3500);
             }
         }
         else { // if window size <= 600px
@@ -1523,9 +1576,16 @@ function setupNewRound() {
         }
 
     }
+
+    // add event listeners for answer choice buttons on click
+    const buttons = choices.childNodes;
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            let correctOrIncorrect = button.textContent == cityQueue.peek().name; // bool determining if answer was correct or incorrect
+            evaluateAnswer(correctOrIncorrect);
+        });
+    });
 }
-
-
 
 
 // Play new game
