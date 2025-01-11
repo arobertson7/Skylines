@@ -121,7 +121,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 8;
+const rounds = 4;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -276,6 +276,7 @@ function generateFeedback(score) {
 
 // currently gives hint by providing a different picture of the same city or country
 function giveHint() {
+    const mediaQuery = window.matchMedia('(min-width: 601px)');
     if (hintsRemaining >= 0) // number corresponds to how many hints remain after this one
     {
         // *** the below code gives a secong picture
@@ -329,6 +330,9 @@ function giveHint() {
             case hintsRemaining == 2:
                 hintButton.style.background = "linear-gradient(to right, rgb(203, 186, 0), 66%, black, 66%, black, 97%, gray)";
                 hintButton.textContent = "2 remaining";
+                if (!mediaQuery.matches) {
+                    hintButton.textContent = "2";
+                }
                 break
             case hintsRemaining == 1:
                 hintButton.textContent = "1 left...";
@@ -336,6 +340,9 @@ function giveHint() {
                 break;
             case hintsRemaining == 0:
                 hintButton.textContent = "All out..";
+                if (!mediaQuery.matches) {
+                    hintButton.textContent = "empty";
+                }
                 hintButton.style.background = "linear-gradient(to right, red, 4%, black, 4%, black, 97%, gray)";
                 break;
         }
@@ -669,7 +676,7 @@ function endGameSmallScreen() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
-        hintsRemaining = 2;
+        hintsRemaining = 3;
         currentSlide = 4;
         // clear the queue
         while (!cityQueue.isEmpty())
@@ -698,7 +705,7 @@ function endGameLargeScreen() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
-        hintsRemaining = 2;
+        hintsRemaining = 3;
         // clear the queue
         while (!cityQueue.isEmpty())
         {
@@ -730,7 +737,7 @@ function endGameLargeScreen() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
-        hintsRemaining = 2;
+        hintsRemaining = 3;
         // clear the queue
         while (!cityQueue.isEmpty())
         {
@@ -978,7 +985,7 @@ function showResultsLargeScreen() {
     // calculatingContainer.appendChild(document.createElement("span"));
     calc.childNodes[0].textContent = "Calculating your results";
     // there's probably a way better way to do this but...
-    let timer = 275;
+    let timer = 200;
     for (let i = 0; i < 3; i++)
     {
         for (let j = 0; j < 4; j++)
@@ -986,7 +993,7 @@ function showResultsLargeScreen() {
             setTimeout(() => {
                 calc.childNodes[0].textContent += ". ";
             }, timer);
-            timer += 275;
+            timer += 200;
         }
         timer += 50;
         if (i != 2) // leaves dots on final iteration
@@ -1229,7 +1236,9 @@ function evaluateAnswer(correct) {
             gradeColor = "red";
             break;
     }
-    score.childNodes[1].textContent = `Score: ${currentGrade}%`;
+    if (mediaQuery.matches) {
+        score.childNodes[1].textContent = `Score: ${currentGrade}%`;
+    }
     // score.childNodes[1].style.color = gradeColor; // this colors the whole line, need to put the actual percentage in a span and color only it
     
     // Logic for any round except the last one
@@ -1396,9 +1405,7 @@ function setupGameDisplay()
         hints.classList.add("hints");
         let hintButton = document.createElement("button");
         hintButton.id="hintButton";
-        hintButton.textContent = `${hintsRemaining} remaining`;
         let numHints = document.createElement("p");
-        numHints.textContent = "Hint?";
 
         hintButton.addEventListener("click", () => {
             hintsRemaining--;
@@ -1430,6 +1437,8 @@ function setupGameDisplay()
             gamePanel.appendChild(hints);
             hints.appendChild(numHints);
             hints.appendChild(hintButton);
+            hintButton.textContent = `${hintsRemaining} remaining`;
+            numHints.textContent = "Hint?";
 
             if (gamesPlayed == 1) {
                 // add temporary message "Can you guess the city/country?"
@@ -1456,21 +1465,6 @@ function setupGameDisplay()
                     leftSide.removeChild(leftSide.childNodes[1]);
                     cityPic.classList.remove("changeOpacity");
                 }, 3000);
-                setTimeout(() => {
-                    hintButton.style.background = "none";
-                    hintButton.backgroundColor = "black";
-                    hintButton.classList.add("chargeHintButton");
-                    hints.style.visibility = "visible";
-
-                    setTimeout(() => {
-                        hintButton.style.backgroundColor = "rgb(35, 181, 58)";
-                        setTimeout(() => {
-                            hintButton.classList.remove("chargeHintButton");
-                            hintButton.style.backgroundColor = null;
-                            hintButton.style.background = null;
-                        }, 1500);
-                    }, 500);
-                }, 3500);
             }
         }
         else { // if window size <= 600px
@@ -1478,8 +1472,13 @@ function setupGameDisplay()
             gameContainer.appendChild(leftSide);
             leftSide.appendChild(score);
             score.appendChild(questionNumber);
-            score.appendChild(grade);
+            hints.appendChild(numHints);
+            hints.appendChild(hintButton);
+            score.appendChild(hints);
             leftSide.appendChild(cityPic);
+
+            hintButton.textContent = `${hintsRemaining}`;
+            numHints.textContent = "Hints: ";
 
             if (gamesPlayed == 1) {
                 // add temporary message "Can you guess the city/country?"
@@ -1514,6 +1513,31 @@ function setupGameDisplay()
             // hints.appendChild(hintButton); // removing hints on this screen size for now
             // hints.appendChild(numHints);
         }
+
+        let hintsDisplayTimer; // delay on hint display only on first game
+        if (gamesPlayed == 1) {
+            hintsDisplayTimer = 3500;
+        }
+        else
+        {
+            hintsDisplayTimer = 0;
+        }
+
+        setTimeout(() => {
+            hintButton.style.background = "none";
+            hintButton.backgroundColor = "black";
+            hintButton.classList.add("chargeHintButton");
+            hints.style.visibility = "visible";
+
+            setTimeout(() => {
+                hintButton.style.backgroundColor = "rgb(35, 181, 58)";
+                setTimeout(() => {
+                    hintButton.classList.remove("chargeHintButton");
+                    hintButton.style.backgroundColor = null;
+                    hintButton.style.background = null;
+                }, 1500);
+            }, 500);
+        }, hintsDisplayTimer);
 
 
         // Display question and choice buttons
