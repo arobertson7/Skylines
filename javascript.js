@@ -1400,7 +1400,6 @@ function setupGameDisplay()
 
         // create hints section
         let hints = document.createElement("div");
-        hints.style.visibility = "hidden";
         hints.id = "hints";
         hints.classList.add("hints");
         let hintButton = document.createElement("button");
@@ -1436,6 +1435,7 @@ function setupGameDisplay()
             // appending hints section
             gamePanel.appendChild(hints);
             hints.appendChild(numHints);
+            hints.style.visibility = "hidden";
             hints.appendChild(hintButton);
             hintButton.textContent = `${hintsRemaining} remaining`;
             numHints.textContent = "Hint?";
@@ -1472,13 +1472,15 @@ function setupGameDisplay()
             gameContainer.appendChild(leftSide);
             leftSide.appendChild(score);
             score.appendChild(questionNumber);
-            hints.appendChild(numHints);
+            // hints.appendChild(numHints);
             hints.appendChild(hintButton);
+            hintButton.style.background = "none";
+            hintButton.backgroundColor = "black";
             score.appendChild(hints);
             leftSide.appendChild(cityPic);
 
-            hintButton.textContent = `${hintsRemaining}`;
-            numHints.textContent = "Hints: ";
+            hintButton.textContent = "Hint";
+            // numHints.textContent = "Hints: ";
 
             if (gamesPlayed == 1) {
                 // add temporary message "Can you guess the city/country?"
@@ -1538,6 +1540,23 @@ function setupGameDisplay()
                 }, 1500);
             }, 500);
         }, hintsDisplayTimer);
+
+
+        if (!mediaQuery.matches) { // small screen
+            if (gamesPlayed == 1) {
+                hintsDisplayTimer = 6000;
+            }
+            else
+            {
+                hintsDisplayTimer = 500;
+            }
+            setTimeout(() => {
+                hintButton.textContent = "3 left";
+                setTimeout(() => {
+                    hintButton.textContent = "Hint";
+                }, 1500);
+            }, hintsDisplayTimer);
+        }
 
 
         // Display question and choice buttons
