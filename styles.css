@@ -566,6 +566,11 @@ html, body {
     box-shadow: 2px 2px 2px 2px black;
     font-size: 1em;
   }
+
+  .hintBrightness {
+    transition: filter 1.5s ease;
+    transition: opacity 1s ease-in;
+  }
   
 }
 

@@ -1168,13 +1168,16 @@ function nextRound() {
 function evaluateAnswer(correct) {
     const mediaQuery = window.matchMedia('(min-width: 601px)');
 
-    // temporarily hide hints section
-    const theHints = document.getElementById("hints");
-    if (theHints) {
-        theHints.style.visibility = "hidden";
+    // temporarily hide hints section on big screen
+    if (mediaQuery.matches) {
+        hints.style.visibility = "hidden";
     }
     // temporarily remove question and buttons
     gamePanel.removeChild(questions);
+
+    // shortcut for temporarily disabling hint button during answer display on small screen
+    let hintsHolder = hintsRemaining;
+    hintsRemaining = -1;
 
     // display answer ("correct" or "incorrect") and add button for going to next question
     const answer = document.createElement("div");
@@ -1276,6 +1279,7 @@ function evaluateAnswer(correct) {
             else {
                 gameContainer.style.background = null;
             }
+            hintsRemaining = hintsHolder;
             nextRound();
         }, 2300);
     }
@@ -1341,23 +1345,18 @@ function displayQuestion() {
     questions.appendChild(choices);
 
     if (!mediaQuery.matches && hintUsed) {
-        hintButton.style.background = "none";
-        if (hintsRemaining == 2) {
-            setTimeout(() => {
-                hintButton.style.background = "linear-gradient(to right, rgb(203, 186, 0), 66%, black, 66%, black, 97%, gray)";
-            }, 1000);
-        }
-        else {
-            setTimeout(() => {
-                hintButton.style.background = "linear-gradient(to right, orange, 29%, black, 29%, black, 97%, gray)";
-            }, 1000);
-        }
+        hintButton.style.opacity = "0.3";
+        setTimeout(() => {
+            hintButton.classList.add("hintBrightness");
+            hintButton.style.opacity = "1";
+        }, 200);
         setTimeout(() => {
             hintButton.textContent = `${hintsRemaining} left`;
-            setTimeout(() => {
-                hintButton.textContent = "Hint";
-            }, 1500);
+            hintButton.classList.remove("hintBrightness");
         }, 1500);
+        setTimeout(() => {
+            hintButton.textContent = "Hint";
+        }, 3250);
         hintUsed = false;
     }
 }
@@ -1433,15 +1432,6 @@ function setupGameDisplay()
         let hintButton = document.createElement("button");
         hintButton.id="hintButton";
         let numHints = document.createElement("p");
-
-        hintButton.addEventListener("click", () => {
-            hintsRemaining--;
-            if (hintsRemaining >= 0)
-            {
-                hints.style.visibility = "hidden";
-                giveHint();
-            }
-        })
 
         /* --- appending things section --- */
 
@@ -1585,6 +1575,24 @@ function setupGameDisplay()
                 }, 1500);
             }, hintsDisplayTimer);
         }
+
+        let hintClickTimer = 0;
+        if (gamesPlayed == 1) {
+            hintClickTimer = 7000;
+        }
+        else {
+            hintClickTimer = 3000;
+        }
+        setTimeout(() => {
+            hintButton.addEventListener("click", () => {
+                hintsRemaining--;
+                if (hintsRemaining >= 0)
+                {
+                    hints.style.visibility = "hidden";
+                    giveHint();
+                }
+            });
+        }, hintClickTimer);
 
 
         // Display question and choice buttons
