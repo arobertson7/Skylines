@@ -1344,6 +1344,7 @@ function displayQuestion() {
     
     questions.appendChild(choices);
 
+    // if hint was used, give button visual effect when displaying new amount of hints remaining
     if (!mediaQuery.matches && hintUsed) {
         hintButton.style.opacity = "0.3";
         setTimeout(() => {
@@ -1358,6 +1359,20 @@ function displayQuestion() {
             hintButton.textContent = "Hint";
         }, 3250);
         hintUsed = false;
+    }
+
+    // if no hints have been used by certain points in the game, give display button a visual effect to draw attention
+    if ((hintsRemaining == 3 && currentRound == 3) || (currentRound == 4 && correctCount < 2) || (currentRound == 5 && correctCount < 2) || (currentRound == 7 && hintsRemaining > 0)) {
+        hintButton.classList.add("hintAttention");
+        setTimeout(() => {
+            hintButton.style.filter = "brightness(0.2)";
+        }, 2000);
+        setTimeout(() => {
+            hintButton.style.filter = null;
+        }, 3000);
+        setTimeout(() => {
+            hintButton.classList.remove("hintAttention");
+        }, 4000);
     }
 }
 
@@ -1593,7 +1608,6 @@ function setupGameDisplay()
                 }
             });
         }, hintClickTimer);
-
 
         // Display question and choice buttons
         displayQuestion();

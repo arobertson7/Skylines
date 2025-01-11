@@ -568,10 +568,12 @@ html, body {
   }
 
   .hintBrightness {
-    transition: filter 1.5s ease;
     transition: opacity 1s ease-in;
   }
-  
+}
+
+.hintAttention {
+  transition: filter 1s ease-out;
 }
 
 /* END GAME DISPLAY PAGE */
