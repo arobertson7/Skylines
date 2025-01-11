@@ -121,7 +121,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 4;
+const rounds = 8;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -139,6 +139,8 @@ let currentSlide = 4;
 let assessmentFeedback = "";
 // global variable for tracking how many games have been played (initiated)
 let gamesPlayed = 0;
+// bool used for "hints left" display on small screen
+let hintUsed = false;
 
 
 // an array holding various responses to display when answer is correct
@@ -331,12 +333,17 @@ function giveHint() {
                 hintButton.style.background = "linear-gradient(to right, rgb(203, 186, 0), 66%, black, 66%, black, 97%, gray)";
                 hintButton.textContent = "2 remaining";
                 if (!mediaQuery.matches) {
-                    hintButton.textContent = "2";
+                    hintButton.textContent = "Hint";
                 }
+                hintUsed = true;
                 break
             case hintsRemaining == 1:
                 hintButton.textContent = "1 left...";
                 hintButton.style.background = "linear-gradient(to right, orange, 29%, black, 29%, black, 97%, gray)";
+                if (!mediaQuery.matches) {
+                    hintButton.textContent = "Hint";
+                }
+                hintUsed = true;
                 break;
             case hintsRemaining == 0:
                 hintButton.textContent = "All out..";
@@ -1332,6 +1339,27 @@ function displayQuestion() {
     }
     
     questions.appendChild(choices);
+
+    if (!mediaQuery.matches && hintUsed) {
+        hintButton.style.background = "none";
+        if (hintsRemaining == 2) {
+            setTimeout(() => {
+                hintButton.style.background = "linear-gradient(to right, rgb(203, 186, 0), 66%, black, 66%, black, 97%, gray)";
+            }, 1000);
+        }
+        else {
+            setTimeout(() => {
+                hintButton.style.background = "linear-gradient(to right, orange, 29%, black, 29%, black, 97%, gray)";
+            }, 1000);
+        }
+        setTimeout(() => {
+            hintButton.textContent = `${hintsRemaining} left`;
+            setTimeout(() => {
+                hintButton.textContent = "Hint";
+            }, 1500);
+        }, 1500);
+        hintUsed = false;
+    }
 }
 
 function setupGameDisplay()
@@ -1518,7 +1546,7 @@ function setupGameDisplay()
 
         let hintsDisplayTimer; // delay on hint display only on first game
         if (gamesPlayed == 1) {
-            hintsDisplayTimer = 3500;
+            hintsDisplayTimer = 3000;
         }
         else
         {
@@ -1544,7 +1572,7 @@ function setupGameDisplay()
 
         if (!mediaQuery.matches) { // small screen
             if (gamesPlayed == 1) {
-                hintsDisplayTimer = 6000;
+                hintsDisplayTimer = 5500;
             }
             else
             {

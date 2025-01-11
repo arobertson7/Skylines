@@ -470,7 +470,7 @@ html, body {
     flex-direction: column;
     background: linear-gradient(to top, gray, 4%, black),
                 linear-gradient(to right, gray, 1%, black, 98%, gray); /* <-- not working */
-    gap: 25px;
+    gap: 23px;
   }
 
   #leftSide { /* the same element with class '.city-image' above */
@@ -482,7 +482,7 @@ html, body {
     background-color: black;
     color: white;
     font-weight: 700;
-    gap: 8px;
+    gap: 12px;
     background: transparent;
     position: relative;
   }
@@ -493,7 +493,7 @@ html, body {
     border: none;
     padding: 0px 8% 0px 8%;
     letter-spacing: 0.07em;
-    font-size: max(14px, 3.5vw);
+    font-size: max(14px, 3.7vw);
   }
 
   #leftSide img {
@@ -547,8 +547,8 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90%;
-    width: 30%;
+    height: 100%;
+    width: 40%;
   }
 
   #hintButton {
