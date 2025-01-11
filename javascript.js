@@ -1365,7 +1365,7 @@ function displayQuestion() {
     if ((hintsRemaining == 3 && currentRound == 3) || (currentRound == 4 && correctCount < 2) || (currentRound == 5 && correctCount < 2) || (currentRound == 7 && hintsRemaining > 0)) {
         hintButton.classList.add("hintAttention");
         setTimeout(() => {
-            hintButton.style.filter = "brightness(0.2)";
+            hintButton.style.filter = "brightness(0.25)";
         }, 2000);
         setTimeout(() => {
             hintButton.style.filter = null;
