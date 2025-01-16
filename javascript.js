@@ -22,45 +22,45 @@ const atl = new City("Atlanta", ["./images/atl1.webp", "./images/atl2.jpg", "./i
 const denver = new City("Denver", ["./images/denver1.avif", "./images/denver2.jpg", "./images/denver3.jpg", "./images/denver4.webp", "./images/denver5.jpeg", "./images/denver6.jpg"], "denver hint");
 const phx = new City("Phoenix", ["./images/phx1.jpg", "./images/phx2.jpg", "./images/phx3.png", "./images/phx4.jpg", "./images/phx5.webp", "./images/phx6.jpg"], "phx hint");
 const boston = new City("Boston", ["./images/boston1.jpg", "./images/boston2.jpg", "./images/boston3.jpg", "./images/boston4.webp", "./images/boston5.webp", "./images/boston6.webp", "./images/boston7.jpg"], "boston hint");
-const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif", "./images/nash3.jpg", "./images/nash4.jpg", "./images/nash5.jpg"], "nash hint");
+const nash = new City("Nashville", ["./images/nash1.jpg", "./images/nash2.avif", "./images/nash3.jpg"], "nash hint");
 const stl = new City("St. Louis", ["./images/stl1.webp", "./images/stl2.jpg", "./images/stl3.jpg", "./images/stl4.webp", "./images/stl5.jpg"], "stl hint");
-const portland = new City("Portland", ["./images/portland1.webp", "./images/portland2.webp", "./images/portland3.jpg", "./images/portland4.jpg", "./images/portland5.jpg", "./images/portland6.jpg"], "portland hint");
-const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.webp", "./images/knox4.jpg", "./images/knox5.jpg"], "knox hint");
+const portland = new City("Portland", ["./images/portland1.webp", "./images/portland2.webp", "./images/portland3.jpg", "./images/portland4.jpg", "./images/portland5.jpg"], "portland hint");
+// const knox = new City("Knoxville", ["./images/knox1.jpg", "./images/knox2.jpg", "./images/knox3.webp", "./images/knox4.jpg", "./images/knox5.jpg"], "knox hint");
 // const cross = new City("Crossville, Tennessee", ["./images/cross1.jpg"], "cross hint");
 const newOrleans = new City("New Orleans", ["./images/new-orleans1.avif", "./images/new-orleans2.webp", "./images/new-orleans3.jpg", "./images/new-orleans4.avif", "./images/new-orleans5.jpg"], "new orleans hint");
 const sanDiego = new City("San Diego", ["./images/sd1.avif", "./images/sd2.jpeg", "./images/sd3.jpg", "./images/sd4.jpg", "./images/sd5.jpg"], "sd hint");
 const honolulu = new City("Honolulu", ["./images/honolulu1.jpg", "./images/honolulu2.webp", "./images/honolulu3.jpg", "./images/honolulu4.jpg", "./images/honolulu5.jpg", "./images/honolulu6.jpg"], "honolulu hint");
 const dallas = new City("Dallas", ["./images/dallas1.jpeg", "./images/dallas2.avif", "./images/dallas3.jpeg", "./images/dallas4.jpg", "./images/dallas5.avif"], "dallas hint");
-const charleston = new City("Charleston", ["./images/charleston1.jpg", "./images/charleston2.jpg", "./images/charleston3.jpg", "./images/charleston4.jpg", "./images/charleston5.jpg"], "charleston hint");
+// const charleston = new City("Charleston", ["./images/charleston1.jpg", "./images/charleston2.jpg", "./images/charleston3.jpg", "./images/charleston4.jpg", "./images/charleston5.jpg"], "charleston hint");
 const detroit = new City("Detroit", ["./images/detroit1.webp", "./images/detroit2.jpeg", "./images/detroit3.avif", "./images/detroit4.jpg", "./images/detroit5.webp"], "detroit hint");
 const houston = new City("Houston", ["./images/houston1.jpg", "./images/houston2.avif", "./images/houston3.jpg", "./images/houston4.jpg", "./images/houston5.jpg", "./images/houston6.jpg"], "houston hint");
-const charlotte = new City("Charlotte", ["./images/charlotte1.jpg", "./images/charlotte2.webp", "./images/charlotte3.jpg", "./images/charlotte4.jpeg", "./images/charlotte5.jpg", "./images/charlotte6.webp"], "charlotte hint");
+// const charlotte = new City("Charlotte", ["./images/charlotte1.jpg", "./images/charlotte2.webp", "./images/charlotte3.jpg", "./images/charlotte4.jpeg", "./images/charlotte5.jpg", "./images/charlotte6.webp"], "charlotte hint");
 const baltimore = new City("Baltimore", ["./images/baltimore1.jpeg", "./images/baltimore2.jpg", "./images/baltimore3.jpg", "./images/baltimore4.png", "./images/baltimore5.webp", "./images/baltimore6.jpg"], "baltimore hint");
 const palmSprings = new City("Palm Springs", ["./images/ps1.jpg", "./images/ps2.avif", "./images/ps3.jpg", "./images/ps4.jpeg", "./images/ps5.jpg"], "palm springs hint");
-const boise = new City("Boise", ["./images/boise1.jpg", "./images/boise2.jpg", "./images/boise3.jpg", "./images/boise4.jpg", "./images/boise5.png"], "boise hint");
+// const boise = new City("Boise", ["./images/boise1.jpg", "./images/boise2.jpg", "./images/boise3.jpg", "./images/boise4.jpg", "./images/boise5.png"], "boise hint");
 const sedona = new City("Sedona", ["./images/sedona1.webp", "./images/sedona2.webp", "./images/sedona3.jpg", "./images/sedona4.jpg", "./images/sedona5.jpg", "./images/sedona6.jpg"], "sedona hint");
 const slc = new City("Salt Lake City", ["./images/slc1.jpg", "./images/slc2.webp", "./images/slc3.jpg", "./images/slc4.jpeg", "./images/slc5.avif", "./images/slc6.avif"], "slc hint");
-const barHarbor = new City("Bar Harbor", ["./images/barHarbor1.png", "./images/barHarbor2.png", "./images/barHarbor3.jpg", "./images/barHarbor4.jpg", "./images/barHarbor5.jpg"], "bar harbor hint");
+// const barHarbor = new City("Bar Harbor", ["./images/barHarbor1.png", "./images/barHarbor2.png", "./images/barHarbor3.jpg", "./images/barHarbor4.jpg", "./images/barHarbor5.jpg"], "bar harbor hint");
 const santaFe = new City("Santa Fe", ["./images/santaFe1.jpg", "./images/santaFe2.webp", "./images/santaFe3.jpg", "./images/santaFe4.avif", "./images/santaFe5.webp"], "santa fe hint");
-const newportRI = new City("Newport, RI", ["./images/newport1.jpg", "./images/newport2.jpg", "./images/newport3.jpg", "./images/newport4.jpg", "./images/newport5.jpg", "./images/newport6.jpg"], "newport hint");
+// const newportRI = new City("Newport, RI", ["./images/newport1.jpg", "./images/newport2.jpg", "./images/newport3.jpg", "./images/newport4.jpg", "./images/newport5.jpg", "./images/newport6.jpg"], "newport hint");
 
 // U.S. cities array
-const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, knox, newOrleans, sanDiego, honolulu,
-                    dallas, charleston, detroit, houston, charlotte, baltimore, palmSprings, boise, sedona, slc, barHarbor, santaFe, newportRI];
+const usa = [ny, la, sf, seattle, chicago, lv, philly, dc, miami, atl, denver, phx, boston, nash, stl, portland, newOrleans, sanDiego, honolulu,
+                    dallas, detroit, houston, baltimore, palmSprings, sedona, slc, santaFe];
 
 
 // European countries
 const germany = new City("Germany", ["./images/germany1.avif", "./images/germany2.avif", "./images/germany3.jpg", "./images/germany4.jpg", "./images/germany5.jpg", "./images/germany6.jpg", "./images/germany7.jpg", "./images/germany8.jpg", "./images/germany9.jpg", "./images/germany10.jpg", "./images/germany11.jpg", "./images/germany12.jpg", "./images/germany13.png", "./images/germany14.jpg", "./images/germany15.jpeg", "./images/germany16.jpg", "./images/germany17.jpg", "./images/germany18.jpg"], "germany hint");
-const france = new City("France", ["./images/france1.jpg", "./images/france2.webp", "./images/france3.jpeg", "./images/france4.webp", "./images/france5.webp", "./images/france6.webp", "./images/france7.webp", "./images/france8.avif", "./images/france9.webp", "./images/france10.jpg"], "france hint");
+const france = new City("France", ["./images/france1.jpg", "./images/france2.webp", "./images/france3.jpeg", "./images/france4.webp", "./images/france5.webp", "./images/france6.webp", "./images/france8.avif", "./images/france10.jpg"], "france hint"); // "./images/france7.webp" , "./images/france9.webp"
 const england = new City("England", ["./images/england1.jpg", "./images/england2.jpg", "./images/england3.webp", "./images/england4.webp", "./images/england5.jpg", "./images/england6.avif", "./images/england7.jpg", "./images/england8.jpeg", "./images/england9.webp", "./images/england10.jpg", "./images/england11.jpg", "./images/england12.avif"], "england hint");
 const spain = new City("Spain", ["./images/spain1.webp", "./images/spain2.jpg", "./images/spain3.jpeg", "./images/spain4.avif", "./images/spain5.jpg", "./images/spain6.webp", './images/spain7.jpg', "./images/spain8.jpg", './images/spain9.jpg', "./images/spain10.jpg"], "spain hint");
 const norway = new City("Norway", ["./images/norway1.jpg", "./images/norway2.webp", "./images/norway3.jpg", "./images/norway4.jpg", "./images/norway5.jpg", "./images/norway6.jpg", "./images/norway7.webp", "./images/norway8.jpg", "./images/norway9.jpg", "./images/norway10.jpg"], "norway hint");
 const denmark = new City("Denmark", ["./images/denmark1.jpg", "./images/denmark2.jpg", "./images/denmark3.jpg", "./images/denmark4.webp", "./images/denmark5.jpg", "./images/denmark6.jpg", "./images/denmark7.jpg", "./images/denmark8.jpeg", "./images/denmark9.avif", "./images/denmark10.jpg", "./images/denmark11.webp"], "denmark hint");
-const netherlands = new City("The Netherlands", ["./images/netherlands1.jpg", "./images/netherlands2.jpg", "./images/netherlands3.webp", "./images/netherlands4.jpeg", "./images/netherlands5.jpg", "./images/netherlands6.jpeg", "./images/netherlands7.jpg", "./images/netherlands8.jpg", "./images/netherlands9.jpg", "./images/netherlands10.jpg"], "netherlands hint");
+const netherlands = new City("The Netherlands", ["./images/netherlands1.jpg", "./images/netherlands2.jpg", "./images/netherlands3.webp", "./images/netherlands4.jpeg", "./images/netherlands5.jpg", "./images/netherlands6.jpeg", "./images/netherlands8.jpg", "./images/netherlands9.jpg", "./images/netherlands10.jpg"], "netherlands hint"); // "./images/netherlands7.jpg"
 const czech = new City("Czech Republic", ["./images/czech1.jpg", "./images/czech2.jpg", "./images/czech3.jpg", "./images/czech4.webp", "./images/czech5.jpeg", "./images/czech6.jpg", "./images/czech7.jpg", "./images/czech8.jpg", "./images/czech9.jpg", "./images/czech10.jpg", "./images/czech11.jpeg"], "czech republic hint");
 const portugal = new City("Portugal", ["./images/portugal1.webp", "./images/portugal2.jpg", "./images/portugal3.jpg", "./images/portugal4.jpg", "./images/portugal5.jpg", "./images/portugal6.jpg", "./images/portugal7.webp", "./images/portugal8.jpg", "./images/portugal9.jpg", "./images/portugal10.webp"], "portugal hint");
-const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2.jpg", "./images/austria3.jpg", "./images/austria4.webp", "./images/austria5.jpeg", "./images/austria6.avif", "./images/austria7.jpg", "./images/austria8.webp", "./images/austria9.jpg", "./images/austria10.jpg", "./images/austria11.webp"], "austria hint");
-const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/switzerland2.jpg", "./images/switzerland3.jpeg", "./images/switzerland4.jpg", "./images/switzerland5.jpg", "./images/switzerland6.jpg", "./images/switzerland7.webp", "./images/switzerland8.webp", "./images/switzerland9.jpg", "./images/switzerland10.jpg", "./images/switzerland11.jpg", './images/switzerland12.jpg'], "switzerland hint");
+const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2.jpg", "./images/austria3.jpg", "./images/austria4.webp", "./images/austria5.jpeg", "./images/austria6.avif", "./images/austria7.jpg", "./images/austria8.webp", "./images/austria11.webp"], "austria hint"); // "./images/austria9.jpg", "./images/austria10.jpg"
+const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/switzerland2.jpg", "./images/switzerland3.jpeg", "./images/switzerland4.jpg", "./images/switzerland5.jpg", "./images/switzerland6.jpg", "./images/switzerland7.webp", "./images/switzerland8.webp", "./images/switzerland9.jpg", "./images/switzerland10.jpg", './images/switzerland12.jpg'], "switzerland hint"); // "./images/switzerland11.jpg"
 const italy = new City("Italy", ["./images/italy1.webp", "./images/italy2.jpeg", "./images/italy3.jpg", "./images/italy4.jpg", "./images/italy5.webp", "./images/italy6.webp", "./images/italy7.jpeg", "./images/italy8.jpeg", "./images/italy9.jpg", "./images/italy10.jpeg", "./images/italy11.jpg", "./images/italy12.jpg", "./images/italy13.jpg", "./images/italy14.jpg", "./images/italy15.avif", "./images/italy16.webp"], "italy hint");
 const belgium = new City();
 const greece = new City();
@@ -1209,6 +1209,11 @@ function evaluateAnswer(correct) {
             answer.childNodes[0].style.fontSize = "1.75rem";
         }
 
+        // // picture based reponses
+        // if (cityPic.src == "file:///Users/austinrobertson/Desktop/odin/cities-trivia/images/denmark8.jpeg" || cityPic.src == "file:///Users/austinrobertson/Desktop/odin/cities-trivia/images/denmark11.webp") {
+        //     answer.childNodes[0].textContent = "Wow, nice! That was a tough one.";
+        // }
+
         if (mediaQuery.matches) {
             gamePanel.style.background = "linear-gradient(to top right, white, 1%, green)";
         }
@@ -1230,6 +1235,11 @@ function evaluateAnswer(correct) {
         else {
             gameContainer.style.background = "linear-gradient(to top, rgb(55,55,55), 2%, rgb(178, 13, 13))";
         }
+
+        // // picture based reponses
+        // if (cityPic.src == "file:///Users/austinrobertson/Desktop/odin/cities-trivia/images/denmark8.jpeg" || cityPic.src == "file:///Users/austinrobertson/Desktop/odin/cities-trivia/images/denmark11.webp") {
+        //     answer.childNodes[0].textContent = "That one was tough!";
+        // }
         
     }
     // update display of current grade
@@ -1366,13 +1376,13 @@ function displayQuestion() {
         hintButton.classList.add("hintAttention");
         setTimeout(() => {
             hintButton.style.filter = "brightness(0.25)";
-        }, 2000);
+        }, 4000);
         setTimeout(() => {
             hintButton.style.filter = null;
-        }, 3000);
+        }, 5000);
         setTimeout(() => {
             hintButton.classList.remove("hintAttention");
-        }, 4000);
+        }, 6000);
     }
 }
 
