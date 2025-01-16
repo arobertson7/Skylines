@@ -143,7 +143,7 @@ let gamesPlayed = 0;
 let hintUsed = false;
 
 
-// an array holding various responses to display when answer is correc
+// an array holding various responses to display when answer is correct
 const correctResponses = ["Correct!", "Impressive!", "Nice!", "Well done.", "Bravo!", "Nicely done.", "World Traveler", "Wunderbar!"];
 
 const WrongResponses = ["Nope!", "Not this time!", "Next try!", "Nö", "Not quite!"];
