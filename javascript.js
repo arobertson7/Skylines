@@ -646,7 +646,7 @@ function endGameSmallScreen() {
         // reset global variables for next game
         currentRound = 1;
         correctCount = 0;
-        hintsRemaining = 2;
+        hintsRemaining = 3;
         currentSlide = 4;
         // clear the queue
         while (!cityQueue.isEmpty())
