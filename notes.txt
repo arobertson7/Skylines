@@ -59,3 +59,12 @@ Right side:
     "Broaden your horizons"
     euorpe button
     worldwide button
+
+
+
+
+./images/greece1.avif
+greece2.jpg
+greece3.jpg
+greece4.jpeg
+greece5.webp
