@@ -63,16 +63,16 @@ const austria = new City("Austria", ["./images/austria1.jpg", "./images/austria2
 const switzerland = new City("Switzerland", ["./images/switzerland1.jpg", "./images/switzerland2.jpg", "./images/switzerland3.jpeg", "./images/switzerland4.jpg", "./images/switzerland5.jpg", "./images/switzerland6.jpg", "./images/switzerland7.webp", "./images/switzerland8.webp", "./images/switzerland9.jpg", "./images/switzerland10.jpg", './images/switzerland12.jpg'], "switzerland hint"); // "./images/switzerland11.jpg"
 const italy = new City("Italy", ["./images/italy1.webp", "./images/italy2.jpeg", "./images/italy3.jpg", "./images/italy4.jpg", "./images/italy5.webp", "./images/italy6.webp", "./images/italy7.jpeg", "./images/italy8.jpeg", "./images/italy9.jpg", "./images/italy10.jpeg", "./images/italy11.jpg", "./images/italy12.jpg", "./images/italy13.jpg", "./images/italy14.jpg", "./images/italy15.avif", "./images/italy16.webp"], "italy hint");
 const belgium = new City();
-const greece = new City();
-const ireland = new City();
-const sweden = new City();
+const greece = new City("Greece", ["./images/greece1.avif", "./images/greece2.jpg", "./images/greece3.jpg", "./images/greece4.jpeg", "./images/greece5.webp", "./images/greece6.jpeg", "./images/greece7.jpg", "./images/greece8.webp", "./images/greece9.jpg"], "greece hint");
+const ireland = new City("Ireland", ["./images/ireland1.avif", "./images/ireland2.avif", "./images/ireland3.jpg", "./images/ireland4.webp", "./images/ireland5.jpeg", "./images/ireland6.png", "./images/ireland7.jpg", "./images/ireland8.jpg"], "ireland hint");
+const sweden = new City("Sweden", ["./images/sweden1.jpg", "./images/sweden2.webp", "./images/sweden3.jpg", "./images/sweden4.jpg", "./images/sweden5.jpg", "./images/sweden6.jpg"], "sweden hint");
 const finland = new City();
 const hungary = new City();
 const poland = new City();
 
 
 // European countries array
-const europe = [germany, france, england, spain, norway, denmark, netherlands, czech, portugal, austria, switzerland, italy];
+const europe = [germany, france, england, spain, norway, denmark, netherlands, czech, portugal, austria, switzerland, italy, greece, ireland, sweden];
 
 
 // Queue class
@@ -121,7 +121,7 @@ let currentRegion;
 // cityQueue placeholder for holding cities in each game
 const cityQueue = new Queue();
 // number of rounds per game
-const rounds = 8;
+const rounds = 6;
 // placeholder for current number of correct answers
 let correctCount = 0;
 // placeholder for current question number
@@ -152,14 +152,19 @@ const A_Plus_Responses = ["Geography Genius! You've officially reached 'World Tr
     "Top of the Class! You've got the geography skills of a well-traveled detective! Sherlock Holmes would call you for tips on finding obscure countries. You're basically the Indiana Jones of map-reading.",
     "Are You a Map? You've navigated your way to an A+, making even Google Maps jealous. If there's a lost city of Atlantis, you'd probably find it before breakfast.",
     "Geography? More like Ge-uh, this is easy. You've crushed this quiz like you were born with a passport in one hand and a globe in the other. NASA is considering hiring you as a consultant.",
-    "World-Class Expert! A+! You've officially unlocked 'Superhuman Geography Powers'. At this rate, the only continent you haven't visited is Antarctica..."];
-const A_Responses = [  // "Nice job! You're officially a geography prodigy—at least until someone asks you about Antarctica. But hey, nobody's perfect, right?",
-    "A solid A! You've got a brain like Google Maps... if Google Maps had a caffeine addiction. Keep it up, and you'll be leading world tours in no time!",
-    // "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
+    "World-Class Expert! A+! You've officially unlocked 'Superhuman Geography Powers'. At this rate, the only continent you haven't visited is Antarctica...",
+    "A+! You've got a brain like Google Maps... if Google Maps had a caffeine addiction.",
     "Well done! You're just a few maps away from being the human equivalent of Google Earth. Still need to work on those street names, though.",
-    "You nailed it! You've got more geography knowledge than a globe, and you don't even need to spin yourself to show off. But A+ is still calling your name!",
     "You've been around, huh? You know your cities better than most! Outstanding performance.",
-    "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"];
+    "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"
+    ];
+// const A_Responses = [  // "Nice job! You're officially a geography prodigy—at least until someone asks you about Antarctica. But hey, nobody's perfect, right?",
+//     "A solid A! You've got a brain like Google Maps... if Google Maps had a caffeine addiction. Keep it up, and you'll be leading world tours in no time!",
+//     // "Impressive! You know your cities so well, I bet you could give a TED Talk on the Eiffel Tower. Maybe not a *great* TED Talk, but still.",
+//     "Well done! You're just a few maps away from being the human equivalent of Google Earth. Still need to work on those street names, though.",
+//     "You nailed it! You've got more geography knowledge than a globe, and you don't even need to spin yourself to show off. But A+ is still calling your name!",
+//     "You've been around, huh? You know your cities better than most! Outstanding performance.",
+//     "You've clearly racked up some miles. You deserve a vacation after that performance. Go wild with all those travel rewards!"];
 const B_Responses = [  "Great job! You've got a solid grip on geography, but you're just one step away from being a map wizard. Keep going, the A's are within reach!",
     "Nice work! You're doing awesome—think of this as a high-five from the geography gods. A little more effort and you'll be in the A+ club before you know it!",
     "Well done! A B is a great score, and you've got a fantastic base of knowledge. A few more cities and you'll be on top of the world!",
@@ -217,22 +222,22 @@ function indexAlreadyUsed(usedIndexArray, newIndex) {
 // Converts number grade into letter grade. returns a string letter grade
 function convertToLetterGrade(grade) {
     switch(true) {
-        case (89 <= grade && grade <= 100):
+        case (85 <= grade && grade <= 100):
             return "A+";
             break;
-        case (76 <= grade && grade <= 88):
-            return "A";
-            break;
-        case (51 <= grade && grade <= 75):
+        case (51 <= grade && grade <= 84):
             return "B";
             break;
-        case (26 <= grade && grade <= 50):
+        case (35 <= grade && grade <= 50):
             return "C";
             break;
-        case (14 <= grade && grade <= 25):
+        case (18 <= grade && grade <= 34):
+            return "C-";
+            break;
+        case (1 <= grade && grade <= 17):
             return "D";
             break;
-        case (grade < 14):
+        case (grade < 1):
             return "F";
             break;
     }
@@ -258,13 +263,13 @@ function generateFeedback(score) {
         case "A+":
             return A_Plus_Responses[randomIndex(A_Plus_Responses.length)];
             break;
-        case "A":
-            return A_Responses[randomIndex(A_Responses.length)];
-            break;
         case "B":
             return B_Responses[randomIndex(B_Responses.length)];
             break;
         case "C":
+            return C_Responses[randomIndex(C_Responses.length)];
+            break;
+        case "C-":
             return C_Responses[randomIndex(C_Responses.length)];
             break;
         case "D":
