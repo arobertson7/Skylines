@@ -373,20 +373,22 @@ html, body {
   position: relative;
 }
 
-/* .choices button:active {
-  position: relative;
-  background: linear-gradient(to top left, white, 5%, black);
-  height: 4em;
-  transition: height 0.1s ease-in;
-} */
+.choices button:active {
+  background: linear-gradient(to bottom right, black, 20%, white, 90%, black);
+  color: black;
+}
 
 
 @media screen and (min-width: 601px) {
   .choiceButtonHover:hover {
-    background: linear-gradient(to bottom right, black, 20%, white, 90%, black);
-    color: black;
-    box-shadow: 5px 4px 5px gray;
+    background: linear-gradient(to bottom right, white, 20%, black);
   }
+
+  .choices button:active {
+    background: linear-gradient(to bottom right, white, 5%, black);
+    color: white;
+  }
+
 
   .changeOpacity { /* for the above message and picture at the start of the game
     /* opacity: 1; */
